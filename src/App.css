@@ -7,6 +7,16 @@
   height: 100vh;
   /* display: flex; */
 }
+.linkColor{
+  color: white;
+}
+.linkColor:hover{
+  color: white;
+  border-color: white;
+}
+button:hover{
+  border-color: white;
+}
 .container{
   display: flex;
   justify-content: center;
@@ -46,8 +56,32 @@ form{
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding-top: 100px;
 }
+.Login_Register{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  max-width: 250px;
+  padding-top: 100px;
+  margin-right: 50px;
+  padding-bottom: 10px;
+}
+.Login_Register button{
+  max-width: 140px;
+  background-color: grey;
+  /* border-color: black; */
+}
+.Login_Register span button{
+  background-color: transparent;
+}
+.Login_Register h2{
+  margin: 20px;
+  
+  display: flex;
+  justify-content: center;
+}
+
 form input{
   margin-bottom: 30px;
   height: 35px;
