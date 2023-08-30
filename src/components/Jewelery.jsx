@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import Card from "./Card";
 import Home from "./Home";
 
-export default function Electronics({ apparel, setApparel, items, setItems }){
+export default function Jewelery({ apparel, setApparel, items, setItems }){
     
-    setApparel("electronics")
+    setApparel("jewelery")
 
     return(
         <>

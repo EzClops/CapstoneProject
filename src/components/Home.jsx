@@ -1,14 +1,30 @@
-import { Link } from "react-router-dom"
+import { Link, Outlet } from "react-router-dom"
+import { getClothing } from "../API/apiCalls";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-export default function Home(){
+export default function Home({items, setItems }){
+    // console.log(getClothing);
+    // const navigate = useNavigate();
+    // console.log()
+    let cloth = "";
     return(
         <>
             <div className="container">
-                <button><Link to='/mens_apparel' className="linkColor">Men's Apparel</Link></button>
-                <button><Link to='/womans_apparel' className="linkColor">Woman's Apparel</Link></button>
-                <button><Link to='/electronics' className="linkColor">Electronics</Link></button>
-                <button><Link to='/accessories' className="linkColor">Accessories</Link></button>
+                <button onClick={()=>{
+                    cloth = "men's clothing"
+                    getClothing(cloth, items, setItems)}}><Link to='/mens_apparel' className="linkColor">Men's Apparel</Link></button>
+                <button onClick={()=>{
+                    cloth = "women's clothing"
+                    getClothing(cloth, items, setItems)}}><Link to='/womans_apparel' className="linkColor">Woman's Apparel</Link></button>
+                <button onClick={()=>{
+                    cloth = "electronics"
+                    getClothing(cloth, items, setItems)}}><Link to='/electronics' className="linkColor">Electronics</Link></button>
+                <button onClick={()=>{
+                    cloth = "jewelery"
+                    getClothing(cloth, items, setItems)}}><Link to='/jewelery' className="linkColor">Jewelery</Link></button>
             </div>
+            <Outlet/>
         </>
     )
 }
