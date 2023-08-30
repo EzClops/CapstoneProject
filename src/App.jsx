@@ -14,17 +14,17 @@ import Jewelery from './components/Jewelery'
 function App() {
   const [apparel, setApparel] = useState("")
   const [items, setItems] = useState([]);
-  const [page, setPage] = useState(0);
+  const [homePage, setHomePage] = useState(true);
   // console.log(setItems)
   return (
     <>
       <Routes>
-        <Route path='/' element={<NavBar/>}>
-          <Route path='/' element={<Home items={items} setItems={setItems}/>}/>
-          <Route path='/mens_apparel' element={<Mens_Apparel apparel={apparel} setApparel={setApparel} items={items} setItems={setItems}/>}/>
-          <Route path='/womans_apparel' element={<Womans_Apparel apparel={apparel} setApparel={setApparel} items={items} setItems={setItems}/>}/>
-          <Route path='/jewelery' element={<Jewelery apparel={apparel} setApparel={setApparel} items={items} setItems={setItems}/>}/>
-          <Route path='/electronics' element={<Electronics apparel={apparel} setApparel={setApparel} items={items} setItems={setItems}/>}/>
+        <Route path='/' element={<NavBar homePage={homePage} setHomePage={setHomePage}/>}>
+          <Route path='/' element={<Home items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage}/>}/>
+          <Route path='/mens_apparel' element={<Mens_Apparel apparel={apparel} setApparel={setApparel} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage}/>}/>
+          <Route path='/womans_apparel' element={<Womans_Apparel apparel={apparel} setApparel={setApparel} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage}/>}/>
+          <Route path='/jewelery' element={<Jewelery apparel={apparel} setApparel={setApparel} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage}/>}/>
+          <Route path='/electronics' element={<Electronics apparel={apparel} setApparel={setApparel} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage}/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/register' element={<Register/>}/>

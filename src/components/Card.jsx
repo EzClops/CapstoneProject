@@ -1,7 +1,7 @@
 
 
 export default function Card({ item }){
-    console.log(item)
+    // console.log(item)
     return(
         <>
             <div className="item_card">

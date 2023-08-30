@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 export default function Login(){
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
     async function handleSubmit(event){
         event.preventDefault();
@@ -15,8 +15,8 @@ export default function Login(){
             const response = await fetch("https://fakestoreapi.com/auth/login",{
                 method:'POST',
                 body:JSON.stringify({
-                    username: "mor_2314",
-                    password: "83r5^_"
+                    username: username,
+                    password: password
                 })
             });
             const result = await response.json();

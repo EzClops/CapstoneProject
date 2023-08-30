@@ -3,14 +3,13 @@ import { getClothing } from "../API/apiCalls";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-export default function Home({items, setItems }){
-    // console.log(getClothing);
-    // const navigate = useNavigate();
-    // console.log()
+export default function Home({items, setItems, homePage, setHomePage }){
+    
     let cloth = "";
+
     return(
         <>
-            <div className="container">
+            <div className={"container" + (homePage ? " mainPage" : "")}>
                 <button onClick={()=>{
                     cloth = "men's clothing"
                     getClothing(cloth, items, setItems)}}><Link to='/mens_apparel' className="linkColor">Men's Apparel</Link></button>
