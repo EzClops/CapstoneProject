@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Card from "./Card";
 import Home from "./Home";
 
-export default function Jewelery({ apparel, setApparel, items, setItems, homePage, setHomePage }){
+export default function Jewelery({ apparel, setApparel, items, setItems, homePage, setHomePage, setItem }){
     
     setHomePage(false)
     setApparel("jewelery")
@@ -14,7 +14,7 @@ export default function Jewelery({ apparel, setApparel, items, setItems, homePag
             <div className="cards">
                 {items.map(item => {
                     return(
-                        <Card item={item}/>
+                        <Card item={item} setItem={setItem} setItems={setItems} homePage={homePage} setHomePage={setHomePage}/>
                     )
                 })}
             </div>

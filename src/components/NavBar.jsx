@@ -7,7 +7,7 @@ export default function NavBar({ homePage, setHomePage }){
             <header className="container">
                 <div className="navbar">
                     <div className="storeName">
-                        <h1><Link to='/' className="linkColor" onClick={()=>{setHomePage(true)}}>E-Commerce Store</Link></h1>
+                        <h1><Link to='/' className="linkColor" onClick={()=>{setHomePage(true)}}>FusionNova</Link></h1>
                     </div>
                     <div className="userButtons">
                         <button><Link to='/login' className="linkColor">Login</Link></button>

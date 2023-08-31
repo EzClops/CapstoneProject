@@ -4,7 +4,7 @@ import Card from "./Card";
 import Home from "./Home";
 import { getClothing } from "../API/apiCalls";
 
-export default function Mens_Apparel({ apparel, setApparel, items, setItems, homePage, setHomePage }){
+export default function Mens_Apparel({ apparel, setApparel, items, setItems, homePage, setHomePage, setItem }){
     
 
     setHomePage(false)
@@ -15,7 +15,7 @@ export default function Mens_Apparel({ apparel, setApparel, items, setItems, hom
             <div className="cards">
                 {items.map(item => {
                     return(
-                        <Card item={item}/>
+                        <Card item={item} setItem={setItem} setItems={setItems} homePage={homePage} setHomePage={setHomePage}/>
                     )
                 })}
             </div>

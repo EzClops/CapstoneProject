@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Card from "./Card";
 import Home from "./Home";
 
-export default function Electronics({ apparel, setApparel, items, setItems, homePage, setHomePage }){
+export default function Electronics({ apparel, setApparel, items, setItems, homePage, setHomePage, setItem }){
     
     setHomePage(false)
     setApparel("electronics")
@@ -14,7 +14,7 @@ export default function Electronics({ apparel, setApparel, items, setItems, home
             <div className="cards">
                 {items.map(item => {
                     return(
-                        <Card item={item}/>
+                        <Card item={item} setItem={setItem} setItems={setItems} homePage={homePage} setHomePage={setHomePage}/>
                     )
                 })}
             </div>

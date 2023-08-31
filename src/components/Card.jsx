@@ -1,13 +1,14 @@
+import { Link } from "react-router-dom"
+import ItemPage from "./ItemPage"
 
-
-export default function Card({ item }){
-    // console.log(item)
+export default function Card({ item, setItem, setItems, homePage, setHomePage }){
+    // setItems(item)
     return(
         <>
             <div className="item_card">
-                <img src={item.image} alt="Image" height="200px" width="180px"/>
+                <Link to='/itempage' onClick={()=>{setItem(item)}}><img src={item.image} alt="Image" height="200px" width="180px"/></Link>
                 <div className="details">
-                    <h3>{item.title}</h3>
+                    <Link to='/itempage' onClick={()=>{setItem(item)}}><h3>{item.title}</h3></Link>
                     <p>Price: ${item.price}</p>
                     {/* <p>{item.rating}</p> */}
                     {/* <p>{item.description}</p> */}
@@ -16,3 +17,5 @@ export default function Card({ item }){
         </>
     )
 }
+
+// item={item} setItem={setItems} homePage={homePage} setHomePage={setHomePage}
