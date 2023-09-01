@@ -4,12 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 export default function Home({items, setItems, homePage, setHomePage }){
-    
+
     let cloth = "";
 
     return(
         <>
-            <div className={"container" + (homePage ? " mainPage" : "")}>
+            <div className={"container categoryPage" + (homePage ? " mainPage" : "")}>
                 <button onClick={()=>{
                     cloth = "men's clothing"
                     getClothing(cloth, items, setItems)}}><Link to='/mens_apparel' className="linkColor">Men's Apparel</Link></button>
