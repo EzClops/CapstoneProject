@@ -19,20 +19,21 @@ function App() {
   const [homePage, setHomePage] = useState(true);
   const [item, setItem] = useState(null);
   const [token, setToken] = useState(sessionStorage.getItem("token"));
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState(sessionStorage.getItem("username"));
   const [password, setPassword] = useState("");
   // console.log(setItems)
+  // sessionStorage.
   return (
     <>
       <Routes>
-        <Route path='/' element={<NavBar homePage={homePage} setHomePage={setHomePage} token={token} setToken={setToken}/>}>
+        <Route path='/' element={<NavBar homePage={homePage} setHomePage={setHomePage} token={token} setToken={setToken} usrname={username}/>}>
           <Route path='/' element={<Home items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage} token={token} setToken={setToken}/>}/>
           <Route path='/mens_apparel' element={<Mens_Apparel apparel={apparel} setApparel={setApparel} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage} setItem={setItem} token={token} setToken={setToken}/>}/>
           <Route path='/womans_apparel' element={<Womans_Apparel apparel={apparel} setApparel={setApparel} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage} setItem={setItem}/>}/>
           <Route path='/jewelery' element={<Jewelery apparel={apparel} setApparel={setApparel} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage} setItem={setItem}/>}/>
           <Route path='/electronics' element={<Electronics apparel={apparel} setApparel={setApparel} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage} setItem={setItem}/>}/>
           <Route path='/login' element={<Login token={token} setToken={setToken} username={username} setUsername={setUsername} password={password} setPassword={setPassword}/>}/>
-          <Route path='/logout' element={<LogOut setToken={setToken} setHomePage={setHomePage} setItem={setItem} setItems={setItems} setApparel={setApparel}/>}/>
+          <Route path='/logout' element={<LogOut setToken={setToken} setHomePage={setHomePage} setItem={setItem} setItems={setItems} setApparel={setApparel} setUsername={setUsername}/>}/>
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/register' element={<Register/>}/>
           <Route path='/itempage' element={<ItemPage item={item} setItem={setItem} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage}/>}/>

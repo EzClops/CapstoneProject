@@ -92,7 +92,7 @@ export default function Login({ token, setToken, username, setUsername, password
                     <input type="submit" value="Submit"/>
                 </form>
             </div>
-            {console.log(error)}
+            {/* {console.log(error)} */}
             {error && <p>{error}</p>}
             {/* <button onClick={handleSubmit}>Hi</button> */}
         </>

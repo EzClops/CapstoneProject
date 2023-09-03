@@ -6,7 +6,7 @@ import { getClothing } from "../API/apiCalls";
 
 export default function Mens_Apparel({ apparel, setApparel, items, setItems, homePage, setHomePage, setItem, token, setToken }){
     
-    // console.log("Mens apparel", token)
+    // console.log("Mens apparel", sessionStorage.getItem("token"))
     setHomePage(false)
     setApparel("men's clothing")
     return(

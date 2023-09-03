@@ -1,7 +1,8 @@
 import { Link, Outlet } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
-export default function NavBar({ homePage, setHomePage, token, setToken }){
+export default function NavBar({ homePage, setHomePage, token, setToken, username }){
+    console.log()
     return(
         <>
             <header className="container">
@@ -9,8 +10,12 @@ export default function NavBar({ homePage, setHomePage, token, setToken }){
                     <div className="storeName">
                         <h1><Link to='/' className="linkColor" onClick={()=>{setHomePage(true)}}>FusionNova</Link></h1>
                     </div>
+                    <div className='userName'>
+                        {token ? <p>{sessionStorage.getItem("username")}</p> : <p></p>}
+                        
+                    </div>
                     <div className="userButtons">
-                    {!token ? <button><Link to='/login' className="linkColor">Login</Link></button> : <button><Link to='/logout' className="linkColor">LogOut</Link></button>}
+                        {!token ? <button><Link to='/login' className="linkColor">Login</Link></button> : <button><Link to='/logout' className="linkColor">LogOut</Link></button>}
                         <button><Link to='/cart' className="linkColor">Cart</Link></button>
                     </div>
                 </div>

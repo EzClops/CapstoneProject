@@ -6,8 +6,8 @@ import { useState } from "react";
 export default function Home({items, setItems, homePage, setHomePage, token, setToken }){
 
     let cloth = "";
-    // console.log("Home", token)
-    // console.log("session", sessionStorage.getItem("token"))
+    console.log("Home", token)
+    console.log("session", sessionStorage.getItem("token"))
     return(
         <>
             <div className={"container categoryPage" + (homePage ? " mainPage" : "")}>
