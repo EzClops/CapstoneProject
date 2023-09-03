@@ -15,7 +15,7 @@ export const getClothing = async (apparel, items, setItems ) => {
     };
 
 /*Cart API calls*/
-export const getCart = async (userId) => {
+export const getUserCart = async (userId) => {
     try{
         const response = await fetch(`https://fakestoreapi.com/carts/user/${userId}`);
         const result = await response.json();

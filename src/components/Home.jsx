@@ -3,10 +3,11 @@ import { getClothing } from "../API/apiCalls";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-export default function Home({items, setItems, homePage, setHomePage }){
+export default function Home({items, setItems, homePage, setHomePage, token, setToken }){
 
     let cloth = "";
-
+    // console.log("Home", token)
+    // console.log("session", sessionStorage.getItem("token"))
     return(
         <>
             <div className={"container categoryPage" + (homePage ? " mainPage" : "")}>

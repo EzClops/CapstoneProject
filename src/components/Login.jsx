@@ -3,22 +3,23 @@ import { useNavigate } from 'react-router-dom'
 import { Link } from "react-router-dom";
 
 
-export default function Login(){
+export default function Login({ token, setToken, username, setUsername, password, setPassword }){
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
     const [error, setError] = useState(null)
 
     const min = 6;
     const max = 16;
 
+
+    //Username: mor_2314
+    //Password: 83r5^_
     // console.log(username)
     async function handleSubmit(event){
         event.preventDefault();
         try{
             formValidate(username, password);
-            console.log(username)
+            // console.log(username)
             const response = await fetch("https://fakestoreapi.com/auth/login",{
                 method:'POST',
                 headers: {
@@ -29,11 +30,23 @@ export default function Login(){
                     password: `${password}`
                 })
             });
-            console.log(response)
+            if(!response.ok){
+                console.log(response)
+                // console.log(result)
+                setError()
+                console.log(error)
+                throw new Error("Invalid Username or password. Please try again")
+            }
             const result = await response.json();
-            console.log(result);
+            // console.log(result.token);
+            sessionStorage.setItem("token", result.token)
+            sessionStorage.setItem("username", username)
+            setToken(sessionStorage.getItem("token"))
+            console.log("Token storage", token)
+            navigate('/')
+            // console.log(result);
         }catch(error){
-            setError(error)
+            setError(error.message)
             console.error(error)
         }
     }
@@ -78,8 +91,9 @@ export default function Login(){
                     </label>
                     <input type="submit" value="Submit"/>
                 </form>
-                {/* {error && <p>{error}</p>} */}
             </div>
+            {console.log(error)}
+            {error && <p>{error}</p>}
             {/* <button onClick={handleSubmit}>Hi</button> */}
         </>
     )

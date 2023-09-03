@@ -4,9 +4,9 @@ import Card from "./Card";
 import Home from "./Home";
 import { getClothing } from "../API/apiCalls";
 
-export default function Mens_Apparel({ apparel, setApparel, items, setItems, homePage, setHomePage, setItem }){
+export default function Mens_Apparel({ apparel, setApparel, items, setItems, homePage, setHomePage, setItem, token, setToken }){
     
-
+    // console.log("Mens apparel", token)
     setHomePage(false)
     setApparel("men's clothing")
     return(
