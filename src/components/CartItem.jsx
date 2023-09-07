@@ -18,21 +18,26 @@ export default function CartItem({ productId, quantity, item, setItem}){
     console.log(item2)
     // setItem(item2)
     return (
-        <>
-            <div className="container">
-            <div className="cartItem">
-                <div className="title">
-                    <p>{item2.title}</p>
+        <>  
+            <hr></hr>
+            <div className="containerCart">
+                <div className="cartImage">
+                    <div className="image">
+                        <img src={item2.image} alt="pictar" height="150px" width="150px"/>
+                    </div>
                 </div>
-                <div className="image">
-                    <img src={item2.image} alt="pictar" height="150px" width="150px"/>
+                <div className="cartItem">
+                    <div className="title">
+                        <p>{item2.title}, {item2.description}</p>
+                        <p>${item2.price}</p>
+                    </div>
+                    <div className="quantity">
+                        <p>quantity: {quantity}</p>
+                    </div>
                 </div>
-            </div>
-            <div className="quantity">
-                <p>quantity: {quantity}</p>
-            </div>
 
             </div>
+            <hr></hr>
             {/* {setPId(null)} */}
         </>
     )

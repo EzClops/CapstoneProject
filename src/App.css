@@ -1,7 +1,11 @@
+
+/* Full Scope   */
 *{
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  line-height: var(--lh);
+  
 }
 #root {
   /* max-width: 1280px; */
@@ -10,9 +14,9 @@
   /* padding: 2rem; */
   text-align: center;
   height: 100vh;
+  
   /* display: flex; */
-  background: rgb(123,123,123);
-  background: linear-gradient(0deg, rgba(123,123,123,1) 30%, rgba(190,190,190,1) 100%);
+  --lh: 1.4rem;
   
 }
 .linkColor{
@@ -39,6 +43,22 @@ button:hover{
   /* background: rgb(123,123,123);
   background: linear-gradient(90deg, rgba(123,123,123,1) 30%, rgba(190,190,190,1) 100%); */
 }
+
+form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.container button{
+  border-color: rgb(123, 123, 123);
+  background-color: rgb(66, 66, 66);
+}
+.container button:hover{
+  border-color: black;
+}
+
+/*  End of Full Scope */
 
 /*Navbar Section*/
 header{
@@ -76,22 +96,11 @@ header{
   /* background-color: rgb(66, 66, 66); */
 }
 /*End of NavBar Section*/
-.container button{
-  border-color: rgb(123, 123, 123);
-  background-color: rgb(66, 66, 66);
-}
-.container button:hover{
-  border-color: black;
-}
+
+/* Login Section */
 .loginRegister{
   /* background-color: white; */
   /* max-height: 100vh; */
-}
-form{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
 }
 .Login_Register{
   display: flex;
@@ -128,6 +137,8 @@ form input{
   width: 250px;
   font-size: 20px;
 }
+/* End of Login Section */
+
 /* Category Section*/
 .categoryPage{
   display: flex;
@@ -218,3 +229,47 @@ form input{
   border: 2px solid;
   border-color: black;
 }
+
+/* End of Category Section   */
+
+/* Cart Section*/
+
+hr{
+  text-align: center;
+  /* max-width: 80%; */
+  margin: 15px 15px;
+}
+.containerCart{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: row;
+  margin-bottom: 15px;
+  height: 150px;
+}
+.cartImage{
+  margin-left: 20px;
+}
+.containerCart .cartItem{
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  justify-content: space-between;
+  height: 100%;
+  padding-left: 15px;
+  width: 700px;
+  overflow: hidden;
+}
+.containerCart .cartItem .title p{
+text-align: left;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+max-width: 90%;
+}
+.containerCart .cartItem .quantity p{
+  text-align: left;
+}
+
+
+/* End of Cart Section */

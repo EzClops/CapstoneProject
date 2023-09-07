@@ -39,14 +39,14 @@ export default function Cart({ item, setItem, token, pId, setPId }){
                 setProduct([])
             }
         }
-        fetUserProduct(count, 4)
+        fetUserProduct(count, 1)
     }, [])
 
     return(
         <>
-            <div className="header">
-                <h2>Cart</h2>
-            </div>
+            <header className="header">
+                <h2>Shopping Cart</h2>
+            </header>
             <div className="userCart">
                 {product.map(i =>{
                     return(
