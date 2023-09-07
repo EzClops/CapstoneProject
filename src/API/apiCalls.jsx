@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-
+/* Products API calls */
 export const getClothing = async (apparel, items, setItems ) => {
     // console.log(apparel)
     try {
@@ -10,18 +10,34 @@ export const getClothing = async (apparel, items, setItems ) => {
         setItems(result)
         return items
     } catch (error) {
-        console.error(error);
+        console.error(error.message);
     }
-    };
+};
+
+export const getItem = async (productId, setItem) => {
+    try{
+        const response = await fetch(`https://fakestoreapi.com/products/${productId}`);
+        const result = await response.json();
+        // setItem(result)
+        console.log(result)
+        return result
+    } catch(error){
+        console.error(error.message);
+    }
+}
+
+
+
+/* ENd of Products API calls */
 
 /*Cart API calls*/
 export const getUserCart = async (userId) => {
     try{
         const response = await fetch(`https://fakestoreapi.com/carts/user/${userId}`);
         const result = await response.json();
-        console.log(result)
+        return result
     }catch(error){
-        console.error(error);
+        console.error(error.message);
     }
 }
     
@@ -43,8 +59,20 @@ export const addCart = async (userId, productId, quantity) => {
         const result = await response.json();
         console.log(result);
     }catch(error){
-        console.error(error);
+        console.error(error.message);
     }
 }
 
 /* End of Cart API calls*/
+
+/*  User API calls   */
+
+export const getAllUsers = async() =>{
+    try{
+        const response = await fetch('https://fakestoreapi.com/users');
+        const result = await response.json();
+        console.log(result);
+    }catch(error){
+        console.error(error.message)
+    }
+}

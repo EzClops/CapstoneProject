@@ -37,6 +37,7 @@ export default function Login({ token, setToken, username, setUsername, password
                 console.log(error)
                 throw new Error("Invalid Username or password. Please try again")
             }
+            // console.log(response)
             const result = await response.json();
             // console.log(result.token);
             sessionStorage.setItem("token", result.token)

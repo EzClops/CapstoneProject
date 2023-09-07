@@ -9,6 +9,7 @@ export default function Mens_Apparel({ apparel, setApparel, items, setItems, hom
     // console.log("Mens apparel", sessionStorage.getItem("token"))
     setHomePage(false)
     setApparel("men's clothing")
+    console.log(items)
     return(
         <>
             <Home items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage}/>
