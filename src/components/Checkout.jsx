@@ -87,6 +87,9 @@ export default function Checkout({ item, setItem, product, setCartPage, setCheck
                 <button onClick={() =>{
                     setCartPage(true)
                     setCheckoutPage(false)
+                    setSubmitAddress(false)
+                    setSubmitPayment(false)
+                    setError(null)
                     navigate("/cart")
 
                 }} className="linkColor">Cart</button>

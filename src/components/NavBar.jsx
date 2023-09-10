@@ -2,7 +2,7 @@ import { Link, Outlet } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export default function NavBar({ homePage, setHomePage, token, cartPage, setCartPage, checkoutPage, setCheckoutPage, submitAddress, submitPayment, setError }){
+export default function NavBar({ homePage, setHomePage, token, cartPage, setCartPage, checkoutPage, setCheckoutPage, submitAddress, submitPayment, setError, setSubmitAddress, setSubmitPayment }){
     // const [error, setError] = useState(null)
     
 
@@ -18,6 +18,8 @@ export default function NavBar({ homePage, setHomePage, token, cartPage, setCart
                             setError(null)
                             setCartPage(false)
                             setCheckoutPage(false)
+                            setSubmitAddress(false)
+                            setSubmitPayment(false)
                         }}>FusionNova</Link></h1>
                     </div>
                     <div className='userName'>
@@ -30,6 +32,8 @@ export default function NavBar({ homePage, setHomePage, token, cartPage, setCart
                                 setError(null)
                                 setCartPage(false)
                                 setCheckoutPage(false)
+                                setSubmitAddress(false)
+                            setSubmitPayment(false)
                             }}>Login</Link></button> : <button><Link to='/logout' className="linkColor" onClick={() =>{
                                 setCartPage(false)
                                 setCheckoutPage(false)
