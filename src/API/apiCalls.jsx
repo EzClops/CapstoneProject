@@ -78,8 +78,16 @@ export const getAllUsers = async() =>{
     }
 }
 
-export const updateUserAddress = async(firstname, lastname, city, street, number, zipcode, phone) =>{
+export const updateUserAddress = async(firstname, lastname, city, street, number, zipcode, phone, setError) =>{
     try{
+        if(zipcode.length !== 5 || isNaN(Number(zipcode))){
+            setError("Invalid zipcode")
+            throw new Error("Invalid zipcode");
+        }
+        if(phone.length !== 10 || isNaN(Number(phone))){
+            setError("Invalid phone number")
+            throw new Error("invalid phone number");
+        }
         const response = await fetch('https://fakestoreapi.com/users/7',{
             method:"PUT",
             headers: {
