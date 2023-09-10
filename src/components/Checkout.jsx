@@ -1,8 +1,10 @@
 import { updateUserAddress } from "../API/apiCalls"
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import CartItem from "./CartItem";
+import Cart from "./Cart";
 
-export default function Checkout(){
+export default function Checkout({ item, setItem, product, setCartPage, setCheckoutPage, submitAddress, setSubmitAddress, submitPayment, setSubmitPayment, error, setError }){
     // updateUserAddress("hi", "bye", "why", "sky", 5, "85923", "9165731234")
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
@@ -11,11 +13,12 @@ export default function Checkout(){
     const [number, setNumber] = useState("");
     const [zipcode, setZipcode] = useState("");
     const [phone, setPhone] = useState("");
-    const [error, setError] = useState("");
+    // const [error, setError] = useState("");
     const [card, setCard] = useState("");
     const [month, setMonth] = useState("");
     const [year, setYear] = useState("");
     const [cvv, setCvv] = useState("");
+    
 
     const navigate = useNavigate();
     
@@ -41,7 +44,7 @@ export default function Checkout(){
             console.log(result)
             if(result){
                 clearInput()
-
+                setSubmitAddress(true)
             }
         }catch(error){
             console.error(error.message)
@@ -68,6 +71,7 @@ export default function Checkout(){
                 throw new Error("Invalid CVV");
             }
             clearInput()
+            setSubmitPayment(true)
         }catch(error){
             console.error(error.message)
         }
@@ -80,7 +84,12 @@ export default function Checkout(){
         <>
             <header className="checkoutHeader">
                 <h2>Checkout</h2>
-                <button onClick={() =>{navigate("/cart")}} className="linkColor">Cart</button>
+                <button onClick={() =>{
+                    setCartPage(true)
+                    setCheckoutPage(false)
+                    navigate("/cart")
+
+                }} className="linkColor">Cart</button>
             </header>
                 <span>{error && <p>{error}</p>}</span>
             <div className="container">
@@ -202,7 +211,29 @@ export default function Checkout(){
                             </form>
                         </div>
                     </div> 
+                    <div className="userCart">
+                        <div className="section"><h3>Shopping Cart</h3></div>
+                        {
+                            !(sessionStorage.getItem("token")) ? <p>Cart is Empty</p> :
+                            product.map(i =>{
+                                return(
+                                    <CartItem productId={i["productId"]} quantity={i["quantity"]} item={item} setItem={setItem}/>
+                                )
+                            }) 
+                        }
+                        
+                    </div>
                 </div>
+                <button onClick={()=>{
+                    if(submitAddress && submitPayment){
+                        setCartPage(false)
+                        setCheckoutPage(false)
+                        navigate('/placeorder')
+                    }else{
+                        setError("Complete both Address and Payment form to place order")
+                        throw new Error("Complete both Address and Payment form to place order")
+                    }
+                }}>Place your order</button>
             </div>
         </>
     )

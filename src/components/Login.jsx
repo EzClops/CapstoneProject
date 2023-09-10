@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import { Link } from "react-router-dom";
 
 
-export default function Login({ token, setToken, username, setUsername, password, setPassword }){
+export default function Login({ token, setToken, username, setUsername, password, setPassword, error, setError }){
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
-    const [error, setError] = useState(null)
+    // const [error, setError] = useState(null)
 
     const min = 6;
     const max = 16;
@@ -94,7 +94,7 @@ export default function Login({ token, setToken, username, setUsername, password
                 </form>
             </div>
             {/* {console.log(error)} */}
-            {error && <p>{error}</p>}
+            <span>{error && <p>{error}</p>}</span>
             {/* <button onClick={handleSubmit}>Hi</button> */}
         </>
     )

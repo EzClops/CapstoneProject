@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import moment from "moment";
 import CartItem from "./CartItem";
 
-export default function Cart({ item, setItem }){
+export default function Cart({ item, setItem, product, setProduct, error }){
 
-    const [product, setProduct] = useState([]);
+    
     const [total, setTotal] = useState(0);
     const [count , setCount] = useState(0)
     const [date, setDate] = useState(null)
@@ -44,6 +44,7 @@ export default function Cart({ item, setItem }){
                 <h2>Shopping Cart</h2>
             </header>
             <div className="userCart">
+                <span>{error && <p>{error}</p>}</span>
                 {
                     !(sessionStorage.getItem("token")) ? <p>Cart is Empty</p> :
                     product.map(i =>{
