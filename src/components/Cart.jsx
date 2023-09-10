@@ -3,18 +3,14 @@ import { useState, useEffect } from "react";
 import moment from "moment";
 import CartItem from "./CartItem";
 
-export default function Cart({ item, setItem, token, pId, setPId }){
-    /*  
-        -get the number of products in usercart within fetUserCartLength function
-        -use that value to loop that number of times through object
-        -start product count from 0 untill it is equal to or greater than num of products
-    */
+export default function Cart({ item, setItem, setCartPage }){
+
     const [product, setProduct] = useState([]);
-    
+    const [total, setTotal] = useState(0);
     const [count , setCount] = useState(0)
     const [date, setDate] = useState(null)
-
-    
+    // setCartPage(true)
+    // Grab desired users cart and stores the product and quantity in product state
     useEffect(() => {
         async function fetUserProduct(c, userId){
             try{
@@ -48,11 +44,13 @@ export default function Cart({ item, setItem, token, pId, setPId }){
                 <h2>Shopping Cart</h2>
             </header>
             <div className="userCart">
-                {product.map(i =>{
-                    return(
-                        <CartItem productId={i["productId"]} quantity={i["quantity"]} item={item} setItem={setItem}/>
-                    )
-                }) }
+                {
+                    product.map(i =>{
+                        return(
+                            <CartItem productId={i["productId"]} quantity={i["quantity"]} item={item} setItem={setItem} total={total} setTotal={setTotal}/>
+                        )
+                    }) 
+                }
                 
             </div>
         </>

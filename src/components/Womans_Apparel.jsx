@@ -5,19 +5,19 @@ import Card from "./Card";
 import Home from "./Home";
 import { getClothing } from "../API/apiCalls";
 
-export default function Womans_Apparel({ apparel, setApparel, items, setItems, homePage, setHomePage, setItem }){
+export default function Womans_Apparel({ setApparel, items, setItems, homePage, setHomePage, setItem, setCartPage }){
 
     setHomePage(false)
     setApparel("women's clothing")
     return(
         <>
-            <Home items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage}/>
+            <Home items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage}  setCartPage={setCartPage}/>
             {/* {getClothing(apparel, setItems)} */}
             <div className="cards">
                 {items.map(item => {
                     {/* setItem(i) */}
                     return(
-                        <Card item={item} setItem={setItem} setItems={setItems} homePage={homePage} setHomePage={setHomePage}/>
+                        <Card item={item} setItem={setItem}/>
                     )
                 })}
             </div>

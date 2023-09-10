@@ -12,6 +12,7 @@ import Electronics from './components/Electronics'
 import Jewelery from './components/Jewelery'
 import ItemPage from './components/ItemPage'
 import LogOut from './components/LogOut'
+import Checkout from './components/Checkout'
 
 function App() {
   const [apparel, setApparel] = useState("")
@@ -22,22 +23,24 @@ function App() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [ pId, setPId] = useState(null)
+  const [cartPage, setCartPage] = useState(false);
   // console.log(setItems)
   // sessionStorage.
   return (
     <>
       <Routes>
-        <Route path='/' element={<NavBar homePage={homePage} setHomePage={setHomePage} token={token} setToken={setToken} usrname={username}/>}>
-          <Route path='/' element={<Home items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage} token={token} setToken={setToken}/>}/>
-          <Route path='/mens_apparel' element={<Mens_Apparel apparel={apparel} setApparel={setApparel} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage} setItem={setItem} token={token} setToken={setToken}/>}/>
-          <Route path='/womans_apparel' element={<Womans_Apparel apparel={apparel} setApparel={setApparel} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage} setItem={setItem}/>}/>
-          <Route path='/jewelery' element={<Jewelery apparel={apparel} setApparel={setApparel} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage} setItem={setItem}/>}/>
-          <Route path='/electronics' element={<Electronics apparel={apparel} setApparel={setApparel} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage} setItem={setItem}/>}/>
-          <Route path='/login' element={<Login token={token} setToken={setToken} username={username} setUsername={setUsername} password={password} setPassword={setPassword}/>}/>
-          <Route path='/logout' element={<LogOut setToken={setToken} setHomePage={setHomePage} setItem={setItem} setItems={setItems} setApparel={setApparel} setUsername={setUsername}/>}/>
-          <Route path='/cart' element={<Cart item={item} setItem={setItem} token={token} pId={pId} setPId={setPId} />}/>
+        <Route path='/' element={<NavBar homePage={homePage} setHomePage={setHomePage} token={token} setToken={setToken} usrname={username} cartPage={cartPage} setCartPage={setCartPage}/>}>
+          <Route path='/' element={<Home items={items} setItems={setItems} homePage={homePage} token={token} setCartPage={setCartPage}/>}/>
+          <Route path='/mens_apparel' element={<Mens_Apparel apparel={apparel} setApparel={setApparel} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage} setItem={setItem} token={token} setToken={setToken}  setCartPage={setCartPage}/>}/>
+          <Route path='/womans_apparel' element={<Womans_Apparel apparel={apparel} setApparel={setApparel} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage} setItem={setItem}  setCartPage={setCartPage}/>}/>
+          <Route path='/jewelery' element={<Jewelery apparel={apparel} setApparel={setApparel} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage} setItem={setItem}  setCartPage={setCartPage}/>}/>
+          <Route path='/electronics' element={<Electronics apparel={apparel} setApparel={setApparel} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage} setItem={setItem}  setCartPage={setCartPage}/>}/>
+          <Route path='/login' element={<Login token={token} setToken={setToken} username={username} setUsername={setUsername} password={password} setPassword={setPassword} setCartPage={setCartPage}/>}/>
+          <Route path='/logout' element={<LogOut setToken={setToken} setHomePage={setHomePage} setItem={setItem} setItems={setItems} setApparel={setApparel} setUsername={setUsername} setCartPage={setCartPage}/>}/>
+          <Route path='/cart' element={<Cart item={item} setItem={setItem} setCartPage={setCartPage}/>}/>
           <Route path='/register' element={<Register/>}/>
           <Route path='/itempage' element={<ItemPage item={item} setItem={setItem} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage}/>}/>
+          <Route path='checkout' element={<Checkout/>}></Route>
         </Route>
       </Routes>
       

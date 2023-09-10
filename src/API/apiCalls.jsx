@@ -27,8 +27,8 @@ export const getItem = async (productId, setItem) => {
 }
 
 
-
 /* ENd of Products API calls */
+
 
 /*Cart API calls*/
 export const getUserCart = async (userId) => {
@@ -65,8 +65,8 @@ export const addCart = async (userId, productId, quantity) => {
 
 /* End of Cart API calls*/
 
-/*  User API calls   */
 
+/*  User API calls   */
 export const getAllUsers = async() =>{
     try{
         const response = await fetch('https://fakestoreapi.com/users');
@@ -76,3 +76,5 @@ export const getAllUsers = async() =>{
         console.error(error.message)
     }
 }
+
+/* End of User API calls */

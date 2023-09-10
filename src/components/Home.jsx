@@ -3,13 +3,16 @@ import { getClothing } from "../API/apiCalls";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-export default function Home({items, setItems, homePage, setHomePage, token, setToken }){
+export default function Home({items, setItems, homePage, token, setCartPage }){
 
+    //Hard coding the specific category we want since apparel useState wasn't giving us our desired value when we wanted
     let cloth = "";
+    setCartPage(false)
     console.log("Home", token)
     console.log("session", sessionStorage.getItem("token"))
     return(
         <>
+            {/* each button here will have a on click event that calls the specific category API and loads its values on category page */}
             <div className={"container categoryPage" + (homePage ? " mainPage" : "")}>
                 <button onClick={()=>{
                     cloth = "men's clothing"

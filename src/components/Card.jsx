@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom"
 import ItemPage from "./ItemPage"
+import { useState } from "react"
 
-export default function Card({ item, setItem, setItems, homePage, setHomePage }){
+export default function Card({ item, setItem }){
     // setItems(item)
+    
+
     return(
         <>
             <div className="item_card">

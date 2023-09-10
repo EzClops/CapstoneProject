@@ -1,21 +1,31 @@
 import { getItem } from "../API/apiCalls"
 import { useEffect, useState } from "react"
 
-export default function CartItem({ productId, quantity, item, setItem}){
+export default function CartItem({ productId, quantity, item, setItem, total, setTotal}){
     const [item2, setItem2] = useState("")
+    
+    let num = 0;
 
     useEffect(()=>{
         async function fetchItem(){
             const data = await getItem(productId);
             // console.log(data)
             setItem2(data)
-
+            
         }
         fetchItem()
+        // console.log("Good day", nu)
     },[])
+    // if(!isNaN(total)){
+    //     console.log("Hi",total)
+    //     setTotal(total + item2.price)
 
+    // }
+    // num = num + item2.price
+    
+    // console.log("Hi", item2)
+    // console.log(total)
     // console.log(item)
-    console.log(item2)
     // setItem(item2)
     return (
         <>  
