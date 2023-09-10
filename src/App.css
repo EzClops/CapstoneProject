@@ -270,6 +270,12 @@ max-width: 90%;
 .containerCart .cartItem .quantity p{
   text-align: left;
 }
-
+.checkoutHeader{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 0;
+}
 
 /* End of Cart Section */

@@ -27,7 +27,7 @@ export const getItem = async (productId, setItem) => {
 }
 
 
-/* ENd of Products API calls */
+/* End of Products API calls */
 
 
 /*Cart API calls*/
@@ -72,6 +72,39 @@ export const getAllUsers = async() =>{
         const response = await fetch('https://fakestoreapi.com/users');
         const result = await response.json();
         console.log(result);
+        return result
+    }catch(error){
+        console.error(error.message)
+    }
+}
+
+export const updateUserAddress = async(firstname, lastname, city, street, number, zipcode, phone) =>{
+    try{
+        const response = await fetch('https://fakestoreapi.com/users/7',{
+            method:"PUT",
+            headers: {
+                'Content-Type': 'application/json'
+              },
+            body:JSON.stringify(
+                {
+                    name:{
+                        firstname: firstname,
+                        lastname: lastname
+                    },
+                    address:{
+                        city: city,
+                        street: street,
+                        number: number, //int
+                        zipcode: zipcode, //string
+                    },
+                    phone: phone //string
+                }
+            )
+        });
+        // console.log(response)
+        const result = await response.json();
+        // console.log(result)
+        return result
     }catch(error){
         console.error(error.message)
     }
