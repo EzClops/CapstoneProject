@@ -3,11 +3,10 @@ import { getClothing } from "../API/apiCalls";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-export default function Home({items, setItems, homePage, token, setCartPage }){
+export default function Home({items, setItems, homePage, token }){
 
     //Hard coding the specific category we want since apparel useState wasn't giving us our desired value when we wanted
     let cloth = "";
-    setCartPage(false)
     console.log("Home", token)
     console.log("session", sessionStorage.getItem("token"))
     return(

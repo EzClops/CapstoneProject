@@ -4,7 +4,7 @@ import Card from "./Card";
 import Home from "./Home";
 import { getClothing } from "../API/apiCalls";
 
-export default function Mens_Apparel({ setApparel, items, setItems, homePage, setHomePage, setItem, setCartPage }){
+export default function Mens_Apparel({ setApparel, items, setItems, homePage, setHomePage, setItem }){
     
     // console.log("Mens apparel", sessionStorage.getItem("token"))
     setHomePage(false)
@@ -12,7 +12,7 @@ export default function Mens_Apparel({ setApparel, items, setItems, homePage, se
     console.log(items)
     return(
         <>
-            <Home items={items} setItems={setItems} homePage={homePage}  setCartPage={setCartPage}/>
+            <Home items={items} setItems={setItems} homePage={homePage}/>
             <div className="cards">
                 {items.map(item => {
                     return(

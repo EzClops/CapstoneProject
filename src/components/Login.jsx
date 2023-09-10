@@ -3,12 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import { Link } from "react-router-dom";
 
 
-export default function Login({ token, setToken, username, setUsername, password, setPassword, setCartPage }){
+export default function Login({ token, setToken, username, setUsername, password, setPassword }){
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [error, setError] = useState(null)
-
-    setCartPage(false)
 
     const min = 6;
     const max = 16;

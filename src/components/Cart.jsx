@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import moment from "moment";
 import CartItem from "./CartItem";
 
-export default function Cart({ item, setItem, setCartPage }){
+export default function Cart({ item, setItem }){
 
     const [product, setProduct] = useState([]);
     const [total, setTotal] = useState(0);
@@ -45,6 +45,7 @@ export default function Cart({ item, setItem, setCartPage }){
             </header>
             <div className="userCart">
                 {
+                    !(sessionStorage.getItem("token")) ? <p>Cart is Empty</p> :
                     product.map(i =>{
                         return(
                             <CartItem productId={i["productId"]} quantity={i["quantity"]} item={item} setItem={setItem} total={total} setTotal={setTotal}/>

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 
-export default function LogOut({ setToken, setHomePage, setItem, setItems, setApparel, setUsername, setCartPage }){
+export default function LogOut({ setToken, setHomePage, setItem, setItems, setApparel, setUsername }){
     const navigate = useNavigate()
 
     sessionStorage.removeItem("username")
@@ -8,7 +8,6 @@ export default function LogOut({ setToken, setHomePage, setItem, setItems, setAp
     setUsername("")
     setToken(null)
     setHomePage(true)
-    setCartPage(false)
     setItem(null)
     setItems([])
     setApparel("")

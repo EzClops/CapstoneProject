@@ -5,13 +5,13 @@ import Card from "./Card";
 import Home from "./Home";
 import { getClothing } from "../API/apiCalls";
 
-export default function Womans_Apparel({ setApparel, items, setItems, homePage, setHomePage, setItem, setCartPage }){
+export default function Womans_Apparel({ setApparel, items, setItems, homePage, setHomePage, setItem }){
 
     setHomePage(false)
     setApparel("women's clothing")
     return(
         <>
-            <Home items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage}  setCartPage={setCartPage}/>
+            <Home items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage}/>
             {/* {getClothing(apparel, setItems)} */}
             <div className="cards">
                 {items.map(item => {
