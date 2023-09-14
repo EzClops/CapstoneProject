@@ -13,10 +13,10 @@ export default function Home({items, setItems, homePage, token }){
             <div className={"container categoryPage" + (homePage ? " homePage" : "")}>
                 <button onClick={()=>{
                     clothing = "men's clothing"
-                    getClothing(clothing, items, setItems)}}><Link to='/mens_apparel' className="linkColor">Men's Apparel</Link></button>
+                    getClothing(clothing, items, setItems)}}><Link to="/men's clothing" className="linkColor">Men's Apparel</Link></button>
                 <button onClick={()=>{
                     clothing = "women's clothing"
-                    getClothing(clothing, items, setItems)}}><Link to='/womans_apparel' className="linkColor">Woman's Apparel</Link></button>
+                    getClothing(clothing, items, setItems)}}><Link to="/women's clothing" className="linkColor">Woman's Apparel</Link></button>
                 <button onClick={()=>{
                     clothing = "electronics"
                     getClothing(clothing, items, setItems)}}><Link to='/electronics' className="linkColor">Electronics</Link></button>

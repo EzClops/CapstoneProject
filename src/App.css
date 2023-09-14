@@ -194,6 +194,12 @@ form input{
   max-width: 300px;
   height: 400px;
 }
+.miniNav{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+}
 .itemPage{
   display: flex;
   justify-content: space-around;
