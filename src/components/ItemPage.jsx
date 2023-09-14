@@ -21,4 +21,3 @@ export default function ItemPage({  item, items, setItems, homePage, setHomePage
     )
 }
 
-// <Link to='/cart' className="linkColor">Add to Cart</Link>

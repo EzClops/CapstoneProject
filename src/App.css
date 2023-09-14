@@ -146,7 +146,7 @@ form input{
   display: flex;
   flex-direction: row;
 }
-.mainPage{
+.homePage{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -161,7 +161,7 @@ form input{
     z-index: 1;
   /* width: 400px; */
 }
-.mainPage::after{
+.homePage::after{
   content: '';
     position: absolute;
     left: 0;
@@ -172,7 +172,7 @@ form input{
     opacity: .7;
     z-index: -1;
 }
-.mainPage button{
+.homePage button{
   width: 350px;
   margin: 15px 0px;
 }
@@ -295,7 +295,7 @@ max-width: 90%;
 .checkout .payment .form .cardNumber input{
   width: 500px;
 }
-.checkout .payment .form .extraCard{
+.checkout .payment .form .dates_CVV{
   display: flex;
   flex-direction: row;
   justify-content: space-around;

@@ -1,43 +1,33 @@
-import { getUserCart, getAllUsers, getItem } from "../API/apiCalls";
+import { getUserCart, getAllCart } from "../API/apiCalls";
 import { useState, useEffect } from "react";
-import moment from "moment";
 import CartItem from "./CartItem";
 
-export default function Cart({ item, setItem, product, setProduct, error }){
+export default function Cart({ product, setProduct, error }){
 
-    
-    const [total, setTotal] = useState(0);
     const [count , setCount] = useState(0)
+    const [total, setTotal] = useState(0);
     const [date, setDate] = useState(null)
+
+    const userCartId = 1;
+
     // setCartPage(true)
     // Grab desired users cart and stores the product and quantity in product state
     useEffect(() => {
-        async function fetUserProduct(c, userId){
+        async function fetUserProduct(userId){
             try{
                 const data = await getUserCart(userId)
-                // if (data.length > 1){
-                //     data.map(item =>{
-                //         // console.log(date)
-                //         if(date === null){
-                //             const formatedDate = moment(`${item["date"]}`).utc().format('YYYY-MM-DD')
-                //             setDate(formatedDate)
-                //             console.log("Hi", date)
-                //         }
-                //     })
-                // }
-                // console.log(data["0"]["date"])
-                const p = await data["0"]["products"]
-                setProduct(p)
-                
+                const productsInCart = await data["0"]["products"]
+                setProduct(productsInCart)
                 
             }catch(error){
                 console.error(error.message)
                 setProduct([])
             }
         }
-        fetUserProduct(count, 1)
+        fetUserProduct(userCartId)
     }, [])
 
+    // getAllCart()
     return(
         <>
             <header className="header">
@@ -46,12 +36,12 @@ export default function Cart({ item, setItem, product, setProduct, error }){
             <div className="userCart">
                 <span>{error && <p>{error}</p>}</span>
                 {
-                    !(sessionStorage.getItem("token")) ? <p>Cart is Empty</p> :
-                    product.map(i =>{
-                        return(
-                            <CartItem productId={i["productId"]} quantity={i["quantity"]} item={item} setItem={setItem} total={total} setTotal={setTotal}/>
-                        )
-                    }) 
+                    !(sessionStorage.getItem("token")) 
+                        ?   <p>Cart is Empty</p> 
+                        :   product.map((values, key) =>{
+                            return(
+                                <CartItem key={key} productId={values["productId"]} quantity={values["quantity"]}/>
+                            )})
                 }
                 
             </div>
