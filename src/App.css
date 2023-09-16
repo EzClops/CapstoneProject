@@ -197,8 +197,15 @@ form input{
 .miniNav{
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-direction: row;
+}
+.miniNav button{
+  background-color: rgb(66, 66, 66);
+  border-color: grey;
+}
+.miniNav button:hover{
+  border-color: black;
 }
 .itemPage{
   display: flex;

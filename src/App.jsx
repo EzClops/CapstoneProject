@@ -36,11 +36,11 @@ function App() {
           <Route path='/' element={<Home items={items} setItems={setItems} homePage={homePage} token={token}/>}/>
 
           {/* Product Route */}
-          <Route path="/men's clothing" element={<Mens_Apparel setApparel={setApparel} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage} setItem={setItem}/>}/>
+          <Route path="/men's clothing" element={<Mens_Apparel setApparel={setApparel} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage} setItem={setItem} token={token}/>}/>
           <Route path="/women's clothing" element={<Womans_Apparel setApparel={setApparel} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage} setItem={setItem}/>}/>
           <Route path='/jewelery' element={<Jewelery setApparel={setApparel} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage} setItem={setItem}/>}/>
           <Route path='/electronics' element={<Electronics setApparel={setApparel} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage} setItem={setItem}/>}/>
-          <Route path='/itempage' element={<ItemPage item={item} setItem={setItem} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage}/>}/>
+          <Route path='/itempage' element={<ItemPage item={item} setItem={setItem} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage} product={product}/>}/>
           {/* End of Product Route */}
 
           {/* Login/Logout/Register Route */}

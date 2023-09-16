@@ -3,7 +3,7 @@ import ItemPage from "./ItemPage"
 import { useState } from "react"
 
 export default function Card({ item, setItem }){
-
+    console.log("Hello", item)
     return(
         <>
             <div className="item_card">

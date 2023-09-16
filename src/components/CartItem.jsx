@@ -19,13 +19,13 @@ export default function CartItem({ productId, quantity}){
             <div className="containerCart">
                 <div className="cartImage">
                     <div className="image">
-                        <img src={item2.image} alt="pictar" height="150px" width="150px"/>
+                        <img src={item2?.image} alt="pictar" height="150px" width="150px"/>
                     </div>
                 </div>
                 <div className="cartItem">
                     <div className="title">
-                        <p>{item2.title}, {item2.description}</p>
-                        <p>${item2.price}</p>
+                        <p>{item2?.title}, {item2?.description}</p>
+                        <p>${item2?.price}</p>
                     </div>
                     <div className="quantity">
                         <p>quantity: {quantity}</p>

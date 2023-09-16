@@ -1,12 +1,12 @@
 import Home from "./Home"
 import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
-import { getClothing } from "../API/apiCalls"
+import { getClothing, updateInCart, getUserCart } from "../API/apiCalls"
 
-export default function ItemPage({  item, items, setItems, homePage, setHomePage  }){
-    console.log("Hi", item)
+export default function ItemPage({  item, items, setItems, homePage, setHomePage, product  }){
+    console.log("Hi", product)
 
-
+    const userCartId = 1;
 
     return (
         <>
@@ -15,6 +15,7 @@ export default function ItemPage({  item, items, setItems, homePage, setHomePage
                     getClothing(item["category"], items, setItems)}}><Link to={`/${item["category"]}`} className="linkColor">Return</Link>
                 </button>
                 <Home items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage}/>
+                <div></div>
             </div>
             <div className="itemPage">
                 <div className="container itemDescription">
@@ -24,7 +25,10 @@ export default function ItemPage({  item, items, setItems, homePage, setHomePage
                 </div>
                 <div className="itemPrice">
                     <p>$ {item.price}</p>
-                    <button>Add to Cart</button>
+                    <button onClick={() =>{
+                        
+                        updateInCart(userCartId, item["id"],)
+                    }}>Add to Cart</button>
                 </div>
             </div>
         </>
