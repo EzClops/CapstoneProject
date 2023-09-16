@@ -5,7 +5,6 @@ import CartItem from "./CartItem";
 import Cart from "./Cart";
 
 export default function Checkout({ item, setItem, product, setCartPage, setCheckoutPage, submitAddress, setSubmitAddress, submitPayment, setSubmitPayment, error, setError }){
-    // updateUserAddress("hi", "bye", "why", "sky", 5, "85923", "9165731234")
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [city, setCity] = useState("");
@@ -13,7 +12,6 @@ export default function Checkout({ item, setItem, product, setCartPage, setCheck
     const [number, setNumber] = useState("");
     const [zipcode, setZipcode] = useState("");
     const [phone, setPhone] = useState("");
-    // const [error, setError] = useState("");
     const [card, setCard] = useState("");
     const [month, setMonth] = useState("");
     const [year, setYear] = useState("");
@@ -37,6 +35,22 @@ export default function Checkout({ item, setItem, product, setCartPage, setCheck
         setCvv("")
     }
 
+    function giveLabel(val, setVal, placeholder, maxInput){
+        return(
+            <label>
+                <input required value={val} placeholder={placeholder} onChange={e =>{
+                    if(!(maxInput === undefined)){
+                        if(!(val.length >= maxInput) || e.nativeEvent.inputType === "deleteContentBackward"){
+                            setVal(e.target.value)
+                        }
+                    }else{setVal(e.target.value)}
+                    
+                }}/>
+            </label>
+        )
+    }
+
+    
     async function handleSubmitAddress(e){
         e.preventDefault()
         try{
@@ -78,8 +92,6 @@ export default function Checkout({ item, setItem, product, setCartPage, setCheck
     }
 
 
-
-
     return (
         <>
             <header className="checkoutHeader">
@@ -91,131 +103,50 @@ export default function Checkout({ item, setItem, product, setCartPage, setCheck
                     setSubmitPayment(false)
                     setError(null)
                     navigate("/cart")
-
                 }} className="linkColor">Cart</button>
             </header>
                 <span>{error && <p>{error}</p>}</span>
             <div className="container">
                 <div className="checkout">
-                    <div className="address">
-                        <div className="section"><h3>Address</h3></div>
-                        <div className="form">
-                            <form onSubmit={handleSubmitAddress}>
-                                <div className="left">
-                                    <label>
-                                        <input required value={firstname} placeholder="Firstname" onChange={e =>{
-                                            setFirstname(e.target.value)
-                                        }}/>
-                                    </label>
-                                    <label>
-                                        <input required value={lastname} placeholder="Lastname" onChange={e =>{
-                                            setLastname(e.target.value)
-                                        }}/>
-                                    </label>
-                                    <label>
-                                        <input required value={street} placeholder="Street Address" onChange={e =>{
-                                            setStreet(e.target.value)
-                                        }}/>
-                                    </label>
-
-                                </div>
-                                <div className="right">
-                                    <label>
-                                        <input value={number} placeholder="Apt. # (Optional)" onChange={e =>{
-                                            setNumber(e.target.value)
-                                        }}/>
-                                    </label>
-                                    <label>
-                                        <input required value={city} placeholder="City" onChange={e =>{
-                                            setCity(e.target.value)
-                                        }}/>
-                                    </label>
-                                    <label>
-                                        <input required value={zipcode} placeholder="Zipcode" onChange={e =>{
-                                            setZipcode(e.target.value)
-                                        }}/>
-                                    </label>
-                                    <label>
-                                        <input value={phone} placeholder="Phone # (Optional)" onChange={e =>{
-                                            setPhone(e.target.value)
-                                        }}/>
-                                    </label>
-
-                                </div>
-                                <input type="submit" value="Submit"/>
-                            </form>
-                        </div>
-                    </div>
+                    <section className="address">
+                        <div className="title"><h3>Shipping Address</h3></div>
+                        <form  className="form" onSubmit={handleSubmitAddress}>
+                            {giveLabel(firstname, setFirstname, "Firstname")}
+                            {giveLabel(lastname, setLastname, "Lastname")}
+                            {giveLabel(street, setStreet, "Street Address")}
+                            {giveLabel(number, setNumber, "Apt. # (Optional)")}
+                            {giveLabel(city, setCity, "City")}
+                            {giveLabel(zipcode, setZipcode, "Zipcode")}
+                            {giveLabel(phone, setPhone, "Phone # (Optional)")}
+                            <input type="submit" value="Submit"/>
+                        </form>
+                    </section>
                     <hr></hr>
                     <hr></hr>
-                    <div className="payment">
-                        <div className="section"><h3>Payment</h3></div>
-                        <div className="form">
-                            <form onSubmit={handleSubmitPayment}>
-                                <div className="names">
-                                    <label>
-                                        <input required value={firstname} placeholder="Firstname" onChange={e =>{
-                                            setFirstname(e.target.value)
-                                        }}/>
-                                    </label>
-                                    <label>
-                                        <input required value={lastname} placeholder="Lastname" onChange={e =>{
-                                            setLastname(e.target.value)
-                                        }}/>
-                                    </label>
+                    <section className="payment">
+                        <div className="title"><h3>Payment</h3></div>
+                        <form className="form" onSubmit={handleSubmitPayment}>
+                            <div className="names">
+                                {giveLabel(firstname, setFirstname, "Firstname")}
+                                {giveLabel(lastname, setLastname, "Lastname")}
+                            </div>
+                            <div className="cardNumber">
+                                {giveLabel(card, setCard, "Card number", 16)}
+                            </div>
+                            <div className="dates_CVV">
+                                <div className="dates">
+                                    {giveLabel(month, setMonth, "MM", 2)}
+                                    {giveLabel(year, setYear, "YYYY", 4)}
                                 </div>
-                                <div className="cardNumber">
-                                    <label>
-                                        <input required value={card} placeholder="Card number" onChange={e =>{
-                                            console.log(e)
-                                            
-                                            if(!(card.length >= 16) || e.nativeEvent.inputType === "deleteContentBackward"){
-                                                setCard(e.target.value)
-                                            }
-                                        }}/>
-                                    </label>
+                                <div className="CVV">
+                                    {giveLabel(cvv, setCvv, "CVV", 3)}
                                 </div>
-                                <div className="extraCard">
-                                    <div className="dates">
-                                        <label>
-                                            <input required value={month} placeholder="MM" onChange={e =>{
-                                                if(!(month.length >= 2) || e.nativeEvent.inputType === "deleteContentBackward"){
-                                                setMonth(e.target.value)
-                                                }   
-                                            }}/>
-                                        </label>
-                                        {/* <p>/</p> */}
-                                        <label>
-                                            <input required value={year} placeholder="YYYY" onChange={e =>{
-                                                if(!(year.length >= 4) || e.nativeEvent.inputType === "deleteContentBackward"){
-                                                setYear(e.target.value)
-
-                                                }
-                                                // while(year.length <= 4){
-                                                //     setYear(e.target.value)
-                                                // }
-                                            }}/>
-                                        </label>
-                                    </div>
-                                    <div className="CVV">
-                                        <label>
-                                            <input required value={cvv} placeholder="CVV" onChange={e =>{
-                                                if(!(cvv.length >= 3) || e.nativeEvent.inputType === "deleteContentBackward"){
-                                                setCvv(e.target.value)
-                                            }
-                                                // while(cvv.length <= 3){
-                                                //     setCvv(e.target.value)
-                                                // }
-                                            }}/>
-                                        </label>
-                                    </div>
-                                </div>
-                                <input type="submit" value="Submit"/>
-                            </form>
-                        </div>
-                    </div> 
-                    <div className="userCart">
-                        <div className="section"><h3>Shopping Cart</h3></div>
+                            </div>
+                            <input type="submit" value="Submit"/>
+                        </form>
+                    </section> 
+                    <section className="userCart">
+                        <div className="title"><h3>Shopping Cart</h3></div>
                         {
                             !(sessionStorage.getItem("token")) ? <p>Cart is Empty</p> :
                             product.map(i =>{
@@ -225,7 +156,7 @@ export default function Checkout({ item, setItem, product, setCartPage, setCheck
                             }) 
                         }
                         
-                    </div>
+                    </section>
                 </div>
                 <button onClick={()=>{
                     if(submitAddress && submitPayment){

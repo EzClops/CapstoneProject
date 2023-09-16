@@ -3,9 +3,7 @@ import ItemPage from "./ItemPage"
 import { useState } from "react"
 
 export default function Card({ item, setItem }){
-    // setItems(item)
-    
-
+    console.log("Hello", item)
     return(
         <>
             <div className="item_card">
@@ -13,12 +11,8 @@ export default function Card({ item, setItem }){
                 <div className="details">
                     <Link to='/itempage' className="linkColor" onClick={()=>{setItem(item)}}><h3>{item.title}</h3></Link>
                     <p>Price: ${item.price}</p>
-                    {/* <p>{item.rating}</p> */}
-                    {/* <p>{item.description}</p> */}
                 </div>
             </div>
         </>
     )
 }
-
-// item={item} setItem={setItems} homePage={homePage} setHomePage={setHomePage}

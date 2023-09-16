@@ -146,7 +146,7 @@ form input{
   display: flex;
   flex-direction: row;
 }
-.mainPage{
+.homePage{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -161,7 +161,7 @@ form input{
     z-index: 1;
   /* width: 400px; */
 }
-.mainPage::after{
+.homePage::after{
   content: '';
     position: absolute;
     left: 0;
@@ -172,7 +172,7 @@ form input{
     opacity: .7;
     z-index: -1;
 }
-.mainPage button{
+.homePage button{
   width: 350px;
   margin: 15px 0px;
 }
@@ -193,6 +193,19 @@ form input{
 .item_card{
   max-width: 300px;
   height: 400px;
+}
+.miniNav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.miniNav button{
+  background-color: rgb(66, 66, 66);
+  border-color: grey;
+}
+.miniNav button:hover{
+  border-color: black;
 }
 .itemPage{
   display: flex;
@@ -295,7 +308,7 @@ max-width: 90%;
 .checkout .payment .form .cardNumber input{
   width: 500px;
 }
-.checkout .payment .form .extraCard{
+.checkout .payment .form .dates_CVV{
   display: flex;
   flex-direction: row;
   justify-content: space-around;

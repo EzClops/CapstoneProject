@@ -1,6 +1,15 @@
 import { useState, useEffect } from "react";
 
 /* Products API calls */
+export const getAllProducts = async() =>{
+    try{
+        const response = await fetch('https://fakestoreapi.com/products');
+        const result = await response.json();
+        console.log(result)
+    }catch(error) {
+        console.error(error.message)
+    }
+}
 export const getClothing = async (apparel, items, setItems ) => {
     // console.log(apparel)
     try {
@@ -40,19 +49,50 @@ export const getUserCart = async (userId) => {
         console.error(error.message);
     }
 }
-    
-export const addCart = async (userId, productId, quantity) => {
+  
+export const getAllCart = async() =>{
+    try{
+        const response = await fetch('https://fakestoreapi.com/carts')
+        const result = await response.json()
+        console.log(result)
+    }catch(error){
+        console.error(error.message);
+    }
+}
+export const addToCart = async (userId, productId, quantity) => {
     try {
         const response = await fetch('https://fakestoreapi.com/carts',{
             method:"PUT",
             headers: {
                 'Content-Type': 'application/json'
-              },
+            },
             body:JSON.stringify(
                 {
                     userId: userId,
                     date:2019-12-10,
                     products:[{productId:productId,quantity:1},{productId:productId,quantity:5}]
+                }
+            )
+        })
+        const result = await response.json();
+        console.log(result);
+    }catch(error){
+        console.error(error.message);
+    }
+}
+
+export const updateInCart = async (userId, productId, quantity) => {
+    try{
+        const response = await fetch('https://fakestoreapi.com/carts/1',{
+            method:"PUT",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(
+                {
+                    userId:userId,
+                    date:2019-12-10,
+                    products:[{productId:productId,quantity:quantity}]
                 }
             )
         })
@@ -88,7 +128,7 @@ export const updateUserAddress = async(firstname, lastname, city, street, number
             setError("Invalid phone number")
             throw new Error("invalid phone number");
         }
-        const response = await fetch('https://fakestoreapi.com/users/7',{
+        const response = await fetch('https://fakestoreapi.com/users/1',{
             method:"PUT",
             headers: {
                 'Content-Type': 'application/json'

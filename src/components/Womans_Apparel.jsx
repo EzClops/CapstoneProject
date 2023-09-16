@@ -1,23 +1,21 @@
-import App from "../App";
-import Apparel_Load from "./Apparel_Load"
-import { useEffect, useState } from "react";
 import Card from "./Card";
 import Home from "./Home";
-import { getClothing } from "../API/apiCalls";
+import { useEffect } from "react";
 
 export default function Womans_Apparel({ setApparel, items, setItems, homePage, setHomePage, setItem }){
 
-    setHomePage(false)
-    setApparel("women's clothing")
+    useEffect(() =>{
+        setHomePage(false)
+        setApparel("women's clothing")
+    }, [])
+    
     return(
         <>
-            <Home items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage}/>
-            {/* {getClothing(apparel, setItems)} */}
+            <Home items={items} setItems={setItems} homePage={homePage}/>
             <div className="cards">
-                {items.map(item => {
-                    {/* setItem(i) */}
+                {items.map((item, key) => {
                     return(
-                        <Card item={item} setItem={setItem}/>
+                        <Card key={key} item={item} setItem={setItem}/>
                     )
                 })}
             </div>
