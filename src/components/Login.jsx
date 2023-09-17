@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from 'react-router-dom'
 import { Link } from "react-router-dom";
-import { getUserCart } from "../API/apiCalls";
+import { getUserCart, getAllUsers } from "../API/apiCalls";
 
 
 export default function Login({ token, setToken, username, setUsername, password, setPassword, error, setError }){
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
 
-    const min = 6;
+    const min = 5;
     const max = 16;
 
     const userCartId = 1;
@@ -18,16 +18,15 @@ export default function Login({ token, setToken, username, setUsername, password
         async function fetUserProduct(userId) {
         try {
             const data = await getUserCart(userId);
-            // console.log(data)
             const productsInCart = await data["0"]["products"];
-            // console.log( productsInCart)
-            if (!localStorage.getItem("All_Products_In_User_Cart")){
-                localStorage.setItem("All_Products_In_User_Cart", JSON.stringify(productsInCart))
+        
+            if (!localStorage.getItem(`All_Products_In_User_Cart${userId}`)){
+                localStorage.setItem(`All_Products_In_User_Cart${userId}`, JSON.stringify(productsInCart))
             }
-            // setProduct(productsInCart);
+            
             productsInCart.map((product) => {
-                if(!localStorage.getItem(`productId:${product["productId"]}`)){
-                    localStorage.setItem(`productId:${product["productId"]}`, JSON.stringify(product["quantity"]))
+                if(!localStorage.getItem(`productId:${product["productId"]}[${userId}]`)){
+                    localStorage.setItem(`productId:${product["productId"]}[${userId}]`, JSON.stringify(product["quantity"]))
                 }
             })
             // localStorage.setItem("products_In_Cart", JSON.stringify(productsInCart))
@@ -38,6 +37,7 @@ export default function Login({ token, setToken, username, setUsername, password
         fetUserProduct(userCartId);
     }, []);
 
+    getAllUsers()
     //Username: mor_2314
     //Password: 83r5^_
     async function handleSubmit(event){

@@ -5,16 +5,19 @@ import { getClothing, updateInCart, getUserCart } from "../API/apiCalls"
 import { useCallback } from "react"
 
 export default function ItemPage({  item, items, setItems, homePage, setHomePage, product, setQuantity_Change_Value, setId_Change_Value  }){
-    let All_Local_Productz = JSON.parse(localStorage.getItem("All_Products_In_User_Cart"))
+    const userCartId = 1;
+    let All_Local_Productz = JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`))
+
+    // console.log(JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`))["productsInCart"])
     const addQuantity = useCallback(async () => {
-        let localProduct = JSON.parse(localStorage.getItem(`productId:${item["id"]}`))
+        let localProduct = JSON.parse(localStorage.getItem(`productId:${item["id"]}[${userCartId}]`))
         console.log(!localProduct)
         if(!localProduct){
             All_Local_Productz.push({productId: item["id"], quantity:1})
-            localStorage.setItem("All_Products_In_User_Cart", JSON.stringify(All_Local_Productz))
+            localStorage.setItem(`All_Products_In_User_Cart${userCartId}`, JSON.stringify(All_Local_Productz))
         }
         localProduct += 1;
-        localStorage.setItem(`productId:${item["id"]}`, JSON.stringify(localProduct))
+        localStorage.setItem(`productId:${item["id"]}[${userCartId}]`, JSON.stringify(localProduct))
     },[])
 
     return (

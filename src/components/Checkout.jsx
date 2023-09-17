@@ -31,6 +31,8 @@ export default function Checkout({
 
   const navigate = useNavigate();
 
+  const userCartId = 1;
+
   function clearInput() {
     setFirstname("");
     setLastname("");
@@ -186,7 +188,7 @@ export default function Checkout({
             {!sessionStorage.getItem("token") ? (
               <p>Cart is Empty</p>
             ) : (
-              JSON.parse(localStorage.getItem("All_Products_In_User_Cart")).map((i) => {
+              JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).map((i) => {
                 return (
                   <CartItem
                     productId={i["productId"]}

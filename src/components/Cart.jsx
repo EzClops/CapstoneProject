@@ -15,6 +15,8 @@ export default function Cart({ product, error, quantity_change_value, id_change_
     whenever all_Users_Cart_Items is changed, we will run the useEffect again so we can update the localStorage
   
   */
+  const userCartId = 1;
+  getAllCart()
 
   return (
     <>
@@ -27,9 +29,9 @@ export default function Cart({ product, error, quantity_change_value, id_change_
             {!sessionStorage.getItem("token") ? (
               <p>Cart is Empty</p>
             ) : (
-              JSON.parse(localStorage.getItem("All_Products_In_User_Cart")).map((values, key) => {
+              JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).map((values, key) => {
                 {/* console.log(values) */}
-                let sum_quantity = JSON.parse(localStorage.getItem(`productId:${values["productId"]}`))
+                let sum_quantity = JSON.parse(localStorage.getItem(`productId:${values["productId"]}[${userCartId}]`))
                 {/* console.log(sum_quantity) */}
                 return (
                   <CartItem
