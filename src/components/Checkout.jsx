@@ -186,7 +186,7 @@ export default function Checkout({
             {!sessionStorage.getItem("token") ? (
               <p>Cart is Empty</p>
             ) : (
-              product.map((i) => {
+              JSON.parse(localStorage.getItem("All_Products_In_User_Cart")).map((i) => {
                 return (
                   <CartItem
                     productId={i["productId"]}

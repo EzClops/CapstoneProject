@@ -1,6 +1,7 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate } from 'react-router-dom'
 import { Link } from "react-router-dom";
+import { getUserCart } from "../API/apiCalls";
 
 
 export default function Login({ token, setToken, username, setUsername, password, setPassword, error, setError }){
@@ -10,6 +11,32 @@ export default function Login({ token, setToken, username, setUsername, password
     const min = 6;
     const max = 16;
 
+    const userCartId = 1;
+  // setCartPage(true)
+  // Grab desired users cart and stores the product and quantity in product state
+    useEffect(() => {
+        async function fetUserProduct(userId) {
+        try {
+            const data = await getUserCart(userId);
+            // console.log(data)
+            const productsInCart = await data["0"]["products"];
+            // console.log( productsInCart)
+            if (!localStorage.getItem("All_Products_In_User_Cart")){
+                localStorage.setItem("All_Products_In_User_Cart", JSON.stringify(productsInCart))
+            }
+            // setProduct(productsInCart);
+            productsInCart.map((product) => {
+                if(!localStorage.getItem(`productId:${product["productId"]}`)){
+                    localStorage.setItem(`productId:${product["productId"]}`, JSON.stringify(product["quantity"]))
+                }
+            })
+            // localStorage.setItem("products_In_Cart", JSON.stringify(productsInCart))
+        } catch (error) {
+            console.error(error.message);
+        }
+        }
+        fetUserProduct(userCartId);
+    }, []);
 
     //Username: mor_2314
     //Password: 83r5^_

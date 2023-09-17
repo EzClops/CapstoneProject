@@ -2,11 +2,20 @@ import Home from "./Home"
 import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
 import { getClothing, updateInCart, getUserCart } from "../API/apiCalls"
+import { useCallback } from "react"
 
-export default function ItemPage({  item, items, setItems, homePage, setHomePage, product  }){
-    console.log("Hi", product)
-
-    const userCartId = 1;
+export default function ItemPage({  item, items, setItems, homePage, setHomePage, product, setQuantity_Change_Value, setId_Change_Value  }){
+    let All_Local_Productz = JSON.parse(localStorage.getItem("All_Products_In_User_Cart"))
+    const addQuantity = useCallback(async () => {
+        let localProduct = JSON.parse(localStorage.getItem(`productId:${item["id"]}`))
+        console.log(!localProduct)
+        if(!localProduct){
+            All_Local_Productz.push({productId: item["id"], quantity:1})
+            localStorage.setItem("All_Products_In_User_Cart", JSON.stringify(All_Local_Productz))
+        }
+        localProduct += 1;
+        localStorage.setItem(`productId:${item["id"]}`, JSON.stringify(localProduct))
+    },[])
 
     return (
         <>
@@ -25,10 +34,7 @@ export default function ItemPage({  item, items, setItems, homePage, setHomePage
                 </div>
                 <div className="itemPrice">
                     <p>$ {item.price}</p>
-                    <button onClick={() =>{
-                        
-                        updateInCart(userCartId, item["id"],)
-                    }}>Add to Cart</button>
+                    <button onClick={addQuantity}>Add to Cart</button>
                 </div>
             </div>
         </>

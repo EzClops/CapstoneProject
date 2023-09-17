@@ -10,6 +10,8 @@ export default function Login(){
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
 
+
+    
     async function handleRegister(event){
         event.preventDefault();
         try{

@@ -1,41 +1,23 @@
-import { getUserCart, getAllCart } from "../API/apiCalls";
+import { getUserCart, getAllCart, getAllUsers } from "../API/apiCalls";
 import { useState, useEffect } from "react";
 import CartItem from "./CartItem";
+import { allLocalUserCart } from "../API/apiCalls";
 
-export default function Cart({ product, setProduct, error }) {
-  const [count, setCount] = useState(0);
-  const [total, setTotal] = useState(0);
-  const [date, setDate] = useState(null);
-  const [loading, setLoading] = useState(true);
+export default function Cart({ product, error, quantity_change_value, id_change_value }) {
 
-  const userCartId = 1;
+  /* 
+    So we first want to get all user carts using getAllCart
+      put this in a useEffect so that we only call the api one time
+      store result inside of setAll_Users_Cart_Items so we can use in another useEffect
+    once we have all_Users_Cart_Items contain the object of all users cart, we will map through it and store each unique userID inside of a local storage
+      if localstorage.getItem !== null||undefined then store userId as key, and object cart as value
+      also return within this if and return in else since map needs to have same number returned
+    whenever all_Users_Cart_Items is changed, we will run the useEffect again so we can update the localStorage
+  
+  */
 
-  // setCartPage(true)
-  // Grab desired users cart and stores the product and quantity in product state
-  useEffect(() => {
-    async function fetUserProduct(userId) {
-      try {
-        const data = await getUserCart(userId);
-        // console.log(data)
-        const productsInCart = await data["0"]["products"];
-        // console.log( productsInCart)
-        setProduct(productsInCart);
-        setLoading(false);
-      } catch (error) {
-        console.error(error.message);
-        setProduct([]);
-      }
-    }
-    fetUserProduct(userCartId);
-  }, []);
-  console.log("Good evening", product);
-
-  // getAllCart()
   return (
     <>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
         <>
           <header className="header">
             <h2>Shopping Cart</h2>
@@ -45,19 +27,21 @@ export default function Cart({ product, setProduct, error }) {
             {!sessionStorage.getItem("token") ? (
               <p>Cart is Empty</p>
             ) : (
-              product.map((values, key) => {
+              JSON.parse(localStorage.getItem("All_Products_In_User_Cart")).map((values, key) => {
+                {/* console.log(values) */}
+                let sum_quantity = JSON.parse(localStorage.getItem(`productId:${values["productId"]}`))
+                {/* console.log(sum_quantity) */}
                 return (
                   <CartItem
                     key={key}
                     productId={values["productId"]}
-                    quantity={values["quantity"]}
+                    quantity={sum_quantity}
                   />
                 );
               })
             )}
           </div>
         </>
-      )}
     </>
   );
 }

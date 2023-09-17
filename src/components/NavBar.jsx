@@ -1,5 +1,6 @@
 import { Link, Outlet } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react';
 
 export default function NavBar({ homePage, setHomePage, token, cartPage, setCartPage, checkoutPage, setCheckoutPage, submitAddress, submitPayment, setError, setSubmitAddress, setSubmitPayment }){
     

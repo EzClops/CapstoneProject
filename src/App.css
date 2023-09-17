@@ -262,6 +262,13 @@ hr {
   /* max-width: 80%; */
   margin: 15px 15px;
 }
+.userCart{
+  width: 650px;
+  height: 700px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: auto;
+}
 .containerCart {
   display: flex;
   justify-content: center;

@@ -1,9 +1,10 @@
 import { getItem } from "../API/apiCalls"
 import { useEffect, useState } from "react"
+import { updateInCart } from "../API/apiCalls"
 
 export default function CartItem({ productId, quantity}){
     const [item2, setItem2] = useState("")
-
+    // console.log(`productId${productId}`, quantity)
     useEffect(()=>{
         async function fetchItem(){
             const data = await getItem(productId);
@@ -12,7 +13,7 @@ export default function CartItem({ productId, quantity}){
         }
         fetchItem()
     },[])
-
+    // console.log("product", item2)
     return (
         <>  
             <hr></hr>
