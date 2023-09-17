@@ -1,7 +1,7 @@
 import { Link, Outlet } from "react-router-dom"
 import { getClothing, getAllProducts } from "../API/apiCalls";
 
-export default function Home({items, setItems, homePage, token }){
+export default function Home({items, setItems, homePage }){
 
     //Hard coding the specific category we want since apparel useState wasn't giving us our desired value when we wanted
     let clothing = "";

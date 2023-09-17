@@ -15,7 +15,6 @@ import ItemPage from './components/ItemPage'
 import LogOut from './components/LogOut'
 import Checkout from './components/Checkout'
 import PlaceOrder from './components/PlaceOrder'
-import { getUserCart } from './API/apiCalls'
 
 function App() {
   const [apparel, setApparel] = useState("")
@@ -31,24 +30,20 @@ function App() {
   const[submitAddress, setSubmitAddress] = useState(false);
   const[submitPayment, setSubmitPayment] = useState(false);
   const [error, setError] = useState(null)
-  const [quantity_change_value, setQuantity_Change_Value] = useState(0);
-  const [id_change_value, setId_Change_Value] = useState(null);
 
-
-  
 
   return (
     <>
       <Routes>
-        <Route path='/' element={<NavBar homePage={homePage} setHomePage={setHomePage} token={token} cartPage={cartPage} setCartPage={setCartPage} checkoutPage={checkoutPage} setCheckoutPage={setCheckoutPage} submitAddress={submitAddress} submitPayment={submitPayment} setError={setError}/>}>
-          <Route path='/' element={<Home items={items} setItems={setItems} homePage={homePage} token={token}/>}/>
+        <Route path='/' element={<NavBar setHomePage={setHomePage} token={token} cartPage={cartPage} setCartPage={setCartPage} checkoutPage={checkoutPage} setCheckoutPage={setCheckoutPage} submitAddress={submitAddress} submitPayment={submitPayment} setError={setError}/>}>
+          <Route path='/' element={<Home items={items} setItems={setItems} homePage={homePage} />}/>
 
           {/* Product Route */}
           <Route path="/men's clothing" element={<Mens_Apparel setApparel={setApparel} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage} setItem={setItem} token={token}/>}/>
           <Route path="/women's clothing" element={<Womans_Apparel setApparel={setApparel} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage} setItem={setItem}/>}/>
           <Route path='/jewelery' element={<Jewelery setApparel={setApparel} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage} setItem={setItem}/>}/>
           <Route path='/electronics' element={<Electronics setApparel={setApparel} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage} setItem={setItem}/>}/>
-          <Route path='/itempage' element={<ItemPage item={item} setItem={setItem} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage} product={product} quantity_change_value={quantity_change_value} setQuantity_Change_Value={setQuantity_Change_Value} setId_Change_Value={setId_Change_Value}/>}/>
+          <Route path='/itempage' element={<ItemPage item={item} setItem={setItem} items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage}/>}/>
           {/* End of Product Route */}
 
           {/* Login/Logout/Register Route */}
@@ -58,8 +53,8 @@ function App() {
           {/* End of Login/Logout/Register Route */}
 
           {/* Cart Route */}
-          <Route path='/cart' element={<Cart product={product} error={error} quantity_change_value={quantity_change_value} setId_Change_Value={setId_Change_Value} id_change_value={id_change_value}/>}/>
-          <Route path='checkout' element={<Checkout item={item} setItem={setItem} product={product} setCartPage={setCartPage} setCheckoutPage={setCheckoutPage} submitAddress={submitAddress} setSubmitAddress={setSubmitAddress} submitPayment={submitPayment} setSubmitPayment={setSubmitPayment} error={error} setError={setError}/>}></Route>
+          <Route path='/cart' element={<Cart error={error}/>}/>
+          <Route path='checkout' element={<Checkout item={item} setItem={setItem} setCartPage={setCartPage} setCheckoutPage={setCheckoutPage} submitAddress={submitAddress} setSubmitAddress={setSubmitAddress} submitPayment={submitPayment} setSubmitPayment={setSubmitPayment} error={error} setError={setError}/>}></Route>
           <Route path='placeorder' element={<PlaceOrder/>}/>
           {/* End of Cart Route */}
         </Route>

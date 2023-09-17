@@ -1,9 +1,8 @@
-import { getUserCart, getAllCart, getAllUsers } from "../API/apiCalls";
-import { useState, useEffect } from "react";
-import CartItem from "./CartItem";
-import { allLocalUserCart } from "../API/apiCalls";
 
-export default function Cart({ product, error, quantity_change_value, id_change_value }) {
+import CartItem from "./CartItem";
+
+
+export default function Cart({ error }) {
 
   /* 
     So we first want to get all user carts using getAllCart
@@ -16,7 +15,6 @@ export default function Cart({ product, error, quantity_change_value, id_change_
   
   */
   const userCartId = 1;
-  getAllCart()
 
   return (
     <>
@@ -30,9 +28,7 @@ export default function Cart({ product, error, quantity_change_value, id_change_
               <p>Cart is Empty</p>
             ) : (
               JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).map((values, key) => {
-                {/* console.log(values) */}
                 let sum_quantity = JSON.parse(localStorage.getItem(`productId:${values["productId"]}[${userCartId}]`))
-                {/* console.log(sum_quantity) */}
                 return (
                   <CartItem
                     key={key}

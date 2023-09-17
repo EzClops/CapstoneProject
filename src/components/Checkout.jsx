@@ -7,7 +7,6 @@ import Cart from "./Cart";
 export default function Checkout({
   item,
   setItem,
-  product,
   setCartPage,
   setCheckoutPage,
   submitAddress,
