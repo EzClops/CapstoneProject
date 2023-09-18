@@ -6,7 +6,7 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
     
     const navigate = useNavigate();
     const userCartId = 1;
-
+    localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)
     return(
         <>
             <header className="container">

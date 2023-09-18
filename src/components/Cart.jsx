@@ -2,7 +2,7 @@
 import CartItem from "./CartItem";
 
 
-export default function Cart({ error }) {
+export default function Cart({ error, set_Quantity_User_Cart }) {
 
   /* 
     So we first want to get all user carts using getAllCart
@@ -15,7 +15,7 @@ export default function Cart({ error }) {
   
   */
   const userCartId = 1;
-
+  
   return (
     <>
         <>
@@ -28,11 +28,16 @@ export default function Cart({ error }) {
               <p>Cart is Empty</p>
             ) : (
               JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).map((values, key) => {
+                
+                {/* setItem_In_Cart(values) */}
+                {/* console.log(item_In_Cart) */}
+                console.log("Index", key)
                 return (
                   <CartItem
                     key={key}
                     productId={values["productId"]}
                     quantity={JSON.parse(localStorage.getItem(`productId:${values["productId"]}[${userCartId}]`))}
+                    set_Quantity_User_Cart={set_Quantity_User_Cart}
                   />
                 );
               })

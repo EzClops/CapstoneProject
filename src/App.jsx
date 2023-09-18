@@ -17,10 +17,13 @@ import Checkout from './components/Checkout'
 import PlaceOrder from './components/PlaceOrder'
 
 function App() {
+  const userCartId = 1;
+
   const [apparel, setApparel] = useState("")
   const [items, setItems] = useState([]);
   const [homePage, setHomePage] = useState(true);
   const [item, setItem] = useState(null);
+  const [quantity_User_Cart, set_Quantity_User_Cart] = useState(JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).length)
   const [token, setToken] = useState(sessionStorage.getItem("token"));
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -35,7 +38,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<NavBar setHomePage={setHomePage} token={token} cartPage={cartPage} setCartPage={setCartPage} checkoutPage={checkoutPage} setCheckoutPage={setCheckoutPage} submitAddress={submitAddress} submitPayment={submitPayment} setError={setError}/>}>
+        <Route path='/' element={<NavBar setHomePage={setHomePage} token={token} cartPage={cartPage} setCartPage={setCartPage} checkoutPage={checkoutPage} setCheckoutPage={setCheckoutPage} submitAddress={submitAddress} submitPayment={submitPayment} setError={setError} quantity_User_Cart={quantity_User_Cart}/>}>
           <Route path='/' element={<Home items={items} setItems={setItems} homePage={homePage} />}/>
 
           {/* Product Route */}
@@ -53,7 +56,7 @@ function App() {
           {/* End of Login/Logout/Register Route */}
 
           {/* Cart Route */}
-          <Route path='/cart' element={<Cart error={error}/>}/>
+          <Route path='/cart' element={<Cart error={error} set_Quantity_User_Cart={set_Quantity_User_Cart}/>}/>
           <Route path='checkout' element={<Checkout item={item} setItem={setItem} setCartPage={setCartPage} setCheckoutPage={setCheckoutPage} submitAddress={submitAddress} setSubmitAddress={setSubmitAddress} submitPayment={submitPayment} setSubmitPayment={setSubmitPayment} error={error} setError={setError}/>}></Route>
           <Route path='placeorder' element={<PlaceOrder/>}/>
           {/* End of Cart Route */}
