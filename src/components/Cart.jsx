@@ -28,12 +28,11 @@ export default function Cart({ error }) {
               <p>Cart is Empty</p>
             ) : (
               JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).map((values, key) => {
-                let sum_quantity = JSON.parse(localStorage.getItem(`productId:${values["productId"]}[${userCartId}]`))
                 return (
                   <CartItem
                     key={key}
                     productId={values["productId"]}
-                    quantity={sum_quantity}
+                    quantity={JSON.parse(localStorage.getItem(`productId:${values["productId"]}[${userCartId}]`))}
                   />
                 );
               })

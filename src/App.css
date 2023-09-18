@@ -297,6 +297,12 @@ hr {
   white-space: nowrap;
   max-width: 90%;
 }
+.containerCart .cartItem .quantity{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+}
 .containerCart .cartItem .quantity p {
   text-align: left;
 }

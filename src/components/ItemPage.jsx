@@ -26,10 +26,10 @@ export default function ItemPage({  item, items, setItems, homePage, setHomePage
                     <p>$ {item.price}</p>
                     <div className="Quantity_Buttons">
                         <button onClick={() =>{
-                            addQuantity(item)
+                            addQuantity(item["id"])
                         }}>Add to Cart</button>
                         <button onClick={() =>{
-                            reduceQuantity(item)
+                            reduceQuantity(item["id"])
                         }}>-</button>
                     </div>
                 </div>

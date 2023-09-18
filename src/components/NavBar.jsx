@@ -5,6 +5,7 @@ import { useState } from 'react';
 export default function NavBar({ setHomePage, token, cartPage, setCartPage, checkoutPage, setCheckoutPage, submitAddress, submitPayment, setError, setSubmitAddress, setSubmitPayment }){
     
     const navigate = useNavigate();
+    const userCartId = 1;
 
     return(
         <>
@@ -40,12 +41,18 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
                                 }}>LogOut</Link></button>
                         }
 
-                        {(cartPage && sessionStorage.getItem("token") === null) 
+                        {((cartPage && sessionStorage.getItem("token") === null)) 
                             ? <button><Link to='/cart' className="linkColor" onClick=
                                 {() =>{
                                     setCartPage(true);
                                     setError("Please Login before Checkout.")
-                                }}>Checkout</Link></button> 
+                                }}>Checkout</Link></button>
+                        : ((cartPage && (JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).length === 0))) 
+                            ? <button><Link to='/cart' className="linkColor" onClick=
+                                {() =>{
+                                    setCartPage(true);
+                                    setError("Cart is Empty.")
+                                }}>Checkout</Link></button>
                         : ((cartPage) && !(sessionStorage.getItem("token") === null)) 
                             ? <button><Link to='/checkout' className='linkColor' onClick=
                                 {() =>{
