@@ -1,24 +1,28 @@
 import Card from "./Card";
 import Home from "./Home";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-export default function Mens_Apparel({ setApparel, items, setItems, homePage, setHomePage, setItem, token }){
-    
-    useEffect(() =>{
-        setHomePage(false)
-        setApparel("men's clothing")
-    }, [])
+export default function Mens_Apparel({ setApparel, items, setItems, homePage, setHomePage, setItem, token }) {
+  const [loading, setLoading] = useState(true);
 
-    return(
-        <>
-            <Home items={items} setItems={setItems} homePage={homePage} token={token}/>
-            <div className="cards">
-                {items.map((item, key) => {
-                    return(
-                        <Card key={key} item={item} setItem={setItem}/>
-                    )
-                })}
-            </div>
-        </>
-    )
+  useEffect(() => {
+    setHomePage(false);
+    setApparel("men's clothing");
+    setLoading(false);
+  }, []);
+
+  return (
+    <>
+      <Home items={items} setItems={setItems} homePage={homePage} token={token}/>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className="cards">
+          {items.map((item, key) => {
+            return <Card key={key} item={item} setItem={setItem} />;
+          })}
+        </div>
+      )}
+    </>
+  );
 }

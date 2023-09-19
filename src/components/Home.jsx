@@ -1,12 +1,12 @@
 import { Link, Outlet } from "react-router-dom"
-import { getClothing } from "../API/apiCalls";
+import { getClothing, getAllProducts } from "../API/apiCalls";
 
-export default function Home({items, setItems, homePage, token }){
+export default function Home({items, setItems, homePage }){
 
     //Hard coding the specific category we want since apparel useState wasn't giving us our desired value when we wanted
     let clothing = "";
-    console.log("Home", token)
-    console.log("session", sessionStorage.getItem("token"))
+    
+    getAllProducts();
     return(
         <>
             {/* each button here will have a on click event that calls the specific category API and loads its values on category page */}
