@@ -1,14 +1,14 @@
+import { useEffect, useState } from "react";
 import Card from "./Card";
-import Home from "./Home";
-import { useEffect } from "react";
+import Home from "../Home";
 
-export default function Womans_Apparel({ setApparel, items, setItems, homePage, setHomePage, setItem }){
-
+export default function Jewelery({ setApparel, items, setItems, homePage, setHomePage, setItem }){
+    
     useEffect(() =>{
         setHomePage(false)
-        setApparel("women's clothing")
+        setApparel("jewelery")
     }, [])
-    
+
     return(
         <>
             <Home items={items} setItems={setItems} homePage={homePage}/>

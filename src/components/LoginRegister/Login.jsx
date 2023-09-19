@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from 'react-router-dom'
 import { Link } from "react-router-dom";
-import { getUserCart, getAllUsers } from "../API/apiCalls";
+import { getUserCart, getAllUsers } from "../../API/apiCalls"
 
 
 export default function Login({ token, setToken, username, setUsername, password, setPassword, error, setError }){

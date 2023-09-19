@@ -1,4 +1,4 @@
-import { updateUserAddress } from "../API/apiCalls";
+import { updateUserAddress } from "../../API/apiCalls";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import CartItem from "./CartItem";
@@ -191,7 +191,7 @@ export default function Checkout({
                 return (
                   <CartItem
                     productId={i["productId"]}
-                    quantity={i["quantity"]}
+                    quantity={JSON.parse(localStorage.getItem(`productId:${i["productId"]}[${userCartId}]`))}
                     item={item}
                     setItem={setItem}
                   />

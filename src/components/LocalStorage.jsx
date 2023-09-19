@@ -16,6 +16,7 @@ export const addQuantity = (item) => {
     localStorage.setItem(`productId:${item}[${userCartId}]`, JSON.stringify(localProductQuantity))
 }
 
+
 export const reduceQuantity = (item) => {
     let localProductQuantity = JSON.parse(localStorage.getItem(`productId:${item}[${userCartId}]`))
     // console.log(All_Local_Productz)
@@ -34,6 +35,7 @@ export const reduceQuantity = (item) => {
         })
     }
 }
+
 
 export const removeItemFromCart = (item, setItem2) => {
     let localProductQuantity = JSON.parse(localStorage.getItem(`productId:${item}[${userCartId}]`))

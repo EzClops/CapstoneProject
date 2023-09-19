@@ -1,5 +1,5 @@
 import Card from "./Card";
-import Home from "./Home";
+import Home from "../Home";
 import { useEffect, useState } from "react";
 
 export default function Mens_Apparel({ setApparel, items, setItems, homePage, setHomePage, setItem, token }) {

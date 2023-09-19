@@ -1,7 +1,7 @@
-import { getItem } from "../API/apiCalls"
+import { getItem } from "../../API/apiCalls"
 import { useEffect, useState } from "react"
-import { updateInCart } from "../API/apiCalls"
-import { addQuantity, reduceQuantity, removeItemFromCart } from "./LocalStorage"
+import { updateInCart } from "../../API/apiCalls"
+import { addQuantity, reduceQuantity, removeItemFromCart } from "../LocalStorage"
 
 export default function CartItem({ productId, quantity, set_Quantity_User_Cart}){
     const [item2, setItem2] = useState("")
@@ -14,6 +14,7 @@ export default function CartItem({ productId, quantity, set_Quantity_User_Cart})
             const data = await getItem(productId);
             console.log("run")
             setItem2(data)
+            if(!JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)))
             set_Quantity_User_Cart(JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).length)
             
         }
