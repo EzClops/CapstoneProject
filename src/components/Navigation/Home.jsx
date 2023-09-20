@@ -1,5 +1,5 @@
 import { Link, Outlet } from "react-router-dom"
-import { getClothing, getAllProducts } from "../API/apiCalls";
+import { getClothing, getAllProducts } from "../../API/apiCalls"
 
 export default function Home({items, setItems, homePage }){
 
