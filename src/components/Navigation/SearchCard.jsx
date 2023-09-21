@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import Image from '../../Images/icons8-search-50.png'
 
-export default function SearchCard({ product, setItem, setHomePage, setMobile_Menu, setHam, setSearchImage, setSearchChange}){
+export default function SearchCard({ product, setItem, setHomePage, setMobile_Menu, setHam, setSearchImage, setSearchChange, setCartPage}){
     // console.log(product)
     return(
         <>
@@ -13,7 +13,8 @@ export default function SearchCard({ product, setItem, setHomePage, setMobile_Me
                     setHam(false)
                     setItem(product)
                     setSearchImage(Image)
-                    setSearchChange("")
+                    // setSearchChange("")
+                    setCartPage(false)
                 }}><img src={product.image} alt="image" height="290px" width="230px"/></Link>
                 <Link to='/itempage' onClick={()=>{
                      setHomePage(false)
@@ -21,7 +22,8 @@ export default function SearchCard({ product, setItem, setHomePage, setMobile_Me
                     setHam(false)
                     setItem(product)
                     setSearchImage(Image)
-                    setSearchChange("")
+                    // setSearchChange("")
+                    setCartPage(false)
                 }}><h3>{product.title}</h3></Link>
             </div>
         </>

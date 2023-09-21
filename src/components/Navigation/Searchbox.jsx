@@ -5,7 +5,7 @@ export default function Searchbox({ setSearchChange, searchChange }){
             type="search" 
             placeholder="Find Item"
             onChange={(event) =>{
-                setSearchChange(event.target.value)
+            setSearchChange(event.target.value)
             }}
             ></input>
         </>

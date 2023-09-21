@@ -16,18 +16,12 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
 
     const navigate = useNavigate();
     const userCartId = 1;
-
-    // localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)
-    
-    // const ham = document.querySelector('.container .navbar .userButtons div.ham');
-    //   const mobile_menu = document.querySelector('.container .navbar .userButtons div.mobileMenu')
   
     useEffect(()=>{
         if(!mobile_menu){
             setSearchChange("")
         }
     },[searchChange])
-    // console.log(getProducts)
 
     return(
         <>
@@ -70,7 +64,7 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
                                     setCartPage(true);
                                     setError("Please Login before Checkout.")
                                 }}>Checkout</Link></button>
-                        : ((cartPage && (JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).length === 1))) 
+                        : ((cartPage && (JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).length <= 1))) 
                             ? <button><Link to='/cart' className="linkColor" onClick=
                                 {() =>{
                                     setCartPage(true);
@@ -133,7 +127,7 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
                                     if(searchChange.length !== 0 && (product.title.toLowerCase().includes(searchChange.toLocaleLowerCase()) || product.category.toLowerCase().includes(searchChange.toLocaleLowerCase()))){
                                         {/* console.log("Success") */}
                                         return(
-                                            <SearchCard product={product} setItem={setItem} setHomePage={setHomePage} setMobile_Menu={setMobile_Menu} setHam={setHam} setSearchImage={setSearchImage} setSearchChange={setSearchChange}/>
+                                            <SearchCard product={product} setItem={setItem} setHomePage={setHomePage} setMobile_Menu={setMobile_Menu} setHam={setHam} setSearchImage={setSearchImage} setSearchChange={setSearchChange} setCartPage={setCartPage}/>
                                         )
                                     }
                                 })}
