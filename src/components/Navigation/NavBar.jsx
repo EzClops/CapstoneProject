@@ -13,6 +13,7 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
     const [ham, setHam] = useState(false)
     const [mobile_menu, setMobile_Menu] = useState(false)
     const [searchImage, setSearchImage] = useState(Image);
+    const sortByAlphabet = useRef(false)
 
     const navigate = useNavigate();
     const userCartId = 1;
@@ -22,7 +23,7 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
             setSearchChange("")
         }
     },[searchChange])
-
+    console.log(JSON.parse(localStorage.getItem("allLocalProducts")))
     return(
         <>
             <header className="container">
@@ -113,6 +114,12 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
                         <div className={"mobileMenu" + (!mobile_menu ? "" : " active")}>
                             <h2>Search Catalog</h2>
                             <Searchbox setSearchChange={setSearchChange} searchChange={searchChange}/>
+                            <div>
+                                <input type="checkbox" id="sortByAlphabet" name="sortByAlphabet" onChange={() => {
+                                    sortByAlphabet.current = !sortByAlphabet.current
+                                }}/>
+                                <label for="sortByAlphabet">A-Z</label>
+                            </div>
                             {/* 
                                 -if the text in value searchChange compared to the first title of 
                                     getProducts, then display that item

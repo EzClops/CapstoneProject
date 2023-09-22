@@ -24,7 +24,9 @@ export default function SearchCard({ product, setItem, setHomePage, setMobile_Me
                     setSearchImage(Image)
                     // setSearchChange("")
                     setCartPage(false)
-                }}><h3>{product.title}</h3></Link>
+                }}>
+                <h3>{product.title}</h3></Link>
+                <p>${product.price}</p>
             </div>
         </>
     )
