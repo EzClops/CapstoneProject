@@ -1,20 +1,22 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react'
 import './App.css'
-import NavBar from './components/NavBar'
 import { Routes, Route, Link } from 'react-router-dom'
+import NavBar from './components/Navigation/NavBar'
+import Home from './components/Navigation/Home'
 import Login from './components/LoginRegister/Login'
-import Cart from './components/Carts/Cart'
 import Register from './components/LoginRegister/Register'
-import Home from './components/Home'
+import LogOut from './components/LoginRegister/LogOut'
+import Cart from './components/Carts/Cart'
+import Checkout from './components/Carts/Checkout'
+import PlaceOrder from './components/Carts/PlaceOrder'
 import Mens_Apparel from './components/Products/Mens_Apparel'
 import Womans_Apparel from './components/Products/Womans_Apparel'
 import Electronics from './components/Products/Electronics'
 import Jewelery from './components/Products/Jewelery'
 import ItemPage from './components/Products/ItemPage'
-import LogOut from './components/LoginRegister/LogOut'
-import Checkout from './components/Carts/Checkout'
-import PlaceOrder from './components/Carts/PlaceOrder'
+import { getAllProducts } from './API/apiCalls'
+// import TextField from "@mui/material/TextField";
 
 function App() {
   const userCartId = 1;
@@ -23,7 +25,7 @@ function App() {
   const [items, setItems] = useState([]);
   const [homePage, setHomePage] = useState(true);
   const [item, setItem] = useState(null);
-  const [quantity_User_Cart, set_Quantity_User_Cart] = useState(JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).length)
+  const [quantity_User_Cart, set_Quantity_User_Cart] = useState(0)
   const [token, setToken] = useState(sessionStorage.getItem("token"));
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -33,18 +35,31 @@ function App() {
   const[submitAddress, setSubmitAddress] = useState(false);
   const[submitPayment, setSubmitPayment] = useState(false);
   const [error, setError] = useState(null)
+  const [getProducts, setGetProducts] = useState(null);
 
 
   useEffect(() => {
+    async function compareSearch_Title(){
+      try{
+          const allProducts = await getAllProducts();
+          setGetProducts(allProducts)
+          localStorage.setItem("allLocalProducts", JSON.stringify(allProducts))
+
+      }catch(error){
+          console.error(error.message)
+      }
+    }
+    compareSearch_Title()
     setLoading(false)
   },[])
 
+  // console.log(ham, mobile_menu)
   return (
     <>
       {loading ? <p>Loading...</p> : 
       (<>
         <Routes>
-          <Route path='/' element={<NavBar setHomePage={setHomePage} token={token} cartPage={cartPage} setCartPage={setCartPage} checkoutPage={checkoutPage} setCheckoutPage={setCheckoutPage} submitAddress={submitAddress} submitPayment={submitPayment} setError={setError} quantity_User_Cart={quantity_User_Cart}/>}>
+          <Route path='/' element={<NavBar setHomePage={setHomePage} token={token} cartPage={cartPage} setCartPage={setCartPage} checkoutPage={checkoutPage} setCheckoutPage={setCheckoutPage} submitAddress={submitAddress} submitPayment={submitPayment} setError={setError} quantity_User_Cart={quantity_User_Cart} setItem={setItem}/>}>
             <Route path='/' element={<Home items={items} setItems={setItems} homePage={homePage} />}/>
 
             {/* Product Route */}

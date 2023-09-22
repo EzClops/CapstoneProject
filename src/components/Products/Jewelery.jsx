@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Card from "./Card";
-import Home from "../Home";
+import Home from "../Navigation/Home";
 
 export default function Jewelery({ setApparel, items, setItems, homePage, setHomePage, setItem }){
     

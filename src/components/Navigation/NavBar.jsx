@@ -1,12 +1,28 @@
 import { Link, Outlet } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
+import Searchbox from './Searchbox';
+import SearchCard from './SearchCard';
+import Image from '../../Images/icons8-search-50.png'
+import Image2 from '../../Images/icons8-x-48.png'
+import { getAllProducts } from '../../API/apiCalls';
 
-export default function NavBar({ setHomePage, token, cartPage, setCartPage, checkoutPage, setCheckoutPage, submitAddress, submitPayment, setError, setSubmitAddress, setSubmitPayment }){
+export default function NavBar({ setHomePage, token, cartPage, setCartPage, checkoutPage, setCheckoutPage, submitAddress, submitPayment, setError, setSubmitAddress, setSubmitPayment, setItem}){
     
+    const [searchChange, setSearchChange] = useState("");
+    const [ham, setHam] = useState(false)
+    const [mobile_menu, setMobile_Menu] = useState(false)
+    const [searchImage, setSearchImage] = useState(Image);
+
     const navigate = useNavigate();
     const userCartId = 1;
-    localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)
+  
+    useEffect(()=>{
+        if(!mobile_menu){
+            setSearchChange("")
+        }
+    },[searchChange])
+
     return(
         <>
             <header className="container">
@@ -25,6 +41,7 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
                         {token ? <p>{sessionStorage.getItem("username")}</p> : <p></p>}
                     </div>
                     <div className="userButtons">
+                        
                         {!token 
                             ? <button><Link to='/login' className="linkColor" onClick=
                                 {() =>{
@@ -47,7 +64,7 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
                                     setCartPage(true);
                                     setError("Please Login before Checkout.")
                                 }}>Checkout</Link></button>
-                        : ((cartPage && (JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).length === 0))) 
+                        : ((cartPage && (JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).length <= 1))) 
                             ? <button><Link to='/cart' className="linkColor" onClick=
                                 {() =>{
                                     setCartPage(true);
@@ -78,6 +95,44 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
                                     setCartPage(true);
                                     setError(null)
                                 }}>Cart</Link></button>}
+                        <div className={"ham" + (!ham ? "" : " active")}>
+                            <img src={searchImage} alt="search" height="40px" width="40px" onClick={() =>{
+                                if(ham){
+                                    setHam(false)
+                                    setMobile_Menu(false)
+                                    setSearchImage(Image)
+                                }else{
+                                    setHam(true)
+                                    setMobile_Menu(true)
+                                    setSearchImage(Image2)
+                                }
+                            }}/>
+                                
+                            
+                        </div>                       
+                        <div className={"mobileMenu" + (!mobile_menu ? "" : " active")}>
+                            <h2>Search Catalog</h2>
+                            <Searchbox setSearchChange={setSearchChange} searchChange={searchChange}/>
+                            {/* 
+                                -if the text in value searchChange compared to the first title of 
+                                    getProducts, then display that item
+                                    -so if true, pass object to searchCard component and style the values
+                                    so that it looks good within searchtab
+                                    -use a map to loop through getProducts
+                            
+                             */}
+                             <div className='cardBox'>
+                                {JSON.parse(localStorage.getItem("allLocalProducts")).map((product) => {
+                                    {/* console.log(product.title) */}
+                                    if(searchChange.length !== 0 && (product.title.toLowerCase().includes(searchChange.toLocaleLowerCase()) || product.category.toLowerCase().includes(searchChange.toLocaleLowerCase()))){
+                                        {/* console.log("Success") */}
+                                        return(
+                                            <SearchCard product={product} setItem={setItem} setHomePage={setHomePage} setMobile_Menu={setMobile_Menu} setHam={setHam} setSearchImage={setSearchImage} setSearchChange={setSearchChange} setCartPage={setCartPage}/>
+                                        )
+                                    }
+                                })}
+                             </div>
+                        </div>
                     </div>
                 </div>
             </header>

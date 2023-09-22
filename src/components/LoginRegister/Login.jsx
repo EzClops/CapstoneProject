@@ -21,13 +21,13 @@ export default function Login({ token, setToken, username, setUsername, password
             const productsInCart = await data["0"]["products"];
             
             if (!localStorage.getItem(`All_Products_In_User_Cart${userId}`)){
-                localStorage.setItem(`All_Products_In_User_Cart${userId}`, JSON.stringify(productsInCart))
+                localStorage.setItem(`All_Products_In_User_Cart${userId}`, '[{}]')
             }
-            productsInCart.map((product) => {
-                if(!localStorage.getItem(`productId:${product["productId"]}[${userId}]`)){
-                    localStorage.setItem(`productId:${product["productId"]}[${userId}]`, JSON.stringify(product["quantity"]))
-                }
-            }, [])
+            // productsInCart.map((product) => {
+            //     if(!localStorage.getItem(`productId:${product["productId"]}[${userId}]`)){
+            //         localStorage.setItem(`productId:${product["productId"]}[${userId}]`, JSON.stringify(product["quantity"]))
+            //     }
+            // }, [])
             // localStorage.setItem("products_In_Cart", JSON.stringify(productsInCart))
         } catch (error) {
             console.error(error.message);

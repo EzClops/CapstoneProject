@@ -1,4 +1,4 @@
-import Home from "../Home"
+import Home from "../Navigation/Home";
 import { Link } from "react-router-dom"
 import { getClothing, updateInCart, getUserCart } from "../../API/apiCalls"
 import { addQuantity, reduceQuantity } from "../LocalStorage"
