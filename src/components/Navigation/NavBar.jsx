@@ -6,24 +6,62 @@ import SearchCard from './SearchCard';
 import Image from '../../Images/icons8-search-50.png'
 import Image2 from '../../Images/icons8-x-48.png'
 import { getAllProducts } from '../../API/apiCalls';
+import React from 'react';
 
-export default function NavBar({ setHomePage, token, cartPage, setCartPage, checkoutPage, setCheckoutPage, submitAddress, submitPayment, setError, setSubmitAddress, setSubmitPayment, setItem}){
+export default function NavBar({ setHomePage, token, cartPage, setCartPage, checkoutPage, setCheckoutPage, submitAddress, submitPayment, setError, error, setSubmitAddress, setSubmitPayment, setItem}){
     
     const [searchChange, setSearchChange] = useState("");
     const [ham, setHam] = useState(false)
     const [mobile_menu, setMobile_Menu] = useState(false)
     const [searchImage, setSearchImage] = useState(Image);
-    const sortByAlphabet = useRef(false)
+    const [isAscendingOrder, setIsAscendingOrder] = useState(false)
+    const [isDescendingOrder, setIsDescendingOrder] = useState(false)
+    const productsByPrice = useRef(null)
 
     const navigate = useNavigate();
     const userCartId = 1;
+    
   
     useEffect(()=>{
         if(!mobile_menu){
             setSearchChange("")
         }
     },[searchChange])
-    console.log(JSON.parse(localStorage.getItem("allLocalProducts")))
+    
+    function getAllProductPrices(sortedProductPrice){
+        JSON.parse(localStorage.getItem("allLocalProducts")).map((product) => {
+            sortedProductPrice.push(product.price)
+        })
+        return sortedProductPrice
+    }
+    function ascendedPriceOrder(){
+        let localSortedProductPrice = []
+        getAllProductPrices(localSortedProductPrice)
+        localSortedProductPrice.sort((a, b) => a - b)
+
+        return sortProductsByPrice(localSortedProductPrice)
+    }
+    function descendedPriceOrder(){
+        let localSortedProductPrice = []
+        getAllProductPrices(localSortedProductPrice)
+        localSortedProductPrice.sort((a, b) => b - a)
+
+        return sortProductsByPrice(localSortedProductPrice)
+    }
+    function sortProductsByPrice(localSortedProductPrice){
+        const sortedProductsByPrice = localSortedProductPrice.map((currentPrice) => {
+            let targetProductPrice = null
+            JSON.parse(localStorage.getItem("allLocalProducts")).forEach(product => {
+                if(currentPrice === product.price){
+                    targetProductPrice = product
+                }
+            });
+            return targetProductPrice;
+        })
+        productsByPrice.current = sortedProductsByPrice 
+    }
+
+    
     return(
         <>
             <header className="container">
@@ -65,7 +103,7 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
                                     setCartPage(true);
                                     setError("Please Login before Checkout.")
                                 }}>Checkout</Link></button>
-                        : ((cartPage && (JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).length <= 1))) 
+                        : ((cartPage && (JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).length <= 0))) 
                             ? <button><Link to='/cart' className="linkColor" onClick=
                                 {() =>{
                                     setCartPage(true);
@@ -115,29 +153,56 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
                             <h2>Search Catalog</h2>
                             <Searchbox setSearchChange={setSearchChange} searchChange={searchChange}/>
                             <div>
-                                <input type="checkbox" id="sortByAlphabet" name="sortByAlphabet" onChange={() => {
-                                    sortByAlphabet.current = !sortByAlphabet.current
+                                <input type="checkbox" id="isAscendingOrder" checked={isAscendingOrder} name="isAscendingOrder" onClick={() => {
+                                    if(!isAscendingOrder){
+                                        ascendedPriceOrder() 
+                                        setIsAscendingOrder(true)
+                                        setIsDescendingOrder(false)
+                                    }else{
+
+                                        setIsAscendingOrder(false)
+                                        }
+                                    
                                 }}/>
-                                <label for="sortByAlphabet">A-Z</label>
+                                <label>Ascending</label>
                             </div>
-                            {/* 
-                                -if the text in value searchChange compared to the first title of 
-                                    getProducts, then display that item
-                                    -so if true, pass object to searchCard component and style the values
-                                    so that it looks good within searchtab
-                                    -use a map to loop through getProducts
-                            
-                             */}
+                            <div>
+                                <input type="checkbox" id="isDescendingOrder" checked={isDescendingOrder} name="isDescendingOrder" onClick={() => {
+                                    if(!isDescendingOrder){
+                                        descendedPriceOrder() 
+                                        setIsDescendingOrder(true)
+                                        setIsAscendingOrder(false)
+                                    }else{
+
+                                        setIsDescendingOrder(false)
+                                        }
+                                    
+                                }}/>
+                                <label>Descending</label>
+                            </div>
                              <div className='cardBox'>
-                                {JSON.parse(localStorage.getItem("allLocalProducts")).map((product) => {
-                                    {/* console.log(product.title) */}
+                                {!(isAscendingOrder || isDescendingOrder) ? (JSON.parse(localStorage.getItem("allLocalProducts")).map((product) => {
                                     if(searchChange.length !== 0 && (product.title.toLowerCase().includes(searchChange.toLocaleLowerCase()) || product.category.toLowerCase().includes(searchChange.toLocaleLowerCase()))){
-                                        {/* console.log("Success") */}
                                         return(
                                             <SearchCard product={product} setItem={setItem} setHomePage={setHomePage} setMobile_Menu={setMobile_Menu} setHam={setHam} setSearchImage={setSearchImage} setSearchChange={setSearchChange} setCartPage={setCartPage}/>
                                         )
                                     }
-                                })}
+                                })) : isAscendingOrder ? productsByPrice.current.map((product) => {
+                                        
+                                        if(searchChange.length !== 0 && (product.title.toLowerCase().includes(searchChange.toLocaleLowerCase()) || product.category.toLowerCase().includes(searchChange.toLocaleLowerCase()))){
+                                            return(
+                                                <SearchCard product={product} setItem={setItem} setHomePage={setHomePage} setMobile_Menu={setMobile_Menu} setHam={setHam} setSearchImage={setSearchImage} setSearchChange={setSearchChange} setCartPage={setCartPage}/>
+                                            )
+                                        }
+                                    })
+                                 : productsByPrice.current.map((product) => {
+                                        if(searchChange.length !== 0 && (product.title.toLowerCase().includes(searchChange.toLocaleLowerCase()) || product.category.toLowerCase().includes(searchChange.toLocaleLowerCase()))){
+                                            return(
+                                                <SearchCard product={product} setItem={setItem} setHomePage={setHomePage} setMobile_Menu={setMobile_Menu} setHam={setHam} setSearchImage={setSearchImage} setSearchChange={setSearchChange} setCartPage={setCartPage}/>
+                                            )
+                                        }
+                                    })
+                                }
                              </div>
                         </div>
                     </div>
@@ -147,3 +212,4 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
         </>
     )
 }
+//change

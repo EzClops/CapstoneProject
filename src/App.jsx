@@ -22,6 +22,7 @@ function App() {
   const userCartId = 1;
 
   const [apparel, setApparel] = useState("")
+  const activeProductsInUserCart = useRef(JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)))
   const [items, setItems] = useState([]);
   const [homePage, setHomePage] = useState(true);
   const [item, setItem] = useState(null);
@@ -59,7 +60,7 @@ function App() {
       {loading ? <p>Loading...</p> : 
       (<>
         <Routes>
-          <Route path='/' element={<NavBar setHomePage={setHomePage} token={token} cartPage={cartPage} setCartPage={setCartPage} checkoutPage={checkoutPage} setCheckoutPage={setCheckoutPage} submitAddress={submitAddress} submitPayment={submitPayment} setError={setError} quantity_User_Cart={quantity_User_Cart} setItem={setItem}/>}>
+          <Route path='/' element={<NavBar setHomePage={setHomePage} token={token} cartPage={cartPage} setCartPage={setCartPage} checkoutPage={checkoutPage} setCheckoutPage={setCheckoutPage} submitAddress={submitAddress} submitPayment={submitPayment} setError={setError} error={error} quantity_User_Cart={quantity_User_Cart} setItem={setItem}/>}>
             <Route path='/' element={<Home items={items} setItems={setItems} homePage={homePage} />}/>
 
             {/* Product Route */}
