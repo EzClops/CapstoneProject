@@ -212,3 +212,4 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
         </>
     )
 }
+//change
