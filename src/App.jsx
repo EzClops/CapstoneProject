@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import './App.css'
 import { Routes, Route, Link } from 'react-router-dom'
 import NavBar from './components/Navigation/NavBar'
@@ -22,6 +22,7 @@ function App() {
   const userCartId = 1;
 
   const [apparel, setApparel] = useState("")
+  const activeProductsInUserCart = useRef(JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)))
   const [items, setItems] = useState([]);
   const [homePage, setHomePage] = useState(true);
   const [item, setItem] = useState(null);
