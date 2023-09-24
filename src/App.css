@@ -164,7 +164,7 @@ header {
   left: 30%;
   margin-right: 100px;
 }
-.navbar .userButtons .active .cardBox{
+.navbar .userButtons .active .filteredList{
   display: grid; 
   grid-template-columns: 1fr 1fr; 
   grid-template-rows: 1fr 1fr; 
@@ -178,7 +178,7 @@ header {
     overflow-y: auto;
     margin: auto;
 }
-.navbar .userButtons .active .cardBox .searchCard{
+.navbar .userButtons .active .filteredList .searchCard{
   padding: 15px 5px;
 }
 .navbar .userButtons button {

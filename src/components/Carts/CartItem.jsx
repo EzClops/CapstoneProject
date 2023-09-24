@@ -1,7 +1,7 @@
 import { getItem } from "../../API/apiCalls"
 import { useEffect, useState } from "react"
 import { updateInCart } from "../../API/apiCalls"
-import { addQuantity, reduceQuantity, removeItemFromCart } from "../LocalStorage"
+import { addQuantity, reduceQuantity, removeItemFromCart } from "../GetFunctions/LocalStorage"
 
 export default function CartItem({ productId, quantity, set_Quantity_User_Cart}){
     const [item2, setItem2] = useState("")

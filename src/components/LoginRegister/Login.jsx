@@ -15,10 +15,10 @@ export default function Login({ token, setToken, username, setUsername, password
             if (!localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)){
                 localStorage.setItem(`All_Products_In_User_Cart${userCartId}`, '[{}]')
             }
+            getAllUsers()
     }, []);
 
     //To see all user's login info
-    getAllUsers()
 
     async function handleSubmit(event){
         event.preventDefault();
