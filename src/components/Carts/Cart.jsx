@@ -28,9 +28,6 @@ export default function Cart({ error, set_Quantity_User_Cart }) {
               <p>Cart is Empty</p>
             ) : (
               JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).map((values, key) => {
-                
-                {/* setItem_In_Cart(values) */}
-                {/* console.log(item_In_Cart) */}
                 console.log("Index", key)
                 return (
                   <CartItem

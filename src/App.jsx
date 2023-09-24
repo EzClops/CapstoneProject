@@ -60,7 +60,7 @@ function App() {
       {loading ? <p>Loading...</p> : 
       (<>
         <Routes>
-          <Route path='/' element={<NavBar setHomePage={setHomePage} token={token} cartPage={cartPage} setCartPage={setCartPage} checkoutPage={checkoutPage} setCheckoutPage={setCheckoutPage} submitAddress={submitAddress} submitPayment={submitPayment} setError={setError} quantity_User_Cart={quantity_User_Cart} setItem={setItem}/>}>
+          <Route path='/' element={<NavBar setHomePage={setHomePage} token={token} cartPage={cartPage} setCartPage={setCartPage} checkoutPage={checkoutPage} setCheckoutPage={setCheckoutPage} submitAddress={submitAddress} submitPayment={submitPayment} setError={setError} error={error} quantity_User_Cart={quantity_User_Cart} setItem={setItem}/>}>
             <Route path='/' element={<Home items={items} setItems={setItems} homePage={homePage} />}/>
 
             {/* Product Route */}
