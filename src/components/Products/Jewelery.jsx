@@ -1,17 +1,17 @@
+import { useEffect, useState } from "react";
 import Card from "./Card";
-import Home from "./Home";
-import { useEffect } from "react";
+import Home from "../Navigation/Home";
 
-export default function Mens_Apparel({ setApparel, items, setItems, homePage, setHomePage, setItem, token }){
+export default function Jewelery({ setApparel, items, setItems, homePage, setHomePage, setItem }){
     
     useEffect(() =>{
         setHomePage(false)
-        setApparel("men's clothing")
+        setApparel("jewelery")
     }, [])
 
     return(
         <>
-            <Home items={items} setItems={setItems} homePage={homePage} token={token}/>
+            <Home items={items} setItems={setItems} homePage={homePage}/>
             <div className="cards">
                 {items.map((item, key) => {
                     return(
@@ -19,6 +19,7 @@ export default function Mens_Apparel({ setApparel, items, setItems, homePage, se
                     )
                 })}
             </div>
+            
         </>
     )
 }

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from 'react-router-dom'
 import { Link } from "react-router-dom";
-import { getAllProducts, getAllUsers } from "../API/apiCalls";
+import { getAllProducts, getAllUsers } from "../../API/apiCalls"
 
 export default function Login(){
     const navigate = useNavigate();
@@ -10,6 +10,8 @@ export default function Login(){
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
 
+
+    
     async function handleRegister(event){
         event.preventDefault();
         try{

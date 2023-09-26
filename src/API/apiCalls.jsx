@@ -5,7 +5,7 @@ export const getAllProducts = async() =>{
     try{
         const response = await fetch('https://fakestoreapi.com/products');
         const result = await response.json();
-        console.log(result)
+        return result;
     }catch(error) {
         console.error(error.message)
     }
@@ -54,7 +54,7 @@ export const getAllCart = async() =>{
     try{
         const response = await fetch('https://fakestoreapi.com/carts')
         const result = await response.json()
-        console.log(result)
+        return result;
     }catch(error){
         console.error(error.message);
     }
@@ -159,3 +159,22 @@ export const updateUserAddress = async(firstname, lastname, city, street, number
 }
 
 /* End of User API calls */
+
+
+
+
+/*  Local Data */
+
+export const allLocalUserCart = async() => {
+    try{
+        const response = await fetch('../API_Data/allUserCart.json');
+        const result = await response.json()
+        console.log(result)
+    } catch(error){
+        console.error(error.message)
+    }
+}
+
+
+
+/* End of Local Data */

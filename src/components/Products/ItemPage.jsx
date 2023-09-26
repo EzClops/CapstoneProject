@@ -1,12 +1,11 @@
-import Home from "./Home"
-import { useNavigate } from "react-router-dom"
+import Home from "../Navigation/Home";
 import { Link } from "react-router-dom"
-import { getClothing, updateInCart, getUserCart } from "../API/apiCalls"
+import { getClothing, updateInCart, getUserCart } from "../../API/apiCalls"
+import { addQuantity, reduceQuantity } from "../LocalStorage"
 
-export default function ItemPage({  item, items, setItems, homePage, setHomePage, product  }){
-    console.log("Hi", product)
+export default function ItemPage({  item, items, setItems, homePage, setHomePage }){
 
-    const userCartId = 1;
+    // reduceQuantity(item)
 
     return (
         <>
@@ -25,10 +24,14 @@ export default function ItemPage({  item, items, setItems, homePage, setHomePage
                 </div>
                 <div className="itemPrice">
                     <p>$ {item.price}</p>
-                    <button onClick={() =>{
-                        
-                        updateInCart(userCartId, item["id"],)
-                    }}>Add to Cart</button>
+                    <div className="Quantity_Buttons">
+                        <button onClick={() =>{
+                            addQuantity(item["id"])
+                        }}>Add to Cart</button>
+                        <button onClick={() =>{
+                            reduceQuantity(item["id"])
+                        }}>-</button>
+                    </div>
                 </div>
             </div>
         </>
