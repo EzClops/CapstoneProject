@@ -123,7 +123,7 @@ export default function Checkout({
   return (
     <>
       <header className="checkoutHeader">
-        <h2>Checkout</h2>
+        <h2 class="selection:bg-fuchsia-300">Checkout</h2>
         <button
           className="linkColor checkout_To_Cart_Button"
           onClick={() => {

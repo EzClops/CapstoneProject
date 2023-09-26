@@ -19,8 +19,6 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
     const [isAscendingOrder, setIsAscendingOrder] = useState(false)
     const [isDescendingOrder, setIsDescendingOrder] = useState(false)
     const productsByPrice = useRef(null)
-    const [allLocalProducts, setAllLocalProducts] = useState(JSON.parse(localStorage.getItem("allLocalProducts")))
-    // const allLocalProducts = useRef(JSON.parse(localStorage.getItem("allLocalProducts")))
 
     const navigate = useNavigate();
     const userCartId = 1;
@@ -41,7 +39,7 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
                         }}>FusionNova</Link></h1>
                     </div>
                     <div className='userName'>
-                        {token ? <p>{sessionStorage.getItem("username")}</p> : <p></p>}
+                        {token ? <p>User: {sessionStorage.getItem("username")}</p> : <p></p>}
                     </div>
                     <div className="userButtons">
                         
@@ -67,7 +65,7 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
                                     setCartPage(true);
                                     setError("Please Login before Checkout.")
                                 }}>Checkout</Link></button>
-                        : ((cartPage && (JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).length <= 0))) 
+                        : ((cartPage && (JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).length <= 1))) 
                             ? <button><Link to='/cart' className="linkColor" onClick=
                                 {() =>{
                                     setCartPage(true);
@@ -116,7 +114,7 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
                         <div className={"mobileMenu" + (!mobile_menu ? "" : " active")}>
                             <h2>Search Catalog</h2>
                             <Searchbox setSearchChange={setSearchChange} searchChange={searchChange}/>
-                            <Checkbox isAscendingOrder={isAscendingOrder} setIsAscendingOrder={setIsAscendingOrder} isDescendingOrder={isDescendingOrder} setIsDescendingOrder={setIsDescendingOrder} productsByPrice={productsByPrice} setItem={setItem} setHomePage={setHomePage} setMobile_Menu={setMobile_Menu} setHam={setHam} setSearchImage={setSearchImage} setSearchChange={setSearchChange} setCartPage={setCartPage} searchChange={searchChange} allLocalProducts={allLocalProducts} />
+                            <Checkbox isAscendingOrder={isAscendingOrder} setIsAscendingOrder={setIsAscendingOrder} isDescendingOrder={isDescendingOrder} setIsDescendingOrder={setIsDescendingOrder} productsByPrice={productsByPrice} setItem={setItem} setHomePage={setHomePage} setMobile_Menu={setMobile_Menu} setHam={setHam} setSearchImage={setSearchImage} setSearchChange={setSearchChange} setCartPage={setCartPage} searchChange={searchChange}/>
 
                         </div>
                     </div>

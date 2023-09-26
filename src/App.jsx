@@ -53,7 +53,6 @@ function App() {
     setLoading(false)
   },[])
 
-  // console.log(ham, mobile_menu)
   return (
     <>
       {loading ? <p>Loading...</p> : 
