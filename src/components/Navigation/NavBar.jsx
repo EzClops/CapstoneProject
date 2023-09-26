@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom'
 import { useState, useRef, useEffect, useCallback } from 'react';
 import Searchbox from './Searchbox';
 import SearchCard from './SearchCard';
+import Checkbox from './Checkbox';
 import Image from '../../Images/icons8-search-50.png'
 import Image2 from '../../Images/icons8-x-48.png'
-import { getAllProducts } from '../../API/apiCalls';
 import React from 'react';
+import { ascendedPriceOrder, descendedPriceOrder } from '../GetFunctions/FilterProducts';
+
 
 export default function NavBar({ setHomePage, token, cartPage, setCartPage, checkoutPage, setCheckoutPage, submitAddress, submitPayment, setError, error, setSubmitAddress, setSubmitPayment, setItem}){
     
@@ -21,46 +23,6 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
     const navigate = useNavigate();
     const userCartId = 1;
     
-  
-    useEffect(()=>{
-        if(!mobile_menu){
-            setSearchChange("")
-        }
-    },[searchChange])
-    
-    function getAllProductPrices(sortedProductPrice){
-        JSON.parse(localStorage.getItem("allLocalProducts")).map((product) => {
-            sortedProductPrice.push(product.price)
-        })
-        return sortedProductPrice
-    }
-    function ascendedPriceOrder(){
-        let localSortedProductPrice = []
-        getAllProductPrices(localSortedProductPrice)
-        localSortedProductPrice.sort((a, b) => a - b)
-
-        return sortProductsByPrice(localSortedProductPrice)
-    }
-    function descendedPriceOrder(){
-        let localSortedProductPrice = []
-        getAllProductPrices(localSortedProductPrice)
-        localSortedProductPrice.sort((a, b) => b - a)
-
-        return sortProductsByPrice(localSortedProductPrice)
-    }
-    function sortProductsByPrice(localSortedProductPrice){
-        const sortedProductsByPrice = localSortedProductPrice.map((currentPrice) => {
-            let targetProductPrice = null
-            JSON.parse(localStorage.getItem("allLocalProducts")).forEach(product => {
-                if(currentPrice === product.price){
-                    targetProductPrice = product
-                }
-            });
-            return targetProductPrice;
-        })
-        productsByPrice.current = sortedProductsByPrice 
-    }
-
     
     return(
         <>
@@ -77,7 +39,7 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
                         }}>FusionNova</Link></h1>
                     </div>
                     <div className='userName'>
-                        {token ? <p>{sessionStorage.getItem("username")}</p> : <p></p>}
+                        {token ? <p>User: {sessionStorage.getItem("username")}</p> : <p></p>}
                     </div>
                     <div className="userButtons">
                         
@@ -103,7 +65,7 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
                                     setCartPage(true);
                                     setError("Please Login before Checkout.")
                                 }}>Checkout</Link></button>
-                        : ((cartPage && (JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).length <= 0))) 
+                        : ((cartPage && (JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).length <= 1))) 
                             ? <button><Link to='/cart' className="linkColor" onClick=
                                 {() =>{
                                     setCartPage(true);
@@ -152,58 +114,8 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
                         <div className={"mobileMenu" + (!mobile_menu ? "" : " active")}>
                             <h2>Search Catalog</h2>
                             <Searchbox setSearchChange={setSearchChange} searchChange={searchChange}/>
-                            <div>
-                                <input type="checkbox" id="isAscendingOrder" checked={isAscendingOrder} name="isAscendingOrder" onClick={() => {
-                                    if(!isAscendingOrder){
-                                        ascendedPriceOrder() 
-                                        setIsAscendingOrder(true)
-                                        setIsDescendingOrder(false)
-                                    }else{
+                            <Checkbox isAscendingOrder={isAscendingOrder} setIsAscendingOrder={setIsAscendingOrder} isDescendingOrder={isDescendingOrder} setIsDescendingOrder={setIsDescendingOrder} productsByPrice={productsByPrice} setItem={setItem} setHomePage={setHomePage} setMobile_Menu={setMobile_Menu} setHam={setHam} setSearchImage={setSearchImage} setSearchChange={setSearchChange} setCartPage={setCartPage} searchChange={searchChange}/>
 
-                                        setIsAscendingOrder(false)
-                                        }
-                                    
-                                }}/>
-                                <label>Ascending</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="isDescendingOrder" checked={isDescendingOrder} name="isDescendingOrder" onClick={() => {
-                                    if(!isDescendingOrder){
-                                        descendedPriceOrder() 
-                                        setIsDescendingOrder(true)
-                                        setIsAscendingOrder(false)
-                                    }else{
-
-                                        setIsDescendingOrder(false)
-                                        }
-                                    
-                                }}/>
-                                <label>Descending</label>
-                            </div>
-                             <div className='cardBox'>
-                                {!(isAscendingOrder || isDescendingOrder) ? (JSON.parse(localStorage.getItem("allLocalProducts")).map((product) => {
-                                    if(searchChange.length !== 0 && (product.title.toLowerCase().includes(searchChange.toLocaleLowerCase()) || product.category.toLowerCase().includes(searchChange.toLocaleLowerCase()))){
-                                        return(
-                                            <SearchCard product={product} setItem={setItem} setHomePage={setHomePage} setMobile_Menu={setMobile_Menu} setHam={setHam} setSearchImage={setSearchImage} setSearchChange={setSearchChange} setCartPage={setCartPage}/>
-                                        )
-                                    }
-                                })) : isAscendingOrder ? productsByPrice.current.map((product) => {
-                                        
-                                        if(searchChange.length !== 0 && (product.title.toLowerCase().includes(searchChange.toLocaleLowerCase()) || product.category.toLowerCase().includes(searchChange.toLocaleLowerCase()))){
-                                            return(
-                                                <SearchCard product={product} setItem={setItem} setHomePage={setHomePage} setMobile_Menu={setMobile_Menu} setHam={setHam} setSearchImage={setSearchImage} setSearchChange={setSearchChange} setCartPage={setCartPage}/>
-                                            )
-                                        }
-                                    })
-                                 : productsByPrice.current.map((product) => {
-                                        if(searchChange.length !== 0 && (product.title.toLowerCase().includes(searchChange.toLocaleLowerCase()) || product.category.toLowerCase().includes(searchChange.toLocaleLowerCase()))){
-                                            return(
-                                                <SearchCard product={product} setItem={setItem} setHomePage={setHomePage} setMobile_Menu={setMobile_Menu} setHam={setHam} setSearchImage={setSearchImage} setSearchChange={setSearchChange} setCartPage={setCartPage}/>
-                                            )
-                                        }
-                                    })
-                                }
-                             </div>
                         </div>
                     </div>
                 </div>

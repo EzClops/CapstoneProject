@@ -22,7 +22,6 @@ function App() {
   const userCartId = 1;
 
   const [apparel, setApparel] = useState("")
-  const activeProductsInUserCart = useRef(JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)))
   const [items, setItems] = useState([]);
   const [homePage, setHomePage] = useState(true);
   const [item, setItem] = useState(null);
@@ -54,7 +53,6 @@ function App() {
     setLoading(false)
   },[])
 
-  // console.log(ham, mobile_menu)
   return (
     <>
       {loading ? <p>Loading...</p> : 

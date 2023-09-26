@@ -23,12 +23,16 @@ export const getClothing = async (apparel, items, setItems ) => {
     }
 };
 
-export const getItem = async (productId, setItem) => {
+export const getItem = async (productId, quantity) => {
     try{
+        
         const response = await fetch(`https://fakestoreapi.com/products/${productId}`);
         const result = await response.json();
-        // setItem(result)
-        console.log(result)
+        console.log("getItem function", result)
+        if((quantity !== null) || (quantity !== undefined)){
+            localStorage.setItem("currentItem", JSON.stringify((result["price"]) * quantity))
+            
+        }
         return result
     } catch(error){
         console.error(error.message);

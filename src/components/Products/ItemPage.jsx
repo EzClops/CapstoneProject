@@ -1,7 +1,7 @@
 import Home from "../Navigation/Home";
 import { Link } from "react-router-dom"
 import { getClothing, updateInCart, getUserCart } from "../../API/apiCalls"
-import { addQuantity, reduceQuantity } from "../LocalStorage"
+import { addQuantity, reduceQuantity } from "../GetFunctions/LocalStorage"
 
 export default function ItemPage({  item, items, setItems, homePage, setHomePage }){
 

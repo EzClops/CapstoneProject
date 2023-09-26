@@ -1,4 +1,4 @@
-
+import TotalPrice from "./TotalPrice";
 import CartItem from "./CartItem";
 
 
@@ -40,6 +40,7 @@ export default function Cart({ error, set_Quantity_User_Cart }) {
               })
             )}
           </div>
+          <TotalPrice/>
         </>
     </>
   );
