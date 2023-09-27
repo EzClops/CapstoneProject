@@ -74,6 +74,7 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
                         : ((cartPage) && !(sessionStorage.getItem("token") === null)) 
                             ? <button><Link to='/checkout' className='linkColor' onClick=
                                 {() =>{
+                                    localStorage.setItem("isCheckoutPage", true)
                                     setCheckoutPage(true)
                                     setCartPage(false)
                                     setError(null)
@@ -84,6 +85,7 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
                                     if(submitAddress && submitPayment){
                                         setCartPage(false)
                                         setCheckoutPage(false)
+                                        localStorage.setItem("isCheckoutPage", false)
                                         setError(null)
                                         navigate('/placeorder')
                                     }else{

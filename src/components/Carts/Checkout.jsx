@@ -2,7 +2,6 @@ import { updateUserAddress } from "../../API/apiCalls";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import CartItem from "./CartItem";
-import Cart from "./Cart";
 
 export default function Checkout({
   item,
@@ -15,6 +14,7 @@ export default function Checkout({
   setSubmitPayment,
   error,
   setError,
+  checkoutPage
 }) {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
@@ -46,7 +46,7 @@ export default function Checkout({
     setYear("");
     setCvv("");
   }
-
+  
   function giveLabel(val, setVal, placeholder, maxInput) {
     return (
       <label>
@@ -122,101 +122,105 @@ export default function Checkout({
 
   return (
     <>
-      <header className="checkoutHeader">
-        <h2 class="selection:bg-fuchsia-300">Checkout</h2>
-        <button
-          className="linkColor checkout_To_Cart_Button"
-          onClick={() => {
-            setCartPage(true);
-            setCheckoutPage(false);
-            setSubmitAddress(false);
-            setSubmitPayment(false);
-            setError(null);
-            navigate("/cart");
-          }}
-        >
-          Cart
-        </button>
-      </header>
-      <span>{error && <p>{error}</p>}</span>
-      <div className="container">
-        <div className="checkout">
-          <section className="address">
-            <div className="title">
-              <h3>Shipping Address</h3>
-            </div>
-            <form className="form" onSubmit={handleSubmitAddress}>
-              {giveLabel(firstname, setFirstname, "Firstname")}
-              {giveLabel(lastname, setLastname, "Lastname")}
-              {giveLabel(street, setStreet, "Street Address")}
-              {giveLabel(number, setNumber, "Apt. # (Optional)")}
-              {giveLabel(city, setCity, "City")}
-              {giveLabel(zipcode, setZipcode, "Zipcode")}
-              {giveLabel(phone, setPhone, "Phone # (Optional)")}
-              <input type="submit" value="Submit" />
-            </form>
-          </section>
-          <hr></hr>
-          <hr></hr>
-          <section className="payment">
-            <div className="title">
-              <h3>Payment</h3>
-            </div>
-            <form className="form" onSubmit={handleSubmitPayment}>
-              <div className="names">
+      <div className="ck">
+        <div className="checkoutHeader">
+          <button
+            className="linkColor checkout_To_Cart_Button"
+            onClick={() => {
+              setCartPage(true);
+              setCheckoutPage(false);
+              localStorage.setItem("isCheckoutPage", true)
+              setSubmitAddress(false);
+              setSubmitPayment(false);
+              setError(null);
+              navigate("/cart");
+            }}
+          >
+            <img width="64" height="64" src="https://img.icons8.com/cotton/64/circled-left-2.png" alt="circled-left-2"/>
+          </button>
+          <h2 className="checkoutHeader">Checkout</h2>
+        </div>
+        <span>{error && <p>{error}</p>}</span>
+        <div className="container">
+          <div className="checkout">
+            <section className="address">
+              <div className="title">
+                <h3>Shipping Address</h3>
+              </div>
+              <form className="form" onSubmit={handleSubmitAddress}>
                 {giveLabel(firstname, setFirstname, "Firstname")}
                 {giveLabel(lastname, setLastname, "Lastname")}
+                {giveLabel(street, setStreet, "Street Address")}
+                {giveLabel(number, setNumber, "Apt. #")}
+                {giveLabel(city, setCity, "City")}
+                {giveLabel(zipcode, setZipcode, "Zipcode")}
+                {giveLabel(phone, setPhone, "Phone #")}
+                <input type="submit" value="Submit" />
+              </form>
+            </section>
+            <hr></hr>
+            <hr></hr>
+            <section className="payment">
+              <div className="title">
+                <h3>Payment</h3>
               </div>
-              <div className="cardNumber">
-                {giveLabel(card, setCard, "Card number", 16)}
-              </div>
-              <div className="dates_CVV">
-                <div className="dates">
-                  {giveLabel(month, setMonth, "MM", 2)}
-                  {giveLabel(year, setYear, "YYYY", 4)}
+              <form className="form" onSubmit={handleSubmitPayment}>
+                <div className="names">
+                  {giveLabel(firstname, setFirstname, "Firstname")}
+                  {giveLabel(lastname, setLastname, "Lastname")}
                 </div>
-                <div className="CVV">{giveLabel(cvv, setCvv, "CVV", 3)}</div>
+                <div className="cardNumber">
+                  {giveLabel(card, setCard, "Card number", 16)}
+                </div>
+                <div className="dates_CVV">
+                  <div className="dates">
+                    {giveLabel(month, setMonth, "MM", 2)}
+                    {giveLabel(year, setYear, "YYYY", 4)}
+                  </div>
+                  <div className="CVV">{giveLabel(cvv, setCvv, "CVV", 3)}</div>
+                </div>
+                <input type="submit" value="Submit" />
+              </form>
+            </section>
+            <section className="userCart">
+              <div className="title">
+                <h3>Cart Items</h3>
               </div>
-              <input type="submit" value="Submit" />
-            </form>
-          </section>
-          <section className="userCart">
-            <div className="title">
-              <h3>Shopping Cart</h3>
-            </div>
-            {!sessionStorage.getItem("token") ? (
-              <p>Cart is Empty</p>
-            ) : (
-              JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).map((i) => {
-                return (
-                  <CartItem
-                    productId={i["productId"]}
-                    quantity={JSON.parse(localStorage.getItem(`productId:${i["productId"]}[${userCartId}]`))}
-                    item={item}
-                    setItem={setItem}
-                  />
+              {!sessionStorage.getItem("token") ? (
+                <p>Cart is Empty</p>
+              ) : (
+                JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).map((i) => {
+                  return (
+                    <CartItem
+                      productId={i["productId"]}
+                      quantity={JSON.parse(localStorage.getItem(`productId:${i["productId"]}[${userCartId}]`))}
+                      item={item}
+                      setItem={setItem}
+                      checkoutPa ge={checkoutPage}
+                    />
+                  );
+                })
+              )}
+            </section>
+          </div>
+          <button
+            onClick={() => {
+              if (submitAddress && submitPayment) {
+                setCartPage(false);
+                setCheckoutPage(false);
+                navigate("/placeorder");
+              } else {
+                setError("Complete both Address and Payment form to place order");
+                throw new Error(
+                  "Complete both Address and Payment form to place order"
                 );
-              })
-            )}
-          </section>
+              }
+            }}
+            className="linkColor"
+          >
+            Place your order
+          </button>
         </div>
-        <button
-          onClick={() => {
-            if (submitAddress && submitPayment) {
-              setCartPage(false);
-              setCheckoutPage(false);
-              navigate("/placeorder");
-            } else {
-              setError("Complete both Address and Payment form to place order");
-              throw new Error(
-                "Complete both Address and Payment form to place order"
-              );
-            }
-          }}
-          className="linkColor"
-        >
-          Place your order
-        </button>
       </div>
     </>
   );

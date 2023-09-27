@@ -19,11 +19,6 @@ export default function TotalPrice(){
         return price
     }
 
-
-    // useEffect(() =>{
-    //     setCurrentCartItems(cartItems)
-    // },[currentCartItems])
-
     const totalPrice = currentCartItems.reduce((accumulator, currentItem, index) => {
         console.log("bee", currentItem)
         accumulator += multiplyQuantityOfProduct(currentItem)
@@ -38,7 +33,8 @@ export default function TotalPrice(){
     console.log("gee", price_Of_Item_Multiplied_Quantity)
     return(
         <>
-            <p>Hi {totalPrice}</p>
+            <hr></hr>
+            <p>Total: {totalPrice}</p>
         </>
     )
 }

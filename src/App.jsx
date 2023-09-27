@@ -76,8 +76,8 @@ function App() {
             {/* End of Login/Logout/Register Route */}
 
             {/* Cart Route */}
-            <Route path='/cart' element={<Cart error={error} set_Quantity_User_Cart={set_Quantity_User_Cart}/>}/>
-            <Route path='checkout' element={<Checkout item={item} setItem={setItem} setCartPage={setCartPage} setCheckoutPage={setCheckoutPage} submitAddress={submitAddress} setSubmitAddress={setSubmitAddress} submitPayment={submitPayment} setSubmitPayment={setSubmitPayment} error={error} setError={setError}/>}></Route>
+            <Route path='/cart' element={<Cart error={error} set_Quantity_User_Cart={set_Quantity_User_Cart} checkoutPage={checkoutPage}/>}/>
+            <Route path='checkout' element={<Checkout item={item} setItem={setItem} setCartPage={setCartPage} setCheckoutPage={setCheckoutPage} submitAddress={submitAddress} setSubmitAddress={setSubmitAddress} submitPayment={submitPayment} setSubmitPayment={setSubmitPayment} error={error} setError={setError} checkoutPage={checkoutPage}/>}></Route>
             <Route path='placeorder' element={<PlaceOrder/>}/>
             {/* End of Cart Route */}
           </Route>
