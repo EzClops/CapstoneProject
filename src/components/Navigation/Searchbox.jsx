@@ -1,7 +1,8 @@
 export default function Searchbox({ setSearchChange, searchChange }){
     return(
         <>
-            <input 
+            <input
+            className="styleSearchBar" 
             type="search" 
             placeholder="Find Item"
             onChange={(event) =>{

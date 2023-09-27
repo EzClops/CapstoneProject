@@ -2,7 +2,7 @@ import TotalPrice from "./TotalPrice";
 import CartItem from "./CartItem";
 
 
-export default function Cart({ error, set_Quantity_User_Cart }) {
+export default function Cart({ error, set_Quantity_User_Cart, checkoutPage }) {
 
   /* 
     So we first want to get all user carts using getAllCart
@@ -19,9 +19,8 @@ export default function Cart({ error, set_Quantity_User_Cart }) {
   return (
     <>
         <>
-          <header className="header">
-            <h2>Shopping Cart</h2>
-          </header>
+          
+          <h2>Shopping Cart</h2>
           <div className="userCart">
             <span>{error && <p>{error}</p>}</span>
             {!sessionStorage.getItem("token") ? (
@@ -35,6 +34,7 @@ export default function Cart({ error, set_Quantity_User_Cart }) {
                     productId={values["productId"]}
                     quantity={JSON.parse(localStorage.getItem(`productId:${values["productId"]}[${userCartId}]`))}
                     set_Quantity_User_Cart={set_Quantity_User_Cart}
+                    checkoutPage={checkoutPage}
                   />
                 );
               })

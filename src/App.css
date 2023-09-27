@@ -167,6 +167,25 @@ background: linear-gradient(0deg, rgba(92,158,173,1) 0%, rgba(227,151,116,1) 100
   left: 30%;
   margin-right: 100px;
 }
+.navbar .userButtons .active .styleSearchBar{
+  height: 75px;
+  width: 400px;
+  font-size: 25px;
+  border-color: rgb(238, 238, 238);
+}
+.navbar .userButtons .active .checkbox{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.navbar .userButtons .active .checkbox .filters{
+  padding: 15px 15px;
+}
+.navbar .userButtons .active .checkbox .filters input[type="checkbox" i]{
+  transform: scale(2);
+  margin-right: 10px;
+}
 .navbar .userButtons .active .filteredList{
   display: grid; 
   grid-template-columns: 1fr 1fr;  
@@ -292,10 +311,10 @@ form input {
   justify-content: space-between;
   flex-direction: row;
 }
-.miniNav button {
+/* .miniNav button {
   background-color: rgb(66, 66, 66);
   border-color: grey;
-}
+} */
 .miniNav button:hover {
   border-color: black;
 }
@@ -312,6 +331,22 @@ form input {
   align-items: center;
   flex-direction: column;
   width: 60%;
+  border-radius: 10px;
+  background-color: rgb(227, 151, 116);
+  position: relative;
+  z-index: 1;
+}
+.itemDescription::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(238, 238, 238);
+  opacity: 0.3;
+  z-index: -1;
+  border-radius: 10px;
 }
 .itemPrice {
   display: flex;
@@ -323,18 +358,18 @@ form input {
 .itemPrice p {
   padding: 7px 40px;
   margin-bottom: 10px;
-  background-color: rgb(66, 66, 66);
+  background-color: rgb(50, 98, 115);
+  border: 2px solid rgb(123, 123, 123);
   border-radius: 10px;
-  border: 2px solid #73ad21;
-  border-color: black;
   width: 100%;
 }
 .itemPrice button {
   width: 100%;
-  background-color: rgb(66, 66, 66);
+  background-color: rgb(50, 98, 115);
+  border: 2px solid rgb(123, 123, 123);
   border-radius: 10px;
-  border: 2px solid;
-  border-color: black;
+  color: rgb(255, 255, 255);
+  /* border: 2px solid; */
 }
 
 /* End of Category Section   */
@@ -345,6 +380,12 @@ hr {
   text-align: center;
   /* max-width: 80%; */
   margin: 15px 15px;
+}
+h2{
+  font-size: 40px;
+  text-decoration: underline;
+  margin-top: -10px;
+  /* margin-left: 30px; */
 }
 .userCart{
   width: 650px;
@@ -359,6 +400,9 @@ hr {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#326273",endColorstr="#e39774",GradientType=1);
   position: relative;
   z-index: 1;
+}
+.containerCheckout{
+  margin: 0;
 }
 .userCart::after {
   content: "";
@@ -378,6 +422,9 @@ hr {
   flex-direction: row;
   margin-bottom: 15px;
   height: 150px;
+}
+.containerCartCheckout{
+  /* margin-right: ; */
 }
 .cartImage {
   margin-left: 20px;
@@ -408,23 +455,35 @@ hr {
 .containerCart .cartItem .quantity p {
   text-align: left;
 }
+.ck{
+  padding-top: 30px;
+}
 .checkoutHeader {
+  margin-top: 0;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 30px 0;
+  margin-right: 50px;
+  /* padding: 30px 0; */
 }
 .checkout_To_Cart_Button {
-  background-color: rgb(66, 66, 66);
-  border-color: rgb(123, 123, 123);
+  border-radius: 50%;
+  background-color: transparent;
+  border-color: transparent;
+  
 }
 .checkout {
   width: 650px;
   height: 600px;
   overflow-x: hidden;
   overflow-y: auto;
-  padding: 0 60px;
+  padding: 0;
+  background: rgb(50,98,115);
+  background: -moz-linear-gradient(0deg, rgba(50,98,115,1) 0%, rgba(227,151,116,1) 100%);
+  background: -webkit-linear-gradient(0deg, rgba(50,98,115,1) 0%, rgba(227,151,116,1) 100%);
+  background: linear-gradient(0deg, rgba(50,98,115,1) 0%, rgba(227,151,116,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#326273",endColorstr="#e39774",GradientType=1);
 }
 .checkout .address .form label {
   padding: 0px 10px;
@@ -486,6 +545,106 @@ hr {
     display: flex;
     align-items: center;
     justify-content: space-around;
+  }
+  .navbar .userButtons .ham{
+    height: 60px;
+    width: 60px;
+    border: 2px solid rgb(238, 238, 238);
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 100;
+    transform: scale(.8);
+    margin-right: 10px;
+  }
+  .navbar .userButtons .ham img{
+    position: relative;
+    z-index: 99;
+  }
+  .navbar .userButtons .ham::after{
+    position: absolute;
+    content: '';
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    border: 3px solid rgb(238, 238, 238);
+    animation: ham_puls 1s ease infinite;
+    
+  }
+  .navbar .userButtons .ham button{
+    /* background-image: '../../Images/icons8-search-50.png'; */
+    padding: 0;
+  }
+  .navbar .userButtons .mobileMenu{
+    list-style: none;
+    position: absolute;
+    background: rgb(92,158,173);
+    background: linear-gradient(0deg, rgba(92,158,173,1) 0%, rgba(227,151,116,1) 100%);
+    width: 40vw;
+    height: 100vh;
+    left: 100%;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 2;
+    overflow: hidden;
+    transition: .5s ease-in-out;  
+    /* padding-top: 100px; */
+    border: 1px solid black;
+    border-radius: 15px;
+  }
+  
+  .navbar .userButtons .mobileMenu h2{
+    font-size: 50px;
+    text-decoration: underline;
+    margin-bottom: 30px;
+  }
+  .navbar .userButtons .active{
+    left: 60%;
+    margin-right: 100px;
+  }
+  .navbar .userButtons .active .filteredList{
+    display: grid; 
+    grid-template-columns: 1fr 1fr;  
+    gap: 0px 0px; 
+    grid-template-areas: 
+      ". ."
+      ". ."; 
+    width: 500px;
+    height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+      margin: auto;
+  }
+  .navbar .userButtons .active .filteredList .searchCard{
+    padding: 15px 5px;
+  }
+  .navbar .userButtons button {
+    background-color: transparent;
+    border-color: transparent;
+    color: white;
+  }
+
+  .checkout {
+    width: 650px;
+    height: 800px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    
+    /* padding: 0 60px; */
+    background: rgb(50,98,115);
+    background: -moz-linear-gradient(0deg, rgba(50,98,115,1) 0%, rgba(227,151,116,1) 100%);
+    background: -webkit-linear-gradient(0deg, rgba(50,98,115,1) 0%, rgba(227,151,116,1) 100%);
+    background: linear-gradient(0deg, rgba(50,98,115,1) 0%, rgba(227,151,116,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#326273",endColorstr="#e39774",GradientType=1);
+  }
+  .ck{
+    
   }
 }
 /*  End of Media Query For Desktop */

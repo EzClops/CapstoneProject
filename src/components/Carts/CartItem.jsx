@@ -2,11 +2,11 @@ import { getItem } from "../../API/apiCalls"
 import { useEffect, useState } from "react"
 import { addQuantity, reduceQuantity, removeItemFromCart } from "../GetFunctions/LocalStorage"
 
-export default function CartItem({ productId, quantity, set_Quantity_User_Cart}){
+export default function CartItem({ productId, quantity, set_Quantity_User_Cart, checkoutPage}){
     const [item2, setItem2] = useState("")
     const [cartQuantity, setCartQuantity] = useState(quantity)
     const userCartId = 1;
-
+    
     useEffect(()=>{
         async function fetchItem(){
             const data = await getItem(productId);
@@ -17,14 +17,15 @@ export default function CartItem({ productId, quantity, set_Quantity_User_Cart})
         }
         fetchItem([cartQuantity])
     },[])
-
+    console.log(checkoutPage)
     console.log("CartQuantity", JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).length)
     return (
         <>  
             {cartQuantity === null ? ""  : 
                 (<>
                     <hr></hr>
-                    <div className="containerCart">
+
+                    <div className={"containerCart" + (!checkoutPage ? "" : " containerCartCheckout")}>
                         <div className="cartImage">
                             <div className="image">
                                 <img src={item2?.image} alt="pictar" height="150px" width="150px"/>
@@ -32,7 +33,9 @@ export default function CartItem({ productId, quantity, set_Quantity_User_Cart})
                         </div>
                         <div className="cartItem">
                             <div className="title">
-                                <p>{item2?.title}, {item2?.description}</p>
+                                {!localStorage.getItem("isCheckoutPage") 
+                                ? <p>{item2?.title}, {item2?.description}</p> 
+                                : <p>{item2?.title}</p>}
                                 <p>${item2?.price}</p>
                             </div>
                             <div className="quantity">

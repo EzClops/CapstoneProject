@@ -9,7 +9,7 @@ export default function ItemPage({  item, items, setItems, homePage, setHomePage
 
     return (
         <>
-            <div className="miniNav">
+            <div className="miniNav container">
                 <button onClick={()=>{
                     getClothing(item["category"], items, setItems)}}><Link to={`/${item["category"]}`} className="linkColor">Return</Link>
                 </button>
