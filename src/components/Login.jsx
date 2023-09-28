@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useNavigate } from 'react-router-dom'
 import { Link } from "react-router-dom";
-import { getAllUsers } from "../../API/apiCalls"
+import { getAllUsers } from "../API/apiCalls"
 
 
 export default function Login({ setToken, username, setUsername, password, setPassword, error, setError }){
@@ -15,7 +15,7 @@ export default function Login({ setToken, username, setUsername, password, setPa
             if (!localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)){
                 localStorage.setItem(`All_Products_In_User_Cart${userCartId}`, '[{}]')
             }
-            getAllUsers()
+            
     }, []);
 
     //To see all user's login info
