@@ -198,7 +198,7 @@ export default function Checkout({
                       quantity={JSON.parse(localStorage.getItem(`productId:${i["productId"]}[${userCartId}]`))}
                       item={item}
                       setItem={setItem}
-                      checkoutPa ge={checkoutPage}
+                      checkoutPage={checkoutPage}
                       loading={loading}
                       setLoading={setLoading}
                     />

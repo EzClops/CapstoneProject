@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 
 
-export default function Login({ setToken, username, setUsername, password, setPassword, error, setError }){
+export default function LoginDog({ setToken, username, setUsername, password, setPassword, error, setError }){
     const navigate = useNavigate();
     const minLoginNum = 5;
     const maxLoginNum = 16;
