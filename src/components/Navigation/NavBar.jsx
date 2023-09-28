@@ -40,7 +40,14 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
                         {token ? <p>User: {sessionStorage.getItem("username")}</p> : <p></p>}
                     </div>
                     <div className="userButtons">
-                        
+                    <button><Link to='/loginDog' className="linkColor" onClick=
+                                {() =>{
+                                    setError(null)
+                                    setCartPage(false)
+                                    setCheckoutPage(false)
+                                    setSubmitAddress(false)
+                                    setSubmitPayment(false)
+                                }}>Login</Link></button> 
                         {!token 
                             ? <button><Link to='/loginDog' className="linkColor" onClick=
                                 {() =>{
