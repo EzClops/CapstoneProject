@@ -70,7 +70,7 @@ function App() {
             {/* End of Product Route */}
 
             {/* Login/Logout/Register Route */}
-            <Route path='/loginDoggy' element={<LoginDoggy setToken={setToken} username={username} setUsername={setUsername} password={password} setPassword={setPassword} error={error} setError={setError}/>}/>
+            <Route exact path='/loginDoggy' element={<LoginDoggy setToken={setToken} username={username} setUsername={setUsername} password={password} setPassword={setPassword} error={error} setError={setError}/>}/>
             <Route path='/logout' element={<LogOut setToken={setToken} setHomePage={setHomePage} setItem={setItem} setItems={setItems} setApparel={setApparel} setUsername={setUsername} setSubmitAddress={setSubmitAddress} setSubmitPayment={setSubmitPayment}/>}/>
             {/* <Route path='/register' element={<Register/>}/> */}
             {/* End of Login/Logout/Register Route */}

@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { useNavigate } from 'react-router-dom'
+import { loginUser } from "../../API/apiCalls";
 
 
 
@@ -21,35 +22,8 @@ export default function LoginDoggy({ setToken, username, setUsername, password, 
 
     async function handleSubmit(event){
         event.preventDefault();
-        try{
-            loginValidate(username, password);
-            const response = await fetch("https://fakestoreapi.com/auth/login",{
-                method:'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                  },
-                body:JSON.stringify({
-                    username: `${username}`,
-                    password: `${password}`
-                })
-            });
-            if(!response.ok){
-                // console.log(response) 
-                setError("Invalid Username or password. Please try again")
-                // console.log(error)
-                throw new Error("Invalid Username or password. Please try again")
-            }
-            const result = await response.json();
-
-            sessionStorage.setItem("token", result.token)
-            sessionStorage.setItem("username", username)
-            setToken(result.token)
-
-            navigate('/')
-        }catch(error){
-            setError(error.message)
-            console.error(error)
-        }
+        // loginValidate(username, password);
+        loginUser(username, password, setError, navigate)
     }
 
     function loginValidate(username, password){

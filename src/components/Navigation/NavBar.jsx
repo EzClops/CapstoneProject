@@ -42,7 +42,7 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
                     <div className="userButtons">
                         {!token 
                             ? <button><Link to='/loginDoggy' className="linkColor" onClick=
-                                {() =>{
+{() =>{
                                     setError(null)
                                     setCartPage(false)
                                     setCheckoutPage(false)

@@ -176,3 +176,36 @@ export const allLocalUserCart = async() => {
 
 
 /* End of Local Data */
+
+/*login */
+
+export const loginUser = async(username, password, setError, navigate) => {
+    try{
+        const response = await fetch("https://fakestoreapi.com/auth/login",{
+            method:'POST',
+            headers: {
+                'Content-Type': 'application/json'
+                },
+            body:JSON.stringify({
+                username: `${username}`,
+                password: `${password}`
+            })
+        });
+        if(!response.ok){
+            // console.log(response) 
+            setError("Invalid Username or password. Please try again")
+            // console.log(error)
+            throw new Error("Invalid Username or password. Please try again")
+        }
+        const result = await response.json();
+        console.log(result)
+        sessionStorage.setItem("token", result.token)
+        sessionStorage.setItem("username", username)
+        // setToken(result.token)
+
+        navigate('/')    
+    }catch(error){
+        setError(error.message)
+        console.error(error)
+    }
+}
