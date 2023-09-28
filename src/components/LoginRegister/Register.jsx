@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { getAllProducts, getAllUsers } from "../../API/apiCalls"
 
 export default function Login(){
-    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -69,7 +68,6 @@ export default function Login(){
                     <input type="submit" value="Submit"/>
                 </form>
             </div>
-            {/* <button onClick={handleSubmit}>Hi</button> */}
         </>
     )
 }

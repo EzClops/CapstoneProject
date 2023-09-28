@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Card from "./Card";
 import Home from "../Navigation/Home";
 

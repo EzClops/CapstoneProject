@@ -7,8 +7,6 @@ import Checkbox from './Checkbox';
 import Image from '../../Images/icons8-search-50.png'
 import Image2 from '../../Images/icons8-x-48.png'
 import React from 'react';
-import { ascendedPriceOrder, descendedPriceOrder } from '../GetFunctions/FilterProducts';
-
 
 export default function NavBar({ setHomePage, token, cartPage, setCartPage, checkoutPage, setCheckoutPage, submitAddress, submitPayment, setError, setSubmitAddress, setSubmitPayment, setItem}){
     

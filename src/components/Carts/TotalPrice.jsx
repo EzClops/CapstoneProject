@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { getItem } from "../../API/apiCalls"
 
 
@@ -6,8 +6,14 @@ const userCartId = 1;
 
 export default function TotalPrice({ loading, setLoading}){
 
-    let cartItems = JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`))
-    cartItems.shift()
+    let cartItems = []
+    if(JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)) !== null){
+        cartItems = JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`))
+    }
+    if(cartItems !== null){
+        cartItems.shift()
+
+    }
     const [itemPriceWithQuantity, setItemPriceWIthQuantity] = useState(0)
     
     
