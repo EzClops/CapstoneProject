@@ -1,10 +1,10 @@
 import { useEffect } from "react"
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 
 
 export default function LoginDoggy({ setToken, username, setUsername, password, setPassword, error, setError }){
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const minLoginNum = 5;
     const maxLoginNum = 16;
     const userCartId = 1;
