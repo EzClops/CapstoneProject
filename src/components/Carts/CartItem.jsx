@@ -1,10 +1,13 @@
 import { getItem } from "../../API/apiCalls"
 import { useEffect, useState } from "react"
 import { addQuantity, reduceQuantity, removeItemFromCart } from "../GetFunctions/LocalStorage"
+import getTotalPrice from "./TotalPrice"
 
-export default function CartItem({ productId, quantity, set_Quantity_User_Cart, checkoutPage}){
+export default function CartItem({ productId, quantity, set_Quantity_User_Cart, checkoutPage, loading, setLoading}){
     const [item2, setItem2] = useState("")
     const [cartQuantity, setCartQuantity] = useState(quantity)
+    const [itemPriceWithQuantity, setItemPriceWIthQuantity] = useState(0)
+    
     const userCartId = 1;
     
     useEffect(()=>{
@@ -45,13 +48,14 @@ export default function CartItem({ productId, quantity, set_Quantity_User_Cart, 
                                     }
                                     reduceQuantity(productId)
                                     setCartQuantity(JSON.parse(localStorage.getItem(`productId:${productId}[${userCartId}]`)))
-                                    
+                                    setLoading(true)
                                     console.log(`Cart Quantity of ProductId:${productId}`, JSON.parse(localStorage.getItem(`productId:${productId}[${userCartId}]`)))
                                 }}>-</button>
                                 {cartQuantity === 0 ? removeItemFromCart(productId, setItem2) : <p>{cartQuantity}</p>}
                                 <button className="Cart_Add_Quantity" onClick={() => {
                                     addQuantity(productId)
                                     setCartQuantity(JSON.parse(localStorage.getItem(`productId:${productId}[${userCartId}]`)))
+                                    setLoading(true)
                                     console.log(`Cart Quantity of ProductId:${productId}`, JSON.parse(localStorage.getItem(`productId:${productId}[${userCartId}]`)))
                                 }}>+</button>
                             </div>

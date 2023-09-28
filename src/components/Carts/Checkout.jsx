@@ -2,6 +2,7 @@ import { updateUserAddress } from "../../API/apiCalls";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import CartItem from "./CartItem";
+import TotalPrice from "./TotalPrice";
 
 export default function Checkout({
   item,
@@ -27,6 +28,7 @@ export default function Checkout({
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
   const [cvv, setCvv] = useState("");
+  const [loading, setLoading] = useState(true)
 
   const navigate = useNavigate();
 
@@ -197,11 +199,14 @@ export default function Checkout({
                       item={item}
                       setItem={setItem}
                       checkoutPa ge={checkoutPage}
+                      loading={loading}
+                      setLoading={setLoading}
                     />
                   );
                 })
               )}
             </section>
+            <TotalPrice loading={loading} setLoading={setLoading}/>
           </div>
           <button
             onClick={() => {

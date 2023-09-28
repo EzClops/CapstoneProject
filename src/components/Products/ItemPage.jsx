@@ -9,9 +9,13 @@ export default function ItemPage({  item, items, setItems, homePage, setHomePage
 
     return (
         <>
-            <div className="miniNav container">
-                <button onClick={()=>{
-                    getClothing(item["category"], items, setItems)}}><Link to={`/${item["category"]}`} className="linkColor">Return</Link>
+            <div className="miniNav">
+                <button
+                className="checkout_To_Cart_Button"
+                onClick={()=>{
+                    getClothing(item["category"], items, setItems)}}><Link to={`/${item["category"]}`} className="linkColor">
+                        <img width="64" height="64" src="https://img.icons8.com/cotton/64/circled-left-2.png" alt="circled-left-2"/>
+                    </Link>
                 </button>
                 <Home items={items} setItems={setItems} homePage={homePage} setHomePage={setHomePage}/>
                 <div></div>

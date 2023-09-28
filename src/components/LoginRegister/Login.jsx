@@ -70,6 +70,9 @@ export default function Login({ token, setToken, username, setUsername, password
     return(
         <>
             <div className="container loginRegister">
+                <p>Use this username and password for the demo!</p>
+                <p>Username: johnd</p>
+                <p>Password: m38rmF$</p>
                 <div className="Login_Register">
                     <button><h2>Login</h2></button>
                     <h2>|</h2>
