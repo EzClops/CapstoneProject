@@ -10,7 +10,7 @@ import React from 'react';
 import { ascendedPriceOrder, descendedPriceOrder } from '../GetFunctions/FilterProducts';
 
 
-export default function NavBar({ setHomePage, token, cartPage, setCartPage, checkoutPage, setCheckoutPage, submitAddress, submitPayment, setError, error, setSubmitAddress, setSubmitPayment, setItem}){
+export default function NavBar({ setHomePage, token, cartPage, setCartPage, checkoutPage, setCheckoutPage, submitAddress, submitPayment, setError, setSubmitAddress, setSubmitPayment, setItem}){
     
     const [searchChange, setSearchChange] = useState("");
     const [ham, setHam] = useState(false)

@@ -12,7 +12,7 @@ export default function TotalPrice({ loading, setLoading}){
     
     
     useEffect(() =>{
-        const totalPrice = cartItems.reduce((accumulator, currentItem, index) => {
+        const totalPrice = cartItems.reduce((accumulator, currentItem) => {
             multiplyQuantityOfProduct(currentItem)
             accumulator += JSON.parse(localStorage.getItem(`ProductTotalPrice_${currentItem["productId"]}`))
             

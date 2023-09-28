@@ -1,10 +1,10 @@
 import { useRef, useEffect } from "react"
 import { useNavigate } from 'react-router-dom'
 import { Link } from "react-router-dom";
-import { getUserCart, getAllUsers } from "../../API/apiCalls"
+import { getAllUsers } from "../../API/apiCalls"
 
 
-export default function Login({ token, setToken, username, setUsername, password, setPassword, error, setError }){
+export default function Login({ setToken, username, setUsername, password, setPassword, error, setError }){
     const navigate = useNavigate();
     const minLoginNum = 5;
     const maxLoginNum = 16;

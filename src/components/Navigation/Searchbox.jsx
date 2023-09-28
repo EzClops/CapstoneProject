@@ -1,4 +1,4 @@
-export default function Searchbox({ setSearchChange, searchChange }){
+export default function Searchbox({ setSearchChange }){
     return(
         <>
             <input
