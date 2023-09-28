@@ -7,7 +7,7 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter basename='/CapstoneProject'>
+    <BrowserRouter>
       <App />
       <Routes>
         <Route path='/login' element={<Login/>}/>
