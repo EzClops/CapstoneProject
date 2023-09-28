@@ -11,9 +11,9 @@ export default function LoginDog({ setToken, username, setUsername, password, se
   // setCartPage(true)
   // Grab desired users cart and stores the product and quantity in product state
     useEffect(() => {
-            if (!localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)){
-                localStorage.setItem(`All_Products_In_User_Cart${userCartId}`, '[{}]')
-            }
+            // if (!localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)){
+            //     localStorage.setItem(`All_Products_In_User_Cart${userCartId}`, '[{}]')
+            // }
             
     }, []);
 
