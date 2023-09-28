@@ -316,7 +316,7 @@ form input {
   border-color: grey;
 } */
 .miniNav button:hover {
-  border-color: black;
+  /* border-color: black; */
 }
 .itemPage {
   display: flex;
@@ -371,7 +371,9 @@ form input {
   color: rgb(255, 255, 255);
   /* border: 2px solid; */
 }
-
+.itemPrice button:hover{
+  border-color: rgb(227, 151, 116);  
+}
 /* End of Category Section   */
 
 /* Cart Section*/
@@ -472,6 +474,9 @@ h2{
   background-color: transparent;
   border-color: transparent;
   
+}
+.checkout_To_Cart_Button:hover{
+  border-color: transparent;
 }
 .checkout {
   width: 650px;

@@ -4,37 +4,39 @@ import { getItem } from "../../API/apiCalls"
 
 const userCartId = 1;
 
-export default function TotalPrice(){
-    const [price_Of_Item_Multiplied_Quantity, setPrice_Of_Item_Multiplied_Quantity] = useState(0)
-    const cartItems = JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`))
+export default function TotalPrice({ loading, setLoading}){
+
+    let cartItems = JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`))
     cartItems.shift()
-    const [currentCartItems, setCurrentCartItems] = useState([])
+    const [itemPriceWithQuantity, setItemPriceWIthQuantity] = useState(0)
     
-    
-    function multiplyQuantityOfProduct(currentItem){
-        getItem(currentItem["productId"], currentItem["quantity"])
-        let price = JSON.parse(localStorage.getItem("currentItem"))
-        console.log("price", price)
-
-        return price
-    }
-
-    const totalPrice = currentCartItems.reduce((accumulator, currentItem, index) => {
-        console.log("bee", currentItem)
-        accumulator += multiplyQuantityOfProduct(currentItem)
- 
-        return accumulator
-    },0)
     
     useEffect(() =>{
-        setPrice_Of_Item_Multiplied_Quantity(totalPrice)
-    },[price_Of_Item_Multiplied_Quantity])
+        const totalPrice = cartItems.reduce((accumulator, currentItem, index) => {
+            multiplyQuantityOfProduct(currentItem)
+            accumulator += JSON.parse(localStorage.getItem(`ProductTotalPrice_${currentItem["productId"]}`))
+            
+            return accumulator
+        },0)
+        setItemPriceWIthQuantity(totalPrice)
+        localStorage.setItem('TotalPrice', totalPrice)
+        setLoading(false)
+    },[loading])
 
-    console.log("gee", price_Of_Item_Multiplied_Quantity)
+    async function multiplyQuantityOfProduct(currentItem){
+        
+        const itemDescription = await getItem(currentItem["productId"])
+        const price = itemDescription["price"] * currentItem["quantity"]
+        
+        localStorage.setItem(`ProductTotalPrice_${currentItem["productId"]}`, price)
+
+    }
+    
     return(
         <>
             <hr></hr>
-            <p>Total: {totalPrice}</p>
+            {loading ? "" : <p>Total: ${localStorage.getItem('TotalPrice')}</p>}
+            
         </>
     )
 }

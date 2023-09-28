@@ -1,6 +1,6 @@
 import TotalPrice from "./TotalPrice";
 import CartItem from "./CartItem";
-
+import { useState } from "react";
 
 export default function Cart({ error, set_Quantity_User_Cart, checkoutPage }) {
 
@@ -15,7 +15,8 @@ export default function Cart({ error, set_Quantity_User_Cart, checkoutPage }) {
   
   */
   const userCartId = 1;
-  
+  const [loading, setLoading] = useState(true)
+
   return (
     <>
         <>
@@ -35,12 +36,14 @@ export default function Cart({ error, set_Quantity_User_Cart, checkoutPage }) {
                     quantity={JSON.parse(localStorage.getItem(`productId:${values["productId"]}[${userCartId}]`))}
                     set_Quantity_User_Cart={set_Quantity_User_Cart}
                     checkoutPage={checkoutPage}
+                    loading={loading}
+                    setLoading={setLoading}
                   />
                 );
               })
             )}
           </div>
-          <TotalPrice/>
+          <TotalPrice loading={loading} setLoading={setLoading}/>
         </>
     </>
   );
