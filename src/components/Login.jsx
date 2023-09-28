@@ -1,7 +1,6 @@
 import { useEffect } from "react"
 import { useNavigate } from 'react-router-dom'
 import { Link } from "react-router-dom";
-import { getAllUsers } from "../API/apiCalls"
 
 
 export default function Login({ setToken, username, setUsername, password, setPassword, error, setError }){
