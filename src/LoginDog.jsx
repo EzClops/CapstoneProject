@@ -20,36 +20,36 @@ export default function LoginDog({ setToken, username, setUsername, password, se
     //To see all user's login info
 
     async function handleSubmit(event){
-        // event.preventDefault();
-        // try{
-        //     loginValidate(username, password);
-        //     const response = await fetch("https://fakestoreapi.com/auth/login",{
-        //         method:'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //           },
-        //         body:JSON.stringify({
-        //             username: `${username}`,
-        //             password: `${password}`
-        //         })
-        //     });
-        //     if(!response.ok){
-        //         // console.log(response) 
-        //         setError("Invalid Username or password. Please try again")
-        //         // console.log(error)
-        //         throw new Error("Invalid Username or password. Please try again")
-        //     }
-        //     const result = await response.json();
+        event.preventDefault();
+        try{
+            loginValidate(username, password);
+            const response = await fetch("https://fakestoreapi.com/auth/login",{
+                method:'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                  },
+                body:JSON.stringify({
+                    username: `${username}`,
+                    password: `${password}`
+                })
+            });
+            if(!response.ok){
+                // console.log(response) 
+                setError("Invalid Username or password. Please try again")
+                // console.log(error)
+                throw new Error("Invalid Username or password. Please try again")
+            }
+            const result = await response.json();
 
-        //     sessionStorage.setItem("token", result.token)
-        //     sessionStorage.setItem("username", username)
-        //     setToken(result.token)
+            sessionStorage.setItem("token", result.token)
+            sessionStorage.setItem("username", username)
+            setToken(result.token)
 
-        //     navigate('/')
-        // }catch(error){
-        //     setError(error.message)
-        //     console.error(error)
-        // }
+            navigate('/')
+        }catch(error){
+            setError(error.message)
+            console.error(error)
+        }
     }
 
     function loginValidate(username, password){
