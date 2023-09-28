@@ -7,10 +7,8 @@ import Checkbox from './Checkbox';
 import Image from '../../Images/icons8-search-50.png'
 import Image2 from '../../Images/icons8-x-48.png'
 import React from 'react';
-import { ascendedPriceOrder, descendedPriceOrder } from '../GetFunctions/FilterProducts';
 
-
-export default function NavBar({ setHomePage, token, cartPage, setCartPage, checkoutPage, setCheckoutPage, submitAddress, submitPayment, setError, error, setSubmitAddress, setSubmitPayment, setItem}){
+export default function NavBar({ setHomePage, token, cartPage, setCartPage, checkoutPage, setCheckoutPage, submitAddress, submitPayment, setError, setSubmitAddress, setSubmitPayment, setItem}){
     
     const [searchChange, setSearchChange] = useState("");
     const [ham, setHam] = useState(false)
@@ -42,9 +40,8 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
                         {token ? <p>User: {sessionStorage.getItem("username")}</p> : <p></p>}
                     </div>
                     <div className="userButtons">
-                        
                         {!token 
-                            ? <button><Link to='/login' className="linkColor" onClick=
+                            ? <button><Link to='/loginDoggy' className="linkColor" onClick=
                                 {() =>{
                                     setError(null)
                                     setCartPage(false)

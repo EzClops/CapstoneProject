@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 
 /* Products API calls */
 export const getAllProducts = async() =>{
@@ -11,11 +10,9 @@ export const getAllProducts = async() =>{
     }
 }
 export const getClothing = async (apparel, items, setItems ) => {
-    // console.log(apparel)
     try {
         const response = await fetch(`https://fakestoreapi.com/products/category/${apparel}`);
         const result = await response.json();
-        // console.log(result);
         setItems(result)
         return items
     } catch (error) {
@@ -28,7 +25,6 @@ export const getItem = async (productId, quantity) => {
         let multipliedPrice = 0;
         const response = await fetch(`https://fakestoreapi.com/products/${productId}`);
         const result = await response.json();
-        // console.log("getItem function", result)
         if((quantity !== null) || (quantity !== undefined)){
             multipliedPrice =  JSON.stringify(result["price"]) * quantity
             
@@ -63,7 +59,7 @@ export const getAllCart = async() =>{
         console.error(error.message);
     }
 }
-export const addToCart = async (userId, productId, quantity) => {
+export const addToCart = async (userId, productId) => {
     try {
         const response = await fetch('https://fakestoreapi.com/carts',{
             method:"PUT",
@@ -153,9 +149,7 @@ export const updateUserAddress = async(firstname, lastname, city, street, number
                 }
             )
         });
-        // console.log(response)
         const result = await response.json();
-        // console.log(result)
         return result
     }catch(error){
         console.error(error.message)

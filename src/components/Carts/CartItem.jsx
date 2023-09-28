@@ -1,12 +1,10 @@
 import { getItem } from "../../API/apiCalls"
 import { useEffect, useState } from "react"
 import { addQuantity, reduceQuantity, removeItemFromCart } from "../GetFunctions/LocalStorage"
-import getTotalPrice from "./TotalPrice"
 
-export default function CartItem({ productId, quantity, set_Quantity_User_Cart, checkoutPage, loading, setLoading}){
+export default function CartItem({ productId, quantity, set_Quantity_User_Cart, checkoutPage, setLoading}){
     const [item2, setItem2] = useState("")
     const [cartQuantity, setCartQuantity] = useState(quantity)
-    const [itemPriceWithQuantity, setItemPriceWIthQuantity] = useState(0)
     
     const userCartId = 1;
     
