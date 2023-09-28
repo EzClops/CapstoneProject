@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Link } from "react-router-dom";
 import { getAllProducts, getAllUsers } from "../../API/apiCalls"
 
-export default function Login(){
+export default function Register(){
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
