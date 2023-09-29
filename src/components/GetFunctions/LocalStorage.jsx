@@ -8,7 +8,8 @@ export const addQuantity = (item) => {
 
     if(!localProductQuantity){
         // localProductQuantity += 1;
-        All_Local_Productz.push({productId: item, quantity: localProductQuantity + 1})
+        console.log(localProductQuantity, )
+        All_Local_Productz.push({productId: item, quantity: 1})
         localStorage.setItem(`All_Products_In_User_Cart${userCartId}`, JSON.stringify(All_Local_Productz))
     }
     localProductQuantity += 1;
