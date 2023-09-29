@@ -10,12 +10,12 @@ export default function TotalPrice({ loading, setLoading}){
     if(JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)) !== null){
         cartItems = JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`))
     }
-    // if(cartItems !== null){
-    //     // cartItems.shift()
+    if(cartItems !== null){
+        cartItems.shift()
 
-    // }
+    }
     const [itemPriceWithQuantity, setItemPriceWIthQuantity] = useState(0)
-    
+    console.log(cartItems)
     
     useEffect(() =>{
         const totalPrice = cartItems.reduce((accumulator, currentItem) => {

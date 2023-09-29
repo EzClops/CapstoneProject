@@ -20,15 +20,12 @@ export const getClothing = async (apparel, items, setItems ) => {
     }
 };
 
-export const getItem = async (productId, quantity) => {
+export const getItem = async (productId) => {
     try{
         let multipliedPrice = 0;
         const response = await fetch(`https://fakestoreapi.com/products/${productId}`);
         const result = await response.json();
-        if((quantity !== null) || (quantity !== undefined)){
-            multipliedPrice =  JSON.stringify(result["price"]) * quantity
-            
-        }
+        
         return result
     } catch(error){
         console.error(error.message);

@@ -4,8 +4,8 @@ import './App.css'
 import { Routes, Route, Link } from 'react-router-dom'
 import NavBar from './components/Navigation/NavBar'
 import Home from './components/Navigation/Home'
-import LoginDoggy from './components/LoginRegister/LoginDoggy'
-// import Register from './components/LoginRegister/Register'
+import Login from './components/LoginRegister/Login'
+import Register from './components/LoginRegister/Register'
 import LogOut from './components/LoginRegister/LogOut'
 import Cart from './components/Carts/Cart'
 import Checkout from './components/Carts/Checkout'
@@ -70,9 +70,9 @@ function App() {
             {/* End of Product Route */}
 
             {/* Login/Logout/Register Route */}
-            <Route exact path='/loginDoggy' element={<LoginDoggy setToken={setToken} username={username} setUsername={setUsername} password={password} setPassword={setPassword} error={error} setError={setError}/>}/>
+            <Route path='/login' element={<Login setToken={setToken} username={username} setUsername={setUsername} password={password} setPassword={setPassword} error={error} setError={setError}/>}/>
             <Route path='/logout' element={<LogOut setToken={setToken} setHomePage={setHomePage} setItem={setItem} setItems={setItems} setApparel={setApparel} setUsername={setUsername} setSubmitAddress={setSubmitAddress} setSubmitPayment={setSubmitPayment}/>}/>
-            {/* <Route path='/register' element={<Register/>}/> */}
+            <Route path='/register' element={<Register/>}/>
             {/* End of Login/Logout/Register Route */}
 
             {/* Cart Route */}
