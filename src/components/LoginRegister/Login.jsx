@@ -44,7 +44,7 @@ export default function Login({ setToken, username, setUsername, password, setPa
 
             sessionStorage.setItem("token", result.token)
             sessionStorage.setItem("username", username)
-            setToken(result.token)
+            setToken(sessionStorage.getItem("token"))
 
             navigate('/')
         }catch(error){

@@ -26,7 +26,7 @@ function App() {
   const [homePage, setHomePage] = useState(true);
   const [item, setItem] = useState(null);
   const [quantity_User_Cart, set_Quantity_User_Cart] = useState(0)
-  const [token, setToken] = useState(sessionStorage.getItem("token"));
+  const [token, setToken] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(true);
