@@ -6,7 +6,7 @@ export const addQuantity = (item) => {
     let localProductQuantity = 0
     {JSON.parse(localStorage.getItem(`productId:${item}[${userCartId}]`)) ? localProductQuantity = JSON.parse(localStorage.getItem(`productId:${item}[${userCartId}]`)) : localProductQuantity +=0} 
 
-    if(!localProductQuantity){
+    if(localProductQuantity !== 0){
         // localProductQuantity += 1;
         console.log(localProductQuantity, )
         All_Local_Productz.push({productId: item, quantity: 1})
