@@ -3,14 +3,16 @@ const userCartId = 1;
 let All_Local_Productz = JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`))
 
 export const addQuantity = (item) => {
-    let localProductQuantity = 0
-    {JSON.parse(localStorage.getItem(`productId:${item}[${userCartId}]`)) ? localProductQuantity = JSON.parse(localStorage.getItem(`productId:${item}[${userCartId}]`)) : localProductQuantity +=0} 
-
-    if(localProductQuantity !== 0){
+    let localProductQuantity = JSON.parse(localStorage.getItem(`productId:${item}[${userCartId}]`))
+    // {JSON.parse(localStorage.getItem(`productId:${item}[${userCartId}]`)) ? localProductQuantity = JSON.parse(localStorage.getItem(`productId:${item}[${userCartId}]`)) : localProductQuantity +=0} 
+    
+    if(!localProductQuantity){
         // localProductQuantity += 1;
-        console.log(localProductQuantity, )
+        // console.log("Hi", localProductQuantity)
+        console.log("Hi", item)
         All_Local_Productz.push({productId: item, quantity: 1})
         localStorage.setItem(`All_Products_In_User_Cart${userCartId}`, JSON.stringify(All_Local_Productz))
+        localProductQuantity = 0
     }
     localProductQuantity += 1;
     All_Local_Productz.map((product, key) => {
