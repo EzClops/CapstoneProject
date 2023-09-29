@@ -7,7 +7,6 @@ const userCartId = 1;
 export default function TotalPrice({ loading, setLoading}){
 
     let cartItems = JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`))
-    cartItems.shift()
     const [itemPriceWithQuantity, setItemPriceWIthQuantity] = useState(0)
     
     
