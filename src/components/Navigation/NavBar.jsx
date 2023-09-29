@@ -63,7 +63,7 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
                                     setCartPage(true);
                                     setError("Please Login before Checkout.")
                                 }}>Checkout</Link></button>
-                        : ((cartPage && (JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).length <= 1))) 
+                        : ((cartPage && (JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).length === 0))) 
                             ? <button><Link to='/cart' className="linkColor" onClick=
                                 {() =>{
                                     setCartPage(true);
