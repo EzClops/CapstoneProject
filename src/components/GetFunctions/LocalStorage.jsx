@@ -5,19 +5,24 @@ let All_Local_Productz = JSON.parse(localStorage.getItem(`All_Products_In_User_C
 export const addQuantity = (item) => {
     let localProductQuantity = JSON.parse(localStorage.getItem(`productId:${item}[${userCartId}]`))
 
+    function testLocalProductWuantity(){
+        let num = 0
+        {!localProductQuantity ? num = localProductQuantity : num += 1}
+        return num
+    }
     if(!localProductQuantity){
         // localProductQuantity += 1;
         All_Local_Productz.push({productId: item, quantity: localProductQuantity + 1})
         localStorage.setItem(`All_Products_In_User_Cart${userCartId}`, JSON.stringify(All_Local_Productz))
+        localProductQuantity += 1;
+        All_Local_Productz.map((product, key) => {
+            if(product["productId"] === item){
+                console.log("Key", All_Local_Productz[`${key}`])
+                All_Local_Productz.splice(key, 1, {productId: item, quantity: localProductQuantity})    
+                localStorage.setItem(`All_Products_In_User_Cart${userCartId}`, JSON.stringify(All_Local_Productz))
+            }
+        })
     }
-    localProductQuantity += 1;
-    All_Local_Productz.map((product, key) => {
-        if(product["productId"] === item){
-            console.log("Key", All_Local_Productz[`${key}`])
-            All_Local_Productz.splice(key, 1, {productId: item, quantity: localProductQuantity})    
-            localStorage.setItem(`All_Products_In_User_Cart${userCartId}`, JSON.stringify(All_Local_Productz))
-        }
-    })
     localStorage.setItem(`productId:${item}[${userCartId}]`, JSON.stringify(localProductQuantity))
 }
 
