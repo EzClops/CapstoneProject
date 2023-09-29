@@ -40,9 +40,10 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
                         {token ? <p>User: {sessionStorage.getItem("username")}</p> : <p></p>}
                     </div>
                     <div className="userButtons">
+                        
                         {!token 
                             ? <button><Link to='/login' className="linkColor" onClick=
-{() =>{
+                                {() =>{
                                     setError(null)
                                     setCartPage(false)
                                     setCheckoutPage(false)
