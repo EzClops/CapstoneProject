@@ -21,7 +21,7 @@ export default function NavBar({ setHomePage, token, cartPage, setCartPage, chec
     const navigate = useNavigate();
     const userCartId = 1;
     
-    console.log(token)
+    
     return(
         <>
             <header className="container">

@@ -28,7 +28,6 @@ export default function ItemPage({  item, items, setItems, homePage, setHomePage
                     <p>$ {item.price}</p>
                     <div className="Quantity_Buttons">
                         <button onClick={() =>{
-                            console.log("item we want to add", item["id"])
                             addQuantity(item["id"])
                         }}>Add to Cart</button>
                         <button onClick={() =>{
@@ -40,4 +39,3 @@ export default function ItemPage({  item, items, setItems, homePage, setHomePage
         </>
     )
 }
-

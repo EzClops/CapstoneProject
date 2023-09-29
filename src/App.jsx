@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-vars */
 import { useEffect, useState, useRef } from 'react'
 import './App.css'
 import { Routes, Route, Link } from 'react-router-dom'
@@ -26,7 +27,7 @@ function App() {
   const [homePage, setHomePage] = useState(true);
   const [item, setItem] = useState(null);
   const [quantity_User_Cart, set_Quantity_User_Cart] = useState(0)
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useState(sessionStorage.getItem("token"));
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(true);
