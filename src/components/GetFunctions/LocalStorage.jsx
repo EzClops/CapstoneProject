@@ -3,7 +3,8 @@ const userCartId = 1;
 let All_Local_Productz = JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`))
 
 export const addQuantity = (item) => {
-    let localProductQuantity = JSON.parse(localStorage.getItem(`productId:${item}[${userCartId}]`))
+    let localProductQuantity = 0
+    {JSON.parse(localStorage.getItem(`productId:${item}[${userCartId}]`)) ? localProductQuantity = JSON.parse(localStorage.getItem(`productId:${item}[${userCartId}]`)) : localProductQuantity +=0} 
 
     if(!localProductQuantity){
         // localProductQuantity += 1;
