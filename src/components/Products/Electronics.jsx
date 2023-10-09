@@ -1,9 +1,10 @@
 import Card from "./Card";
 import Home from "../Navigation/Home";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
+import AppContext from "../GetFunctions/AppContext";
 
-export default function Electronics({ setApparel, items, setItems, homePage, setHomePage, setItem }){
-    
+export default function Electronics(){
+    const {setApparel, items, setHomePage, setItem} = useContext(AppContext)
 
     useEffect(() =>{
         setHomePage(false)
@@ -11,7 +12,7 @@ export default function Electronics({ setApparel, items, setItems, homePage, set
     }, [])
     return(
         <>
-            <Home items={items} setItems={setItems} homePage={homePage}/>
+            <Home/>
             <div className="cards">
                 {items.map((item, key) => {
                     return(

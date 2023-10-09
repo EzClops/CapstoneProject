@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import Image from '../../Images/icons8-search-50.png'
 
 export default function SearchCard({ product, setItem, setHomePage, setMobile_Menu, setHam, setSearchImage, setCartPage}){
+    
     return(
         <>
             <div className="searchCard">

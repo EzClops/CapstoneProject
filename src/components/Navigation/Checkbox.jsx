@@ -2,6 +2,7 @@ import { ascendedPriceOrder, descendedPriceOrder } from "../GetFunctions/FilterP
 import FilteredProducts from "./FilteredProducts"
 
 export default function Checkbox({ isAscendingOrder, setIsAscendingOrder, isDescendingOrder, setIsDescendingOrder, productsByPrice, setItem, setHomePage, setMobile_Menu, setHam, setSearchImage, setSearchChange, setCartPage, searchChange, allLocalProducts }){
+    
     return (
         <>
             <div className="checkbox">

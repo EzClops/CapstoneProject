@@ -1,8 +1,10 @@
 import { Link, Outlet } from "react-router-dom"
 import { getClothing, getAllProducts } from "../../API/apiCalls"
+import AppContext from "../GetFunctions/AppContext";
+import { useContext } from "react";
 
-export default function Home({items, setItems, homePage }){
-
+export default function Home(){
+    const {items, setItems, homePage} = useContext(AppContext)
     //Hard coding the specific category we want since apparel useState wasn't giving us our desired value when we wanted
     let clothing = "";
     

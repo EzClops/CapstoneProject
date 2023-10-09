@@ -1,9 +1,11 @@
 import TotalPrice from "./TotalPrice";
 import CartItem from "./CartItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useContext } from "react";
+import AppContext from "../GetFunctions/AppContext";
 
-export default function Cart({ error, set_Quantity_User_Cart, checkoutPage }) {
-
+export default function Cart() {
+  const {error, set_Quantity_User_Cart, checkoutPage, total, setTotal} = useContext(AppContext)
   /* 
     So we first want to get all user carts using getAllCart
       put this in a useEffect so that we only call the api one time
@@ -14,6 +16,9 @@ export default function Cart({ error, set_Quantity_User_Cart, checkoutPage }) {
     whenever all_Users_Cart_Items is changed, we will run the useEffect again so we can update the localStorage
   
   */
+ useEffect(() => {
+  localStorage.setItem('TotalPrice', JSON.stringify(total))
+ },[total])
   const userCartId = 1;
   const [loading, setLoading] = useState(true)
 
@@ -38,12 +43,15 @@ export default function Cart({ error, set_Quantity_User_Cart, checkoutPage }) {
                     checkoutPage={checkoutPage}
                     loading={loading}
                     setLoading={setLoading}
+                    total={total}
+                    setTotal={setTotal}
                   />
                 );
               })
             )}
           </div>
-          <TotalPrice loading={loading} setLoading={setLoading}/>
+          <p>Total: ${total}</p>
+          {/* <TotalPrice loading={loading} setLoading={setLoading}/> */}
         </>
     </>
   );

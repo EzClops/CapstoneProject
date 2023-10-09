@@ -1,10 +1,15 @@
 import Home from "../Navigation/Home";
 import { Link } from "react-router-dom"
 import { getClothing } from "../../API/apiCalls"
-import { addQuantity, reduceQuantity } from "../GetFunctions/LocalStorage"
+import { addQuantity, reduceQuantity } from "../GetFunctions/UpdateCart"
+import AppContext from "../GetFunctions/AppContext";
+import { useContext, useEffect } from "react";
 
-export default function ItemPage({  item, items, setItems, homePage, setHomePage }){
-    
+export default function ItemPage(){
+    const {item, items, setItems, homePage, setHomePage, total, setTotal, userCartId} = useContext(AppContext)
+    useEffect(() => {
+        localStorage.setItem('TotalPrice', JSON.stringify(total))
+    },[total])
     return (
         <>
             <div className="miniNav">
@@ -28,10 +33,21 @@ export default function ItemPage({  item, items, setItems, homePage, setHomePage
                     <p>$ {item.price}</p>
                     <div className="Quantity_Buttons">
                         <button onClick={() =>{
+                            setTotal(current => current + item["price"])
+                            if(total === 0){
+                                localStorage.setItem('TotalPrice', JSON.stringify(item["price"]))
+                            }else{
+                                localStorage.setItem('TotalPrice', JSON.stringify(total))
+                            }
                             addQuantity(item["id"])
                         }}>Add to Cart</button>
                         <button onClick={() =>{
+                            setTotal(current => current - item["price"])
+                            localStorage.setItem('TotalPrice', JSON.stringify(total))
                             reduceQuantity(item["id"])
+                            if(!localStorage.getItem(`productId:${item.id}[${userCartId}]`)){
+                                setTotal(0)
+                            }
                         }}>-</button>
                     </div>
                 </div>

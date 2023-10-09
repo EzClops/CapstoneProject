@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import Card from "./Card";
 import Home from "../Navigation/Home";
+import AppContext from "../GetFunctions/AppContext";
 
-export default function Jewelery({ setApparel, items, setItems, homePage, setHomePage, setItem }){
-    
+export default function Jewelery(){
+    const {setApparel, items, setHomePage, setItem} = useContext(AppContext)
     useEffect(() =>{
         setHomePage(false)
         setApparel("jewelery")
@@ -11,7 +12,7 @@ export default function Jewelery({ setApparel, items, setItems, homePage, setHom
 
     return(
         <>
-            <Home items={items} setItems={setItems} homePage={homePage}/>
+            <Home/>
             <div className="cards">
                 {items.map((item, key) => {
                     return(

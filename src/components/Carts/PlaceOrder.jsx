@@ -5,6 +5,7 @@ export default function PlaceOrder(){
         localStorage.removeItem(`ProductTotalPrice_${product["productId"]}`)
     })
     localStorage.setItem(`All_Products_In_User_Cart${userCartId}`, '[]')
+    localStorage.setItem('TotalPrice', '0')
     return(
         <>
             <h2>Thank you! You're Order is being prepared.</h2>

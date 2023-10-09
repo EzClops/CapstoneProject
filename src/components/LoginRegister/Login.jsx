@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { useNavigate } from 'react-router-dom'
 import { Link } from "react-router-dom";
+import AppContext from "../GetFunctions/AppContext";
 
-
-export default function Login({ setToken, username, setUsername, password, setPassword, error, setError }){
+export default function Login(){
+    const {username, setUsername, setToken, password, setPassword, error, setError, setTotal} = useContext(AppContext)
     const navigate = useNavigate();
     const [loading , setLoading] = useState(true)
     const minLoginNum = 5;
@@ -45,7 +46,9 @@ export default function Login({ setToken, username, setUsername, password, setPa
             sessionStorage.setItem("token", result.token)
             sessionStorage.setItem("username", username)
             setToken(result.token)
-
+            if(localStorage.getItem('TotalPrice')){
+                setTotal(localStorage.getItem('TotalPrice'));
+            }
             navigate('/')
         }catch(error){
             setError(error.message)

@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { getItem } from "../../API/apiCalls"
-
+import AppContext from "../GetFunctions/AppContext";
 
 const userCartId = 1;
 
-export default function TotalPrice({ loading, setLoading}){
-
+export default function TotalPrice(){
+    const {loading, setLoading, total} = useContext(AppContext)
     let cartItems = JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`))
     const [itemPriceWithQuantity, setItemPriceWIthQuantity] = useState(0)
     
@@ -21,6 +21,7 @@ export default function TotalPrice({ loading, setLoading}){
 
             setItemPriceWIthQuantity(totalPrice)
             localStorage.setItem('TotalPrice', totalPrice)
+            
         }
         setLoading(false)
     },[loading])
@@ -37,7 +38,7 @@ export default function TotalPrice({ loading, setLoading}){
     return(
         <>
             <hr></hr>
-            {loading ? "" : <p>Total: ${localStorage.getItem('TotalPrice')}</p>}
+            {loading ? "" : <p>Total: ${total.current}</p>}
             
         </>
     )

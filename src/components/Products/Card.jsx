@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 
 export default function Card({ item, setItem }){
     console.log("Hello", item)
+    
     return(
         <>
             <div className="item_card">

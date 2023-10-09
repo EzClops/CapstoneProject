@@ -1,6 +1,7 @@
 import SearchCard from "./SearchCard"
 
 export default function FilteredProducts({ isAscendingOrder, isDescendingOrder, productsByPrice, setItem, setHomePage, setMobile_Menu, setHam, setSearchImage, setSearchChange, setCartPage, searchChange }){
+    console.log(productsByPrice)
     return(
         <>
         <div className='filteredList'>

@@ -1,15 +1,16 @@
 import { Link, Outlet } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useContext } from 'react';
 import Searchbox from './Searchbox';
 import SearchCard from './SearchCard';
 import Checkbox from './Checkbox';
 import Image from '../../Images/icons8-search-50.png'
 import Image2 from '../../Images/icons8-x-48.png'
 import React from 'react';
+import AppContext from '../GetFunctions/AppContext';
 
-export default function NavBar({ setHomePage, token, cartPage, setCartPage, checkoutPage, setCheckoutPage, submitAddress, submitPayment, setError, setSubmitAddress, setSubmitPayment, setItem}){
-    
+export default function NavBar(){
+    const {setHomePage, token, cartPage, setCartPage, checkoutPage, setCheckoutPage, submitAddress, submitPayment, setError, setSubmitAddress, setSubmitPayment, setItem} = useContext(AppContext)
     const [searchChange, setSearchChange] = useState("");
     const [ham, setHam] = useState(false)
     const [mobile_menu, setMobile_Menu] = useState(false)

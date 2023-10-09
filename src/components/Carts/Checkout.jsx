@@ -1,22 +1,13 @@
 import { updateUserAddress } from "../../API/apiCalls";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router";
 import CartItem from "./CartItem";
 import TotalPrice from "./TotalPrice";
+import AppContext from "../GetFunctions/AppContext";
 
-export default function Checkout({
-  item,
-  setItem,
-  setCartPage,
-  setCheckoutPage,
-  submitAddress,
-  setSubmitAddress,
-  submitPayment,
-  setSubmitPayment,
-  error,
-  setError,
-  checkoutPage
-}) {
+export default function Checkout() {
+  const {item, setItem, setCartPage, setCheckoutPage, submitAddress, setSubmitAddress, submitPayment, setSubmitPayment, error, setError, checkoutPage, total, setTotal} = useContext(AppContext)
+  
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [city, setCity] = useState("");
@@ -47,6 +38,16 @@ export default function Checkout({
     setMonth("");
     setYear("");
     setCvv("");
+  }
+
+  function setToCartPage(){
+    setCartPage(true);
+    setCheckoutPage(false);
+    localStorage.setItem("isCheckoutPage", true)
+    setSubmitAddress(false);
+    setSubmitPayment(false);
+    setError(null);
+    navigate("/cart")
   }
   
   function giveLabel(val, setVal, placeholder, maxInput) {
@@ -129,13 +130,7 @@ export default function Checkout({
           <button
             className="linkColor checkout_To_Cart_Button"
             onClick={() => {
-              setCartPage(true);
-              setCheckoutPage(false);
-              localStorage.setItem("isCheckoutPage", true)
-              setSubmitAddress(false);
-              setSubmitPayment(false);
-              setError(null);
-              navigate("/cart");
+              setToCartPage()
             }}
           >
             <img width="64" height="64" src="https://img.icons8.com/cotton/64/circled-left-2.png" alt="circled-left-2"/>
@@ -201,12 +196,15 @@ export default function Checkout({
                       checkoutPage={checkoutPage}
                       loading={loading}
                       setLoading={setLoading}
+                      total={total}
+                      setTotal={setTotal}
                     />
                   );
                 })
               )}
             </section>
-            <TotalPrice loading={loading} setLoading={setLoading}/>
+            
+            {total === 0 ? setToCartPage() : <p>Total: ${total}</p>}
           </div>
           <button
             onClick={() => {

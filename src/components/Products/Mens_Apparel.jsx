@@ -1,10 +1,11 @@
 import Card from "./Card";
 import Home from "../Navigation/Home";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import AppContext from "../GetFunctions/AppContext";
 
-export default function Mens_Apparel({ setApparel, items, setItems, homePage, setHomePage, setItem, token }) {
+export default function Mens_Apparel() {
   const [loading, setLoading] = useState(true);
-
+  const {setApparel, items, setHomePage, setItem} = useContext(AppContext)
   useEffect(() => {
     setHomePage(false);
     setApparel("men's clothing");
@@ -12,7 +13,7 @@ export default function Mens_Apparel({ setApparel, items, setItems, homePage, se
   }, []);
   return (
     <>
-      <Home items={items} setItems={setItems} homePage={homePage} token={token}/>
+      <Home/>
       {loading ? (
         <p>Loading...</p>
       ) : (

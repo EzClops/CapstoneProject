@@ -1,8 +1,8 @@
 import { getItem } from "../../API/apiCalls"
 import { useEffect, useState } from "react"
-import { addQuantity, reduceQuantity, removeItemFromCart } from "../GetFunctions/LocalStorage"
+import { addQuantity, reduceQuantity, removeItemFromCart } from "../GetFunctions/UpdateCart"
 
-export default function CartItem({ productId, quantity, set_Quantity_User_Cart, checkoutPage, setLoading}){
+export default function CartItem({ productId, quantity, set_Quantity_User_Cart, checkoutPage, setLoading, total, setTotal}){
     const [item2, setItem2] = useState("")
     const [cartQuantity, setCartQuantity] = useState(quantity)
     
@@ -17,12 +17,13 @@ export default function CartItem({ productId, quantity, set_Quantity_User_Cart, 
             set_Quantity_User_Cart(JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).length)           
         }
         fetchItem([cartQuantity])
-    },[])
-    console.log(checkoutPage)
+    },[cartQuantity])
+    // console.log("fake total", total.current)
     console.log("CartQuantity", JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).length)
+    
     return (
         <>  
-            {cartQuantity === null ? ""  : 
+            {JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).length === 0 ? ""  : 
                 (<>
                     <hr></hr>
 
@@ -44,13 +45,21 @@ export default function CartItem({ productId, quantity, set_Quantity_User_Cart, 
                                     if(JSON.parse(localStorage.getItem(`productId:${productId}[${userCartId}]`)) === null){
                                         removeItemFromCart(productId)
                                     }
+                                    setTotal(current => current - item2["price"])
+                                    localStorage.setItem('TotalPrice', JSON.stringify(total))
                                     reduceQuantity(productId)
                                     setCartQuantity(JSON.parse(localStorage.getItem(`productId:${productId}[${userCartId}]`)))
                                     setLoading(true)
-                                    console.log(`Cart Quantity of ProductId:${productId}`, JSON.parse(localStorage.getItem(`productId:${productId}[${userCartId}]`)))
+                                    if(JSON.parse(localStorage.getItem(`All_Products_In_User_Cart${userCartId}`)).length === 0){
+                                        setTotal(0)
+                                    }
+                                    console.log("geeze", cartQuantity)
                                 }}>-</button>
-                                {cartQuantity === 0 ? removeItemFromCart(productId, setItem2) : <p>{cartQuantity}</p>}
+                                {cartQuantity === 0 ? "" : <p>{cartQuantity}</p>}
                                 <button className="Cart_Add_Quantity" onClick={() => {
+                                    console.log(typeof(item2["price"]))
+                                    setTotal(current => current + item2["price"])
+                                    localStorage.setItem('TotalPrice', JSON.stringify(total))
                                     addQuantity(productId)
                                     setCartQuantity(JSON.parse(localStorage.getItem(`productId:${productId}[${userCartId}]`)))
                                     setLoading(true)
